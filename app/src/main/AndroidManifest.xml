@@ -9,12 +9,40 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Shiper">
-        <activity android:name=".Doi_Mat_Khau"></activity>
-        <activity android:name=".Login" />
-        <activity android:name=".MainActivity">
+
+        <activity android:name=".Login"></activity>
+        <activity android:name=".DangChoXacNhan"
+        android:label="Đang chờ xác nhận"
+        android:parentActivityName=".DangChoXacNhan" />
+
+        <activity android:name=".XacNhanTraHang"
+            android:label="Xác nhận trả hàng"
+            android:parentActivityName=".XacNhanTraHang"
+            />
+        <activity android:name=".XacNhanDaTraTien"
+            android:label="Xác nhận trả tiền"
+            android:parentActivityName=".XacNhanDaTraTien"
+            />
+        <activity android:name=".DangGiaoHang"
+            android:label="Đang giao hàng"
+            android:parentActivityName=".DangGiaoHang"
+            />
+        <activity android:name=".LayHang" />
+        <activity android:name=".ChiTietDonHang"
+            android:label="Chi tiết đơn hàng"
+            android:parentActivityName=".ChiTietDonHang"
+            />
+        <activity android:name=".Thongtincanhan" />
+        <activity android:name=".Doi_Mat_Khau" />
+        <activity android:name=".MainActivity" />
+
+        <activity android:name=".Home"
+            android:label="Home"
+            android:parentActivityName=".Home"
+            >
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

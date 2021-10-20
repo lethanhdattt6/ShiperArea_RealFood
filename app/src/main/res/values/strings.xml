@@ -1,3 +1,33 @@
 <resources>
     <string name="app_name">Shiper</string>
+    <string name="hoten">   Họ và tên</string>
+    <string name="sdt">Số điện thoại</string>
+    <string name="email">Email</string>
+    <string name="ngaysinh">Ngày sinh</string>
+    <string name="cmnd">CMND</string>
+    <string name="diachi">ĐỊa chỉ</string>
+    <string name="bienso">Biển số</string>
+    <string name="title_activity_home">Home</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="tenuser">Lê Thành Đạt</string>
+    <string name="Email">lethanhdat@gmail.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_lichsu">Lịch sử giao hàng</string>
+    <string name="danhsachdonhang">Danh sách đơn hàng</string>
+    <string name="doimatkhau">Đổi mật khẩu</string>
+    <string name="madh">MaDH</string>
+    <string name="sodienthoaicuahang">SĐT cửa hàng</string>
+    <string name="diachicuahang">Địa chỉ cửa hàng:</string>
+    <string name="diachinguoinhan">Địa ngưởi nhận</string>
+    <string name="tongdon">Tổng đơn</string>
+    <string name="tenmathang">Tên mặt hàng</string>
+    <string name="menu_thongtincanhan">Thông tin cá nhân</string>
+    <string name="doanhthu">Doanh thu</string>
+    
+    <string name="nav_open">Open</string>
+    <string name="nav_close">Close</string>
 </resources>

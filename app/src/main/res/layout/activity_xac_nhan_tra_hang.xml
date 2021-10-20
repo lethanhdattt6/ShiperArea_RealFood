@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    tools:context=".DangGiaoHang">
+    <LinearLayout
+        android:background="#CD8C8C"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <ImageView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_arrow_back_ios_24"
+            android:layout_marginTop="3dp"
+            android:layout_marginLeft="5dp"
+            />
+        <TextView
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Đang Giao hàng"
+            android:textSize="22dp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_marginLeft="100dp"/>
+    </LinearLayout>
+    <LinearLayout
+        android:background="@drawable/borderlinear"
+        android:layout_marginRight="3dp"
+        android:layout_marginLeft="3dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="3dp"
+        android:padding="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+
+            <ImageView
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:src="@drawable/background" />
+            <LinearLayout
+                android:layout_marginTop="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/madh"
+                    android:textColor="@color/madh"
+                    android:textStyle="bold"
+                    android:textSize="30dp"
+                    android:layout_marginLeft="50dp"
+                    />
+                <TextView
+                    android:layout_marginTop="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tenmathang"
+                    android:textSize="25dp"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/black"
+                    android:drawablePadding="5dp"
+                    android:drawableLeft="@drawable/ic_baseline_wysiwyg_24"
+                    />
+                <TextView
+                    android:layout_marginTop="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Số lượng"
+                    android:textSize="25dp"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/black"
+                    android:drawablePadding="5dp"
+                    android:drawableLeft="@drawable/ic_baseline_filter_9_plus_24"
+                    />
+
+            </LinearLayout>
+
+        </LinearLayout>
+        <TextView
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Trạng thái"
+            android:textSize="25dp"
+            android:layout_marginLeft="10dp"
+            android:textColor="#E30834"
+            android:drawablePadding="5dp"
+            />
+        <TextView
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Khối lượng"
+            android:textSize="25dp"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/black"
+            android:drawablePadding="5dp"
+            android:drawableLeft="@drawable/ic_baseline_linear_scale_24"
+            />
+        <TextView
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tên cửa hàng"
+            android:textSize="25dp"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/black"
+            android:drawablePadding="5dp"
+            android:drawableLeft="@drawable/ic_baseline_store_24"
+            />
+        <TextView
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Địa chỉ cửa hàng"
+            android:textSize="25dp"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/black"
+            android:drawablePadding="5dp"
+            android:drawableLeft="@drawable/ic_baseline_location_on_24"
+            />
+        <TextView
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SĐT cửa hàng"
+            android:textSize="25dp"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/black"
+            android:drawablePadding="5dp"
+            android:drawableLeft="@drawable/ic_baseline_local_phone_24"
+            />
+        <TextView
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SĐT người nhận"
+            android:textSize="25dp"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/black"
+            android:drawablePadding="5dp"
+            android:drawableLeft="@drawable/ic_baseline_local_phone_24"
+            />
+        <TextView
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Địa chỉ người nhận"
+            android:textSize="25dp"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/black"
+            android:drawablePadding="5dp"
+            android:drawableLeft="@drawable/ic_baseline_location_on_24"
+            />
+        <TextView
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tên người nhận"
+            android:textSize="25dp"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/black"
+            android:drawablePadding="5dp"
+            android:drawableLeft="@drawable/ic_baseline_person_24"
+            />
+        <EditText
+            android:layout_marginLeft="10dp"
+            android:hint="Ghi chú"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:lines="2"
+            android:inputType="textMultiLine"/>
+
+        <TextView
+            android:layout_margin="30dp"
+            android:layout_gravity="end"
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tổng đơn"
+            android:textSize="25dp"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/black"
+            android:drawablePadding="5dp"
+            android:drawableLeft="@drawable/ic_baseline_linear_scale_24"
+            android:layout_marginRight="5dp"
+            android:gravity="end" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="Đã trả hàng"
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                android:background="@drawable/botronbtn"
+                />
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+
+</LinearLayout>
