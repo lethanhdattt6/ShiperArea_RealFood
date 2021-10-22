@@ -1,10 +1,23 @@
 package com.example.shiper.Model;
 
 public class Shipper {
+    String iDShipper, eMail, matKhau, hoVaTen, diaChi, khuVucHoatDong, ngaySinh, maSoXe, trangThaiHoatDong, soDienThoai;
+
     public Shipper() {
     }
 
-    String iDShipper, taiKhoan, matKhau, hoVaTen, diaChu, khuVucHoatDong, ngaySinh, maSoXe, trangThaiHoatDong, soDienThoai;
+    public Shipper(String iDShipper, String eMail, String matKhau, String hoVaTen, String diaChi, String khuVucHoatDong, String ngaySinh, String maSoXe, String trangThaiHoatDong, String soDienThoai) {
+        this.iDShipper = iDShipper;
+        this.eMail = eMail;
+        this.matKhau = matKhau;
+        this.hoVaTen = hoVaTen;
+        this.diaChi = diaChi;
+        this.khuVucHoatDong = khuVucHoatDong;
+        this.ngaySinh = ngaySinh;
+        this.maSoXe = maSoXe;
+        this.trangThaiHoatDong = trangThaiHoatDong;
+        this.soDienThoai = soDienThoai;
+    }
 
     public String getiDShipper() {
         return iDShipper;
@@ -14,12 +27,12 @@ public class Shipper {
         this.iDShipper = iDShipper;
     }
 
-    public String getTaiKhoan() {
-        return taiKhoan;
+    public String geteMail() {
+        return eMail;
     }
 
-    public void setTaiKhoan(String taiKhoan) {
-        this.taiKhoan = taiKhoan;
+    public void seteMail(String eMail) {
+        this.eMail = eMail;
     }
 
     public String getMatKhau() {
@@ -38,12 +51,12 @@ public class Shipper {
         this.hoVaTen = hoVaTen;
     }
 
-    public String getDiaChu() {
-        return diaChu;
+    public String getDiaChi() {
+        return diaChi;
     }
 
-    public void setDiaChu(String diaChu) {
-        this.diaChu = diaChu;
+    public void setDiaChi(String diaChi) {
+        this.diaChi = diaChi;
     }
 
     public String getKhuVucHoatDong() {
@@ -84,19 +97,5 @@ public class Shipper {
 
     public void setSoDienThoai(String soDienThoai) {
         this.soDienThoai = soDienThoai;
-    }
-
-    public Shipper(String iDShipper, String taiKhoan, String matKhau, String hoVaTen, String diaChu, String khuVucHoatDong, String ngaySinh, String maSoXe, String trangThaiHoatDong, String soDienThoai) {
-        this.iDShipper = iDShipper;
-        this.taiKhoan = taiKhoan;
-        this.matKhau = matKhau;
-        this.hoVaTen = hoVaTen;
-        this.diaChu = diaChu;
-        this.khuVucHoatDong = khuVucHoatDong;
-        this.ngaySinh = ngaySinh;
-        this.maSoXe = maSoXe;
-        this.trangThaiHoatDong = trangThaiHoatDong;
-        this.soDienThoai = soDienThoai;
-
     }
 }

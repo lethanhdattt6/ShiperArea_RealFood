@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Shiper">
 
-        <activity android:name=".Login"></activity>
+        <activity android:name=".Home"></activity>
         <activity android:name=".DangChoXacNhan"
         android:label="Đang chờ xác nhận"
         android:parentActivityName=".DangChoXacNhan" />
@@ -32,13 +32,18 @@
             android:label="Chi tiết đơn hàng"
             android:parentActivityName=".ChiTietDonHang"
             />
-        <activity android:name=".Thongtincanhan" />
-        <activity android:name=".Doi_Mat_Khau" />
+        <activity android:name=".Thongtincanhan"
+            android:label="Thong Tin ca nhan"
+            android:parentActivityName=".Home"
+            />
+        <activity android:name=".Doi_Mat_Khau"
+            android:label="Đổi mật khẩu"
+            android:parentActivityName=".Home"
+            />
         <activity android:name=".MainActivity" />
 
-        <activity android:name=".Home"
-            android:label="Home"
-            android:parentActivityName=".Home"
+        <activity android:name=".Login"
+            android:label="Login"
             >
 
             <intent-filter>
