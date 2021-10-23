@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Thongtincanhan">
+    tools:context=".Thongtincanhan_Activity">
 <ScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -32,7 +32,7 @@
         <EditText
             android:id="@+id/hovaten"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="45dp"
             android:text="@string/hoten"
             android:background="@drawable/botron"
             android:layout_marginTop="30dp"
@@ -42,7 +42,7 @@
         <EditText
             android:id="@+id/sodienthoai"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="45dp"
             android:text="@string/sdt"
             android:inputType="number"
             android:background="@drawable/botron"
@@ -53,7 +53,7 @@
         <EditText
             android:id="@+id/email"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="45dp"
             android:text="@string/email"
             android:background="@drawable/botron"
             android:layout_marginTop="15dp"
@@ -63,7 +63,7 @@
         <EditText
             android:id="@+id/ngaysinh"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="45dp"
             android:text="@string/ngaysinh"
             android:background="@drawable/botron"
             android:layout_marginTop="15dp"
@@ -74,7 +74,7 @@
         <EditText
             android:id="@+id/diachi"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="45dp"
             android:text="@string/diachi"
             android:background="@drawable/botron"
             android:layout_marginTop="15dp"
@@ -84,7 +84,7 @@
         <EditText
             android:id="@+id/bienso"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="45dp"
             android:text="@string/bienso"
             android:background="@drawable/botron"
             android:layout_marginTop="15dp"
@@ -93,13 +93,15 @@
             />
 
         <Button
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
             android:id="@+id/btnsave"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Save"
             android:background="@drawable/botronbtn"
             android:layout_gravity="center"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="35dp"
 
             />
     </LinearLayout>

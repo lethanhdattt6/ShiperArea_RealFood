@@ -27,7 +27,9 @@
     <string name="tenmathang">Tên mặt hàng</string>
     <string name="menu_thongtincanhan">Thông tin cá nhân</string>
     <string name="doanhthu">Doanh thu</string>
-    
+
     <string name="nav_open">Open</string>
     <string name="nav_close">Close</string>
+    <string name="tendangnhap">Tên đăng nhập</string>
+    <string name="matkhau">Mật khẩu</string>
 </resources>

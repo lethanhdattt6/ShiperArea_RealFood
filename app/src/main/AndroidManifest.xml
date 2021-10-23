@@ -9,45 +9,44 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Shiper">
-
-        <activity android:name=".Home"></activity>
-        <activity android:name=".DangChoXacNhan"
-        android:label="Đang chờ xác nhận"
-        android:parentActivityName=".DangChoXacNhan" />
-
-        <activity android:name=".XacNhanTraHang"
+        <activity android:name=".QuenMatKhau_Activity"></activity>
+        <activity android:name=".Home_Activity" />
+        <activity
+            android:name=".DangChoXacNhan_Activity"
+            android:label="Đang chờ xác nhận"
+            android:parentActivityName=".DangChoXacNhan_Activity" />
+        <activity
+            android:name=".XacNhanTraHang_Activity"
             android:label="Xác nhận trả hàng"
-            android:parentActivityName=".XacNhanTraHang"
-            />
-        <activity android:name=".XacNhanDaTraTien"
+            android:parentActivityName=".XacNhanTraHang_Activity" />
+        <activity
+            android:name=".XacNhanDaTraTien_Activity"
             android:label="Xác nhận trả tiền"
-            android:parentActivityName=".XacNhanDaTraTien"
-            />
-        <activity android:name=".DangGiaoHang"
+            android:parentActivityName=".XacNhanDaTraTien_Activity" />
+        <activity
+            android:name=".DangGiaoHang_Activity"
             android:label="Đang giao hàng"
-            android:parentActivityName=".DangGiaoHang"
-            />
-        <activity android:name=".LayHang" />
-        <activity android:name=".ChiTietDonHang"
+            android:parentActivityName=".DangGiaoHang_Activity" />
+        <activity android:name=".LayHang_Activity" />
+        <activity
+            android:name=".ChiTietDonHang_Activity"
             android:label="Chi tiết đơn hàng"
-            android:parentActivityName=".ChiTietDonHang"
-            />
-        <activity android:name=".Thongtincanhan"
+            android:parentActivityName=".ChiTietDonHang_Activity" />
+        <activity
+            android:name=".Thongtincanhan_Activity"
             android:label="Thong Tin ca nhan"
-            android:parentActivityName=".Home"
-            />
-        <activity android:name=".Doi_Mat_Khau"
+            android:parentActivityName=".Home_Activity" />
+        <activity
+            android:name=".Doi_Mat_Khau_Activity"
             android:label="Đổi mật khẩu"
-            android:parentActivityName=".Home"
-            />
-        <activity android:name=".MainActivity" />
-
-        <activity android:name=".Login"
-            android:label="Login"
-            >
-
+            android:parentActivityName=".Home_Activity" />
+        <activity android:name=".MainActivity_Activity" />
+        <activity
+            android:name=".Login_Activity"
+            android:label="Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:id="@+id/drawerlayout"
-    tools:context=".Home"
+    tools:context=".Home_Activity"
     tools:openDrawer="start">
 
     <LinearLayout
@@ -19,179 +19,198 @@
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolBar"
+                app:title="Home"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:background="#4A128E"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
                 />
         </com.google.android.material.appbar.AppBarLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="328dp"
+            android:layout_height="320dp"
             android:background="@drawable/background">
 
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <androidx.cardview.widget.CardView
-                android:layout_width="150dp"
-                android:layout_height="100dp"
-                android:backgroundTint="#FF5722"
-                app:cardCornerRadius="20dp"
-                android:layout_marginTop="40dp"
-                android:layout_marginLeft="40dp"
-                android:id="@+id/danhsach"
-                >
 
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="85dp"
-                    android:orientation="vertical">
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <androidx.cardview.widget.CardView
+                        android:layout_margin="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="120dp"
+                        android:layout_weight="1"
+                        app:cardCornerRadius="20dp"
+                        android:layout_marginTop="20dp"
+                        android:id="@+id/danhsach"
+                        >
 
-                    <ImageView
-                        android:layout_marginTop="5dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:src="@drawable/ic_baseline_assignment_24"
-                        />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/backgroundanhsach"
+                            android:orientation="vertical">
 
-                    <TextView
-                        android:layout_marginTop="-5dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="66dp"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:text="Danh sách
+                            <ImageView
+                                android:layout_marginTop="5dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_baseline_assignment_24"
+                                />
+
+                            <TextView
+                                android:layout_marginTop="-5dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="66dp"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:text="Danh sách
                     đơn hàng"
-                        android:textColor="@color/white"
-                        android:textSize="20dp"
-                        android:textStyle="bold" />
+                                android:textColor="@color/white"
+                                android:textSize="20dp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/lichsu"
+                        android:layout_margin="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="120dp"
+                        android:layout_weight="1"
+                        app:cardCornerRadius="20dp"
+                        android:layout_marginTop="20dp"
+                        >
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:background="@drawable/backgroundlichsu"
+                            >
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="5dp"
+                                android:src="@drawable/ic_baseline_access_time_24" />
+
+                            <TextView
+                                android:layout_marginTop="-5dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="66dp"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:text="Lịch sử giao hàng"
+                                android:textColor="@color/white"
+                                android:textSize="20dp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+
+
                 </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/lichsu"
-                android:layout_width="150dp"
-                android:layout_height="100dp"
-                android:backgroundTint="#E3D241"
-                app:cardCornerRadius="20dp"
-                android:layout_marginTop="40dp"
-                android:layout_marginLeft="40dp"
-                >
-
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="85dp"
-                    android:orientation="vertical">
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <androidx.cardview.widget.CardView
+                        android:layout_margin="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="120dp"
+                        android:layout_weight="1"
+                        android:backgroundTint="#10FA19"
+                        app:cardCornerRadius="20dp"
+                        android:layout_marginTop="20dp"
+                        android:id="@+id/thongtincanhan"
+                        >
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="5dp"
-                        android:src="@drawable/ic_baseline_access_time_24" />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/backgroundthongtin"
+                            android:orientation="vertical">
 
-                    <TextView
-                        android:layout_marginTop="-5dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="66dp"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:text="Lịch sử giao hàng"
-                        android:textColor="@color/white"
-                        android:textSize="20dp"
-                        android:textStyle="bold" />
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="5dp"
+                                android:src="@drawable/ic_baseline_person_24" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="66dp"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="-5dp"
+                                android:gravity="center"
+                                android:text="Thông tin cá nhân"
+                                android:textColor="@color/white"
+                                android:textSize="20dp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/doanhthu"
+                        android:layout_margin="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="120dp"
+                        android:layout_weight="1"
+                        android:backgroundTint="#EA663C"
+                        app:cardCornerRadius="20dp"
+                        android:layout_marginTop="20dp"
+                        >
+
+                        <LinearLayout
+                            android:background="@drawable/backgrounddoanhthu"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="5dp"
+                                android:src="@drawable/ic_baseline_trending_up_24" />
+
+                            <TextView
+                                android:layout_marginTop="-5dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="66dp"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:text="Doanh thu"
+                                android:textColor="@color/white"
+                                android:textSize="20dp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+
+
                 </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-
-
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <androidx.cardview.widget.CardView
-                android:layout_width="150dp"
-                android:layout_height="100dp"
-                android:backgroundTint="#10FA19"
-                app:cardCornerRadius="20dp"
-                android:layout_marginTop="40dp"
-                android:layout_marginLeft="40dp"
-                android:id="@+id/thongtincanhan"
-                >
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="85dp"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_marginTop="5dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:src="@drawable/ic_baseline_person_24"
-                        />
-
-                    <TextView
-                        android:layout_marginTop="-5dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="66dp"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:text="Thông tin cá nhân"
-                        android:textColor="@color/white"
-                        android:textSize="20dp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/doanhthu"
-                android:layout_width="150dp"
-                android:layout_height="100dp"
-                android:backgroundTint="#EA663C"
-                app:cardCornerRadius="20dp"
-                android:layout_marginTop="40dp"
-                android:layout_marginLeft="40dp"
-                >
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="85dp"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="5dp"
-                        android:src="@drawable/ic_baseline_trending_up_24" />
-
-                    <TextView
-                        android:layout_marginTop="-5dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="66dp"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:text="Doanh thu"
-                        android:textColor="@color/white"
-                        android:textSize="20dp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-
-
-
-        </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
 
 
         <FrameLayout

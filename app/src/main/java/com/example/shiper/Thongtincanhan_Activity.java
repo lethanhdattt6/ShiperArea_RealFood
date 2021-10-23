@@ -34,7 +34,7 @@ import com.vansuita.pickimage.listeners.IPickResult;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class Thongtincanhan extends AppCompatActivity {
+public class Thongtincanhan_Activity extends AppCompatActivity {
 
     Uri uriAvatar;
     Shipper nguoiDungHienTai = new Shipper();
@@ -50,8 +50,13 @@ public class Thongtincanhan extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_thongtincanhan);
+//        this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        ActionBar actionBar = getSupportActionBar();
+//        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+//        // TODO: Remove the redundant calls to getSupportActionBar()
+//        //       and use variable actionBar instead
 //        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        getActionBar().setHomeButtonEnabled(true);
+//        getSupportActionBar().setHomeButtonEnabled(true);
         auth = FirebaseAuth.getInstance();
         storage = FirebaseStorage.getInstance();
         storageRef = storage.getReference();
@@ -110,7 +115,7 @@ public class Thongtincanhan extends AppCompatActivity {
                             public void onCancelClick() {
                                 //TODO: do what you have to if user clicked cancel
                             }
-                        }).show(Thongtincanhan.this);
+                        }).show(Thongtincanhan_Activity.this);
             }
         });
 
@@ -129,7 +134,7 @@ public class Thongtincanhan extends AppCompatActivity {
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful())
                             {
-                                Toast.makeText(Thongtincanhan.this, "Thông tin đã được cập nhật", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Thongtincanhan_Activity.this, "Thông tin đã được cập nhật", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });

@@ -8,8 +8,6 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-
-import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -18,6 +16,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.developer.kalert.KAlertDialog;
 import com.example.shiper.Model.Shipper;
 import com.example.shiper.databinding.ActivityHomeBinding;
 import com.example.shiper.fragment.DanhSachDonHang;
@@ -35,7 +34,7 @@ import com.google.firebase.storage.StorageReference;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 
-public class Home extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class Home_Activity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     FirebaseAuth auth;
     FirebaseStorage storage;
     StorageReference storageRef;
@@ -83,7 +82,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         binding.thongtincanhan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),Thongtincanhan.class);
+                Intent intent = new Intent(getApplicationContext(), Thongtincanhan_Activity.class);
                 startActivity(intent);
             }
         });
@@ -122,7 +121,6 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigationView);
         View headerView = navigationView.getHeaderView(0);
         CircleImageView imvavatar = (CircleImageView) headerView.findViewById(R.id.imvavatar);
-
         storageRef.child("Shipper").child(auth.getUid()).child("avatar").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
@@ -160,15 +158,27 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         }else if(id == R.id.doanhthu){
 
         }else if(id == R.id.thongtincanhan){
-            Intent intent = new Intent(getApplicationContext(),Thongtincanhan.class);
+            Intent intent = new Intent(getApplicationContext(), Thongtincanhan_Activity.class);
             startActivity(intent);
         }else if(id == R.id.dangxuat){
+//            KAlertDialog kAlertDialog = new KAlertDialog(getApplicationContext());
+//            kAlertDialog.setTitleText("Are you sure?");
+//            kAlertDialog.changeAlertType(KAlertDialog.WARNING_TYPE);
+//            kAlertDialog.set
+//            kAlertDialog.show();
+            new KAlertDialog(this, KAlertDialog.CUSTOM_IMAGE_TYPE)
+                    .setTitleText("Đăng xuất!!!")
+                    .setContentText("Bạn có chắn chắn muốn đăng xuất??")
+                    .setCustomImage(R.drawable.dangxuat,getApplicationContext())
+                    .setConfirmText("OK")
+                    .setCancelText("CANCEL").setConfirmClickListener(kAlertDialog -> {
+                        FirebaseAuth.getInstance().signOut();
+                        finish();})
+                    .show();
 
         }else if(id == R.id.doimatkhau){
-            Intent intent = new Intent(getApplicationContext(),Doi_Mat_Khau.class);
+            Intent intent = new Intent(getApplicationContext(), Doi_Mat_Khau_Activity.class);
             startActivity(intent);
-        }else if(id == R.id.quenmatkhau){
-
         }
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;

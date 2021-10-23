@@ -5,26 +5,22 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.shiper.Model.Shipper;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
-import com.google.gson.Gson;
 
 
-public class Login extends AppCompatActivity {
+public class Login_Activity extends AppCompatActivity {
+    TextView txtQuenMatKhau;
     EditText tendangnhap,matkhau;
     Button login;
     private FirebaseAuth auth;
@@ -37,9 +33,12 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         reference = FirebaseDatabase.getInstance().getReference();
         auth = FirebaseAuth.getInstance();
+        if(auth.getCurrentUser() != null){
+            Intent intent = new Intent(getApplicationContext(), Home_Activity.class);
+            startActivity(intent);
+        }
         setConTrol();
         setEvent();
-        KiemTra();
     }
 
     private boolean KiemTra() {
@@ -78,15 +77,22 @@ public class Login extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if (task.isSuccessful()) {
-                                        Toast.makeText(Login.this, "Đăng Nhập Thành Công!", Toast.LENGTH_SHORT).show();
-                                        Intent intent = new Intent(getApplicationContext(),Home.class);
+                                        Toast.makeText(Login_Activity.this, "Đăng Nhập Thành Công!", Toast.LENGTH_SHORT).show();
+                                        Intent intent = new Intent(getApplicationContext(), Home_Activity.class);
                                         startActivity(intent);
                                     } else {
-                                        Toast.makeText(Login.this, "", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(Login_Activity.this, "", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             });
                 }
+            }
+        });
+        txtQuenMatKhau.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), QuenMatKhau_Activity.class);
+                startActivity(intent);
             }
         });
     }
@@ -95,5 +101,6 @@ public class Login extends AppCompatActivity {
         login = findViewById(R.id.btnLogin);
         tendangnhap = findViewById(R.id.tendangnhap);
         matkhau = findViewById(R.id.matkhau);
+        txtQuenMatKhau = findViewById(R.id.txtQuenMatKhau);
     }
 }

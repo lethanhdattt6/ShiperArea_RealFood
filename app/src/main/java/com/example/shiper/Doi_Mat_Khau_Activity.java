@@ -16,10 +16,15 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
-public class Doi_Mat_Khau extends AppCompatActivity {
+import org.jetbrains.annotations.NotNull;
+
+public class Doi_Mat_Khau_Activity extends AppCompatActivity {
     FirebaseAuth auth;
     DatabaseReference database;
     Shipper nguoiDungHienTai = new Shipper();
@@ -49,7 +54,7 @@ public class Doi_Mat_Khau extends AppCompatActivity {
         binding.imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), Home.class);
+                Intent intent = new Intent(v.getContext(), Home_Activity.class);
                 startActivity(intent);
             }
         });
@@ -58,8 +63,7 @@ public class Doi_Mat_Khau extends AppCompatActivity {
     public void ChangePass(){
 
         FirebaseUser user = auth.getCurrentUser();
-        AuthCredential credential = EmailAuthProvider
-                .getCredential(binding.edttenDangNhap.getText().toString(),binding.edtMatKhau.getText().toString());
+        AuthCredential credential = EmailAuthProvider.getCredential(binding.edttenDangNhap.getText().toString(),binding.edtMatKhau.getText().toString());
         user.reauthenticate(credential)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
@@ -69,16 +73,29 @@ public class Doi_Mat_Khau extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()) {
-                                        Toast.makeText(Doi_Mat_Khau.this, "Đổi mật khẩu thành công", Toast.LENGTH_SHORT).show();
-                                        nguoiDungHienTai.setMatKhau(binding.edtmatKhauMoi.getText().toString());
-                                        database.child("Shipper").child(auth.getUid()).setValue(nguoiDungHienTai);
+                                        database.child("Shipper").child(auth.getUid()).addValueEventListener(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                                               nguoiDungHienTai =  snapshot.getValue(Shipper.class);
+                                               nguoiDungHienTai.setMatKhau(binding.edtmatKhauMoi.getText().toString());
+                                               database.child("Shipper").child(auth.getUid()).setValue(nguoiDungHienTai);
+                                               Toast.makeText(Doi_Mat_Khau_Activity.this, "Đổi mật khẩu thành công", Toast.LENGTH_SHORT).show();
+                                            };
+
+                                            @Override
+                                            public void onCancelled(@NonNull /*@NotNull*/ DatabaseError error) {
+
+                                            }
+                                        });
+
+
                                     } else {
-                                        Toast.makeText(Doi_Mat_Khau.this, "Đổi mật khẩu Không thành công", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(Doi_Mat_Khau_Activity.this, "Đổi mật khẩu Không thành công", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             });
                         } else {
-                            Toast.makeText(Doi_Mat_Khau.this, "Mật khẩu cũ của bạn không đúng", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Doi_Mat_Khau_Activity.this, "Mật khẩu cũ của bạn không đúng", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

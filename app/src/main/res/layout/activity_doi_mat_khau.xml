@@ -4,10 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Doi_Mat_Khau"
+    tools:context=".Doi_Mat_Khau_Activity"
     android:orientation="vertical"
     >
     <LinearLayout
+        android:background="#9A3636"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -20,13 +21,13 @@
             android:layout_marginLeft="5dp"
             />
         <TextView
-            android:layout_width="wrap_content"
+            android:gravity="center"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/doimatkhau"
             android:textSize="22dp"
             android:textStyle="bold"
-            android:textColor="@color/black"
-            android:layout_marginLeft="100dp"/>
+            android:textColor="@color/white" />
     </LinearLayout>
     <ScrollView
         android:layout_width="match_parent"
@@ -50,21 +51,25 @@
                 android:layout_marginTop="50dp"
                 android:orientation="vertical">
                 <EditText
-
+                    android:drawablePadding="10dp"
+                    android:drawableStart="@drawable/ic_baseline_perm_identity_24"
                     android:id="@+id/edttenDangNhap"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:hint="   Tên đăng nhập"
+                    android:hint="Tên đăng nhập"
                     android:textColor="@color/black"
                     android:layout_marginLeft="30dp"
                     android:layout_marginRight="30dp"
                     android:background="@drawable/botron"
                     />
                 <EditText
+                    android:inputType="textPassword"
                     android:id="@+id/edtMatKhau"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:hint="   Mật khẩu cũ"
+                    android:drawablePadding="10dp"
+                    android:drawableStart="@drawable/ic_baseline_lock_24"
+                    android:hint="Mật khẩu"
                     android:textColor="@color/black"
                     android:layout_marginLeft="30dp"
                     android:layout_marginRight="30dp"
@@ -72,10 +77,13 @@
                     android:background="@drawable/botron"
                     />
                 <EditText
+                    android:inputType="textPassword"
                     android:id="@+id/edtmatKhauMoi"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:hint="   Mật khẩu mới"
+                    android:hint="Mật khẩu mới"
+                    android:drawablePadding="10dp"
+                    android:drawableStart="@drawable/ic_baseline_lock_open_24"
                     android:textColor="@color/black"
                     android:layout_marginLeft="30dp"
                     android:layout_marginRight="30dp"
@@ -83,10 +91,13 @@
                     android:background="@drawable/botron"
                     />
                 <EditText
+                    android:inputType="textPassword"
                     android:id="@+id/edtnhapLai"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:hint="   Nhập lại mật khẩu mới"
+                    android:drawablePadding="10dp"
+                    android:drawableStart="@drawable/ic_baseline_lock_open_24"
+                    android:hint="Nhập lại mật khẩu mới"
                     android:textColor="@color/black"
                     android:layout_marginLeft="30dp"
                     android:layout_marginRight="30dp"

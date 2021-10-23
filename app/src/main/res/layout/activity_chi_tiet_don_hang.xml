@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    tools:context=".ChiTietDonHang">
+    tools:context=".ChiTietDonHang_Activity">
     <LinearLayout
         android:background="#CD8C8C"
         android:layout_width="match_parent"

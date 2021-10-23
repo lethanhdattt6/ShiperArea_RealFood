@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    tools:context=".LayHang">
+    tools:context=".LayHang_Activity">
     <LinearLayout
         android:background="@drawable/borderlinear"
         android:layout_marginRight="3dp"
