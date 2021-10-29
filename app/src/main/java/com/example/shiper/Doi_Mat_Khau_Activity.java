@@ -54,51 +54,54 @@ public class Doi_Mat_Khau_Activity extends AppCompatActivity {
         binding.imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), Home_Activity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(v.getContext(), Home_Activity.class);
+//                startActivity(intent);
+                finish();
             }
         });
     }
 
     public void ChangePass(){
+        if(KiemTra()) {
+            FirebaseUser user = auth.getCurrentUser();
+            AuthCredential credential = EmailAuthProvider.getCredential(binding.edttenDangNhap.getText().toString(), binding.edtMatKhau.getText().toString());
+            user.reauthenticate(credential)
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                user.updatePassword(binding.edtmatKhauMoi.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if (task.isSuccessful()) {
+                                            database.child("Shipper").child(auth.getUid()).addValueEventListener(new ValueEventListener() {
+                                                @Override
+                                                public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                                                    nguoiDungHienTai = snapshot.getValue(Shipper.class);
+                                                    nguoiDungHienTai.setMatKhau(binding.edtmatKhauMoi.getText().toString());
+                                                    database.child("Shipper").child(auth.getUid()).setValue(nguoiDungHienTai);
+                                                    Toast.makeText(Doi_Mat_Khau_Activity.this, "Đổi mật khẩu thành công", Toast.LENGTH_SHORT).show();
+                                                    finish();
+                                                }
 
-        FirebaseUser user = auth.getCurrentUser();
-        AuthCredential credential = EmailAuthProvider.getCredential(binding.edttenDangNhap.getText().toString(),binding.edtMatKhau.getText().toString());
-        user.reauthenticate(credential)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            user.updatePassword(binding.edtmatKhauMoi.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    if (task.isSuccessful()) {
-                                        database.child("Shipper").child(auth.getUid()).addValueEventListener(new ValueEventListener() {
-                                            @Override
-                                            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                                               nguoiDungHienTai =  snapshot.getValue(Shipper.class);
-                                               nguoiDungHienTai.setMatKhau(binding.edtmatKhauMoi.getText().toString());
-                                               database.child("Shipper").child(auth.getUid()).setValue(nguoiDungHienTai);
-                                               Toast.makeText(Doi_Mat_Khau_Activity.this, "Đổi mật khẩu thành công", Toast.LENGTH_SHORT).show();
-                                            };
+                                                ;
 
-                                            @Override
-                                            public void onCancelled(@NonNull /*@NotNull*/ DatabaseError error) {
+                                                @Override
+                                                public void onCancelled(@NonNull /*@NotNull*/ DatabaseError error) {
 
-                                            }
-                                        });
-
-
-                                    } else {
-                                        Toast.makeText(Doi_Mat_Khau_Activity.this, "Đổi mật khẩu Không thành công", Toast.LENGTH_SHORT).show();
+                                                }
+                                            });
+                                        } else {
+                                            Toast.makeText(Doi_Mat_Khau_Activity.this, "Đổi mật khẩu Không thành công", Toast.LENGTH_SHORT).show();
+                                        }
                                     }
-                                }
-                            });
-                        } else {
-                            Toast.makeText(Doi_Mat_Khau_Activity.this, "Mật khẩu cũ của bạn không đúng", Toast.LENGTH_SHORT).show();
+                                });
+                            } else {
+                                Toast.makeText(Doi_Mat_Khau_Activity.this, "Mật khẩu cũ của bạn không đúng", Toast.LENGTH_SHORT).show();
+                            }
                         }
-                    }
-                });
+                    });
+        }
     }
     public boolean KiemTra(){
         boolean res = true;
@@ -117,6 +120,7 @@ public class Doi_Mat_Khau_Activity extends AppCompatActivity {
         }else {
             if (!binding.edtnhapLai.getText().toString().equals(binding.edtmatKhauMoi.getText().toString())){
                 binding.edtnhapLai.setError("Mật Khẩu Không Trùng Khớp");
+                res = false;
             }
         }
         return res;

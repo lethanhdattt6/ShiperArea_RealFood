@@ -65,6 +65,12 @@ public class QuenMatKhau_Activity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        binding.imgBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     private boolean KiemTra() {

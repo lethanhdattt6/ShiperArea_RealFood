@@ -195,7 +195,7 @@
             android:layout_marginLeft="10dp"
             android:textColor="@color/black"
             android:drawablePadding="5dp"
-            android:drawableLeft="@drawable/ic_baseline_linear_scale_24"
+            android:drawableLeft="@drawable/ic_baseline_attach_money_24"
             android:layout_marginRight="5dp"
             android:gravity="end" />
         <LinearLayout

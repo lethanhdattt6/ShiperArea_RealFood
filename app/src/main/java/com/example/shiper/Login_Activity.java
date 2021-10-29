@@ -1,5 +1,6 @@
 package com.example.shiper;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.developer.kalert.KAlertDialog;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -20,6 +22,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 
 public class Login_Activity extends AppCompatActivity {
+    KAlertDialog kAlertDialog;
     TextView txtQuenMatKhau;
     EditText tendangnhap,matkhau;
     Button login;
@@ -33,12 +36,14 @@ public class Login_Activity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         reference = FirebaseDatabase.getInstance().getReference();
         auth = FirebaseAuth.getInstance();
-        if(auth.getCurrentUser() != null){
-            Intent intent = new Intent(getApplicationContext(), Home_Activity.class);
-            startActivity(intent);
-        }
         setConTrol();
         setEvent();
+        if(auth.getCurrentUser() != null){
+            Intent intent = new Intent(getApplicationContext(), Home_Activity.class);
+            tendangnhap.setText(auth.getCurrentUser().getEmail());
+            startActivity(intent);
+        }
+
     }
 
     private boolean KiemTra() {
@@ -68,6 +73,7 @@ public class Login_Activity extends AppCompatActivity {
     }
 
     private void setEvent() {
+        Context context = this;
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,8 +86,13 @@ public class Login_Activity extends AppCompatActivity {
                                         Toast.makeText(Login_Activity.this, "Đăng Nhập Thành Công!", Toast.LENGTH_SHORT).show();
                                         Intent intent = new Intent(getApplicationContext(), Home_Activity.class);
                                         startActivity(intent);
+                                        matkhau.setText("");
                                     } else {
-                                        Toast.makeText(Login_Activity.this, "", Toast.LENGTH_SHORT).show();
+                                       Toast.makeText(Login_Activity.this, "Thông tin tài khoản hoặc mật khẩu không chính xác", Toast.LENGTH_SHORT).show();
+//                                        kAlertDialog.changeAlertType(KAlertDialog.ERROR_TYPE);
+//                                        kAlertDialog.setTitleText("Đăng Nhập Không Thành Công!");
+//                                        kAlertDialog.setCancelable(true);
+//                                        kAlertDialog.showConfirmButton(true);
                                     }
                                 }
                             });

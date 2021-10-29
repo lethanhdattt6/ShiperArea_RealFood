@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 
@@ -44,6 +45,7 @@ public class Thongtincanhan_Activity extends AppCompatActivity {
     private FirebaseStorage storage;
     private StorageReference storageRef;
     Button save;
+    ImageView imgBack;
     EditText edthoVaTen, edtemail, edtsdt, edtdiachi, edtngaysinh, edtbienso;
     CircleImageView iv_photo, profile;
     @Override
@@ -99,6 +101,12 @@ public class Thongtincanhan_Activity extends AppCompatActivity {
 
 
     private void setEvent() {
+        imgBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         iv_photo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -198,5 +206,6 @@ public class Thongtincanhan_Activity extends AppCompatActivity {
         edtdiachi = findViewById(R.id.diachi);
         profile = findViewById(R.id.profile);
         iv_photo = findViewById(R.id.iv_camera);
+        imgBack = findViewById(R.id.imgBack);
     }
 }

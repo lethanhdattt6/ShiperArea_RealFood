@@ -4,11 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class LayHang_Activity extends AppCompatActivity {
+import com.example.shiper.databinding.ActivityLayHangBinding;
 
+public class LayHang_Activity extends AppCompatActivity {
+    ActivityLayHangBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lay_hang);
+        binding = ActivityLayHangBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
     }
 }

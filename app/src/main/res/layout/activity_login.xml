@@ -6,14 +6,27 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".Login_Activity">
-    <ImageView
-        android:layout_width="429dp"
-        android:layout_height="283dp"
-        android:src="@drawable/logo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="16dp" />
+    <androidx.cardview.widget.CardView
+        android:layout_marginTop="-35dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        app:cardCornerRadius="40dp">
+        <FrameLayout
+            android:backgroundTint="#93242A"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+
+                android:adjustViewBounds="true"
+                android:background="@drawable/logo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="fitXY"
+                android:src="@drawable/logo"
+                android:layout_marginTop="33dp"/>
+        </FrameLayout>
+    </androidx.cardview.widget.CardView>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -66,7 +79,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/white"
-            android:text="Login"
+            android:text="@string/dangnhap"
             />
     </LinearLayout>
 </LinearLayout>

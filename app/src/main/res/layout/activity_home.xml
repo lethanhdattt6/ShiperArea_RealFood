@@ -22,7 +22,7 @@
                 app:title="Home"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="#4A128E"
+                android:background="#93242A"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
                 />
         </com.google.android.material.appbar.AppBarLayout>

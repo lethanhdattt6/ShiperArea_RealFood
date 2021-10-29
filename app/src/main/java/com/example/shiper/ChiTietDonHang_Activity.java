@@ -4,11 +4,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class ChiTietDonHang_Activity extends AppCompatActivity {
+import com.example.shiper.databinding.ActivityChiTietDonHangBinding;
+import com.example.shiper.databinding.ActivityQuenMatKhauBinding;
 
+public class ChiTietDonHang_Activity extends AppCompatActivity {
+    ActivityChiTietDonHangBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chi_tiet_don_hang);
+        binding = ActivityChiTietDonHangBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
     }
 }

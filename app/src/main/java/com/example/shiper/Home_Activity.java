@@ -19,7 +19,6 @@ import com.bumptech.glide.Glide;
 import com.developer.kalert.KAlertDialog;
 import com.example.shiper.Model.Shipper;
 import com.example.shiper.databinding.ActivityHomeBinding;
-import com.example.shiper.fragment.DanhSachDonHang;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -42,10 +41,10 @@ public class Home_Activity extends AppCompatActivity implements NavigationView.O
     Shipper shipper = new Shipper();
     ActivityHomeBinding binding;
 
-    private static final int FRAMENT_DANHSACHDONHANG = 0;
-    private static final int FRAMENT_DOIMATKHAU= 1;
+//    private static final int FRAMENT_DANHSACHDONHANG = 0;
+//    private static final int FRAMENT_DOIMATKHAU= 1;
 
-    private int mCurrentFragment = FRAMENT_DANHSACHDONHANG;
+//    private int mCurrentFragment = FRAMENT_DANHSACHDONHANG;
 
     private DrawerLayout drawerLayout;
     @Override
@@ -79,6 +78,13 @@ public class Home_Activity extends AppCompatActivity implements NavigationView.O
     }
 
     private void setEvent() {
+        binding.danhsach.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), DanhSachDonHang_Activity.class);
+                startActivity(intent);
+            }
+        });
         binding.thongtincanhan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -148,10 +154,10 @@ public class Home_Activity extends AppCompatActivity implements NavigationView.O
         int id  = item.getItemId();
         if(id == R.id.nav_danhsachdonhang){
 //            if(mCurrentFragment != FRAMENT_DANHSACHDONHANG){
-//                replaceFragment(new DanhSachDonHang());
+//                replaceFragment(new DanhSachDonHang_Activity());
 //                mCurrentFragment = FRAMENT_DANHSACHDONHANG;
 //            }
-            Intent intent = new Intent(getApplicationContext(),DanhSachDonHang.class);
+            Intent intent = new Intent(getApplicationContext(), DanhSachDonHang_Activity.class);
             startActivity(intent);
         }else if(id == R.id.lichsugiaohang){
 
@@ -161,11 +167,6 @@ public class Home_Activity extends AppCompatActivity implements NavigationView.O
             Intent intent = new Intent(getApplicationContext(), Thongtincanhan_Activity.class);
             startActivity(intent);
         }else if(id == R.id.dangxuat){
-//            KAlertDialog kAlertDialog = new KAlertDialog(getApplicationContext());
-//            kAlertDialog.setTitleText("Are you sure?");
-//            kAlertDialog.changeAlertType(KAlertDialog.WARNING_TYPE);
-//            kAlertDialog.set
-//            kAlertDialog.show();
             new KAlertDialog(this, KAlertDialog.CUSTOM_IMAGE_TYPE)
                     .setTitleText("Đăng xuất!!!")
                     .setContentText("Bạn có chắn chắn muốn đăng xuất??")
@@ -173,10 +174,15 @@ public class Home_Activity extends AppCompatActivity implements NavigationView.O
                     .setConfirmText("OK")
                     .setCancelText("CANCEL").setConfirmClickListener(kAlertDialog -> {
                         FirebaseAuth.getInstance().signOut();
-                        finish();})
+                        finish();
+                        kAlertDialog.dismiss();
+                    })
                     .show();
 
-        }else if(id == R.id.doimatkhau){
+
+
+        }
+        else if(id == R.id.doimatkhau){
             Intent intent = new Intent(getApplicationContext(), Doi_Mat_Khau_Activity.class);
             startActivity(intent);
         }

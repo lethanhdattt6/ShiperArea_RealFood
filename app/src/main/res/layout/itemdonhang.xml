@@ -16,7 +16,7 @@
         tools:layout_editor_absoluteY="142dp">
 
         <ImageView
-            android:id="@+id/imageThoiTiet"
+            android:id="@+id/imganhdonhang"
             android:layout_width="80dp"
             android:layout_height="95dp"
             android:layout_marginTop="20dp"
@@ -30,6 +30,7 @@
             android:layout_weight="1"
             android:orientation="vertical">
             <TextView
+                android:id="@+id/maDonHang"
                 android:layout_marginLeft="40dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -37,6 +38,7 @@
                 android:textColor="#ED2A1C"
                 android:textSize="20dp" />
             <TextView
+                android:id="@+id/tvsdtCuaHang"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/sodienthoaicuahang"
@@ -47,6 +49,7 @@
                 />
 
             <TextView
+                android:id="@+id/tvDiaChiCuaHang"
                 android:drawableLeft="@drawable/ic_baseline_location_on_24"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -55,6 +58,7 @@
                 android:textSize="17dp" />
 
             <TextView
+                android:id="@+id/tvDiaChiNguoiNhan"
                 android:drawableLeft="@drawable/ic_baseline_location_on_24"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -62,6 +66,7 @@
                 android:textColor="#000"
                 android:textSize="17dp" />
             <TextView
+                android:id="@+id/tvTongDon"
                 android:layout_marginLeft="40dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
