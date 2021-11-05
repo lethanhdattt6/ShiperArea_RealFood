@@ -30,12 +30,9 @@ public class AdapterDonHang extends RecyclerView.Adapter<AdapterDonHang.DonHangV
         if (donHang == null) {
             return;
         }
-        holder.maDH.setText(donHang.getMa());
-        holder.imganhDH.setImageResource(donHang.getAnh());
-        holder.tvsdtCH.setText(donHang.getSdtCH());
-        holder.tvDiaChiCuaHang.setText(donHang.getDiaChiCH());
-        holder.tvDiaChiNN.setText(donHang.getDiaChiNN());
-        holder.tvTongDon.setText(donHang.getTongDon());
+        holder.maDH.setText("Mã ĐH : " + donHang.getIDDonHang());
+        holder.tvDiaChiNN.setText("Địa chỉ người nhận : "+ donHang.getDiaChi());
+        holder.tvDiaChiCuaHang.setText("Địa chỉ cửa hàng : ");
     }
     public  AdapterDonHang(Context context)
     {

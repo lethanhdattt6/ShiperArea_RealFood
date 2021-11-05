@@ -1,93 +1,108 @@
 package com.example.shiper.Model;
 
+import com.example.shiper.TrangThaiDonHang;
+
+import java.util.Date;
+
 public class DonHang {
-    String ma, tenDH, trangThai, tenCH, diaChiCH, diaChiNN,tongDon,sdtCH;
-    int anh;
+    String  IDDonHang , IDKhachHang , IDShipper , diaChi, soDienThoai, ghiChu_KhachHang, ghiChu_Shipper;
+    double tongTien;
+    Date ngayTao;
+    TrangThaiDonHang trangThai;
 
     public DonHang() {
     }
 
-    public DonHang(String ma, String tenDH, String trangThai, String tenCH, String diaChiCH, String diaChiNN, String tongDon, String sdtCH, int anh) {
-        this.ma = ma;
-        this.tenDH = tenDH;
+    public DonHang(String IDDonHang, String IDKhachHang, String IDShipper, String diaChi, String soDienThoai, String ghiChu_KhachHang, String ghiChu_Shipper, double tongTien, Date ngayTao, TrangThaiDonHang trangThai) {
+        this.IDDonHang = IDDonHang;
+        this.IDKhachHang = IDKhachHang;
+        this.IDShipper = IDShipper;
+        this.diaChi = diaChi;
+        this.soDienThoai = soDienThoai;
+        this.ghiChu_KhachHang = ghiChu_KhachHang;
+        this.ghiChu_Shipper = ghiChu_Shipper;
+        this.tongTien = tongTien;
+        this.ngayTao = ngayTao;
         this.trangThai = trangThai;
-        this.tenCH = tenCH;
-        this.diaChiCH = diaChiCH;
-        this.diaChiNN = diaChiNN;
-        this.tongDon = tongDon;
-        this.sdtCH = sdtCH;
-        this.anh = anh;
     }
 
-    public String getMa() {
-        return ma;
+    public String getIDDonHang() {
+        return IDDonHang;
     }
 
-    public void setMa(String ma) {
-        this.ma = ma;
+    public void setIDDonHang(String IDDonHang) {
+        this.IDDonHang = IDDonHang;
     }
 
-    public String getTenDH() {
-        return tenDH;
+    public String getIDKhachHang() {
+        return IDKhachHang;
     }
 
-    public void setTenDH(String tenDH) {
-        this.tenDH = tenDH;
+    public void setIDKhachHang(String IDKhachHang) {
+        this.IDKhachHang = IDKhachHang;
     }
 
-    public String getTrangThai() {
+    public String getIDShipper() {
+        return IDShipper;
+    }
+
+    public void setIDShipper(String IDShipper) {
+        this.IDShipper = IDShipper;
+    }
+
+    public String getDiaChi() {
+        return diaChi;
+    }
+
+    public void setDiaChi(String diaChi) {
+        this.diaChi = diaChi;
+    }
+
+    public String getSoDienThoai() {
+        return soDienThoai;
+    }
+
+    public void setSoDienThoai(String soDienThoai) {
+        this.soDienThoai = soDienThoai;
+    }
+
+    public String getGhiChu_KhachHang() {
+        return ghiChu_KhachHang;
+    }
+
+    public void setGhiChu_KhachHang(String ghiChu_KhachHang) {
+        this.ghiChu_KhachHang = ghiChu_KhachHang;
+    }
+
+    public String getGhiChu_Shipper() {
+        return ghiChu_Shipper;
+    }
+
+    public void setGhiChu_Shipper(String ghiChu_Shipper) {
+        this.ghiChu_Shipper = ghiChu_Shipper;
+    }
+
+    public double getTongTien() {
+        return tongTien;
+    }
+
+    public void setTongTien(double tongTien) {
+        this.tongTien = tongTien;
+    }
+
+    public Date getNgayTao() {
+        return ngayTao;
+    }
+
+    public void setNgayTao(Date ngayTao) {
+        this.ngayTao = ngayTao;
+    }
+
+    public TrangThaiDonHang getTrangThai() {
         return trangThai;
     }
 
-    public void setTrangThai(String trangThai) {
+    public void setTrangThai(TrangThaiDonHang trangThai) {
         this.trangThai = trangThai;
-    }
-
-    public String getTenCH() {
-        return tenCH;
-    }
-
-    public void setTenCH(String tenCH) {
-        this.tenCH = tenCH;
-    }
-
-    public String getDiaChiCH() {
-        return diaChiCH;
-    }
-
-    public void setDiaChiCH(String diaChiCH) {
-        this.diaChiCH = diaChiCH;
-    }
-
-    public String getDiaChiNN() {
-        return diaChiNN;
-    }
-
-    public void setDiaChiNN(String diaChiNN) {
-        this.diaChiNN = diaChiNN;
-    }
-
-    public String getTongDon() {
-        return tongDon;
-    }
-
-    public void setTongDon(String tongDon) {
-        this.tongDon = tongDon;
-    }
-
-    public String getSdtCH() {
-        return sdtCH;
-    }
-
-    public void setSdtCH(String sdtCH) {
-        this.sdtCH = sdtCH;
-    }
-
-    public int getAnh() {
-        return anh;
-    }
-
-    public void setAnh(int anh) {
-        this.anh = anh;
     }
 }
