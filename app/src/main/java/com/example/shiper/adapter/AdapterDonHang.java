@@ -9,14 +9,24 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.shiper.Model.CuaHang;
 import com.example.shiper.Model.DonHang;
+import com.example.shiper.Model.DonHangInfo;
 import com.example.shiper.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
 public class AdapterDonHang extends RecyclerView.Adapter<AdapterDonHang.DonHangViewHolder> {
     Context context;
     ArrayList<DonHang> donHangs;
+    DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
     @NonNull
     @Override
     public DonHangViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -26,13 +36,30 @@ public class AdapterDonHang extends RecyclerView.Adapter<AdapterDonHang.DonHangV
 
     @Override
     public void onBindViewHolder(@NonNull AdapterDonHang.DonHangViewHolder holder, int position) {
+
         DonHang donHang = donHangs.get(position);
         if (donHang == null) {
             return;
         }
         holder.maDH.setText("Mã ĐH : " + donHang.getIDDonHang());
         holder.tvDiaChiNN.setText("Địa chỉ người nhận : "+ donHang.getDiaChi());
-        holder.tvDiaChiCuaHang.setText("Địa chỉ cửa hàng : ");
+
+        reference.child("CuaHang").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    CuaHang cuaHang = dataSnapshot.getValue(CuaHang.class);
+                    if(cuaHang.getIDCuaHang().equals(donHang.getIDCuaHang())){
+                        holder.tvDiaChiCuaHang.setText("Địa chỉ cửa hàng : "+ cuaHang.getDiaChi());
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+        });
     }
     public  AdapterDonHang(Context context)
     {

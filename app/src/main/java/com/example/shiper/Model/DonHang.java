@@ -5,15 +5,12 @@ import com.example.shiper.TrangThaiDonHang;
 import java.util.Date;
 
 public class DonHang {
-    String  IDDonHang , IDKhachHang , IDShipper , diaChi, soDienThoai, ghiChu_KhachHang, ghiChu_Shipper;
+    String  IDDonHang , IDKhachHang , IDShipper , diaChi, soDienThoai, ghiChu_KhachHang, ghiChu_Shipper,IDCuaHang;
     double tongTien;
     Date ngayTao;
     TrangThaiDonHang trangThai;
 
-    public DonHang() {
-    }
-
-    public DonHang(String IDDonHang, String IDKhachHang, String IDShipper, String diaChi, String soDienThoai, String ghiChu_KhachHang, String ghiChu_Shipper, double tongTien, Date ngayTao, TrangThaiDonHang trangThai) {
+    public DonHang(String IDDonHang, String IDKhachHang, String IDShipper, String diaChi, String soDienThoai, String ghiChu_KhachHang, String ghiChu_Shipper, String IDCuaHang, double tongTien, Date ngayTao, TrangThaiDonHang trangThai) {
         this.IDDonHang = IDDonHang;
         this.IDKhachHang = IDKhachHang;
         this.IDShipper = IDShipper;
@@ -21,6 +18,7 @@ public class DonHang {
         this.soDienThoai = soDienThoai;
         this.ghiChu_KhachHang = ghiChu_KhachHang;
         this.ghiChu_Shipper = ghiChu_Shipper;
+        this.IDCuaHang = IDCuaHang;
         this.tongTien = tongTien;
         this.ngayTao = ngayTao;
         this.trangThai = trangThai;
@@ -82,6 +80,14 @@ public class DonHang {
         this.ghiChu_Shipper = ghiChu_Shipper;
     }
 
+    public String getIDCuaHang() {
+        return IDCuaHang;
+    }
+
+    public void setIDCuaHang(String IDCuaHang) {
+        this.IDCuaHang = IDCuaHang;
+    }
+
     public double getTongTien() {
         return tongTien;
     }
@@ -104,5 +110,8 @@ public class DonHang {
 
     public void setTrangThai(TrangThaiDonHang trangThai) {
         this.trangThai = trangThai;
+    }
+
+    public DonHang() {
     }
 }
