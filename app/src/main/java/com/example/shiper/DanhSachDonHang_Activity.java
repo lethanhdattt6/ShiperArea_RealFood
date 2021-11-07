@@ -47,12 +47,13 @@ public class DanhSachDonHang_Activity extends AppCompatActivity {
         reference.child("DonHang").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange( DataSnapshot snapshot) {
-                //hangs.clear();
+                hangs.clear();
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     DonHang donHang = dataSnapshot.getValue(DonHang.class);
-                    hangs.add(donHang);
+                    if(donHang.getTrangThai().toString().equals("SHOP_ChoXacNhanGiaoHangChoShipper")){
+                        hangs.add(donHang);
+                    }
                 }
-
                 adapterDonHang = new AdapterDonHang(DanhSachDonHang_Activity.this);
                 adapterDonHang.setData(hangs);
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(DanhSachDonHang_Activity.this, RecyclerView.VERTICAL,false);
