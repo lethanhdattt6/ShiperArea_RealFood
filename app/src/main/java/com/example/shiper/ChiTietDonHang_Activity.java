@@ -4,13 +4,16 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
+import com.bumptech.glide.Glide;
 import com.example.shiper.Model.CuaHang;
 import com.example.shiper.Model.DonHang;
 import com.example.shiper.Model.DonHangInfo;
 import com.example.shiper.Model.KhachHang;
 import com.example.shiper.databinding.ActivityChiTietDonHangBinding;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -57,7 +60,7 @@ public class ChiTietDonHang_Activity extends AppCompatActivity {
         binding.sdtNguoiNhan.setText("SĐT người nhận : "+donHang.getSoDienThoai());
         binding.tvDiaChiNguoiNhan.setText("Địa chỉ người nhận :" +donHang.getDiaChi());
         binding.tvtrangThai.setText("Trạng thái : "+ donHang.getTrangThai().toString());
-        binding.edtGhiChu.setText(donHang.getGhiChu_KhachHang());
+        binding.edtGhiChu.setText("Ghi chú : " +donHang.getGhiChu_KhachHang());
         reference.child("CuaHang").child(donHang.getIDCuaHang()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -82,6 +85,26 @@ public class ChiTietDonHang_Activity extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
+            }
+        });
+        reference.child("DonHangInfo").child(donHang.getIDDonHang()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                DonHangInfo donHangInfo = snapshot.getValue(DonHangInfo.class);
+                binding.tvsoluong.setText("Số lượng : "+donHangInfo.getSoLuong());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        storageRef.child("SanPham").child(donHang.getIDDonHang()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Glide.with(getApplicationContext())
+                        .load(uri.toString())
+                        .into(binding.anhsanpham);
             }
         });
 

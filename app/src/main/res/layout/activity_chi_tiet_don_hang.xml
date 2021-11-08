@@ -51,7 +51,9 @@
                     >
 
                     <ImageView
-                        android:layout_width="150dp"
+                        android:scaleType="centerCrop"
+                        android:id="@+id/anhsanpham"
+                        android:layout_width="198dp"
                         android:layout_height="150dp"
                         android:src="@drawable/background" />
                     <LinearLayout
@@ -59,43 +61,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        >
-                        <TextView
-                            android:id="@+id/tvmaDH"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/madh"
-                            android:textColor="@color/madh"
-                            android:textStyle="bold"
-                            android:textSize="27dp"
-                            android:layout_marginLeft="50dp"
-                            />
-                        <TextView
-                            android:id="@+id/tenDonHang"
-                            android:layout_marginTop="5dp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/tenmathang"
-                            android:textSize="23dp"
-                            android:layout_marginLeft="10dp"
-                            android:textColor="@color/black"
-                            android:drawablePadding="5dp"
-                            android:drawableLeft="@drawable/ic_baseline_wysiwyg_24"
-                            />
-                        <TextView
-                            android:id="@+id/tvsoluong"
-                            android:layout_marginTop="5dp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Số lượng"
-                            android:textSize="23dp"
-                            android:layout_marginLeft="10dp"
-                            android:textColor="@color/black"
-                            android:drawablePadding="5dp"
-                            android:drawableLeft="@drawable/ic_baseline_filter_9_plus_24"
-                            />
-
-                    </LinearLayout>
+                        />
 
                 </LinearLayout>
                 <TextView
@@ -108,6 +74,16 @@
                     android:layout_marginLeft="10dp"
                     android:textColor="#E30834"
                     android:drawablePadding="5dp"
+                    />
+                <TextView
+                    android:id="@+id/tvmaDH"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/madh"
+                    android:textColor="@color/madh"
+                    android:textStyle="bold"
+                    android:textSize="27dp"
+                    android:layout_marginLeft="50dp"
                     />
 
                 <TextView
@@ -182,6 +158,11 @@
                     android:drawablePadding="5dp"
                     android:drawableLeft="@drawable/ic_baseline_person_24"
                     />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="ryctenvasoluong"/>
                 <EditText
                     android:id="@+id/edtGhiChu"
                     android:layout_marginLeft="10dp"

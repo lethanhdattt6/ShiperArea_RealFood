@@ -50,8 +50,8 @@ public class Home_Activity extends AppCompatActivity implements NavigationView.O
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       binding = ActivityHomeBinding.inflate(getLayoutInflater());
-       setContentView(binding.getRoot());
+        binding = ActivityHomeBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
         Toolbar toolBar = findViewById(R.id.toolBar);
         setSupportActionBar(toolBar);
 
