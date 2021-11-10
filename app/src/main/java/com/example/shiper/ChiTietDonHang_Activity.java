@@ -2,16 +2,21 @@ package com.example.shiper;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.shiper.Model.CuaHang;
 import com.example.shiper.Model.DonHang;
 import com.example.shiper.Model.DonHangInfo;
 import com.example.shiper.Model.KhachHang;
+import com.example.shiper.adapter.AdapterDonHang;
+import com.example.shiper.adapter.AdapterSoLuong;
 import com.example.shiper.databinding.ActivityChiTietDonHangBinding;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
@@ -25,14 +30,18 @@ import com.google.gson.Gson;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+
 
 public class ChiTietDonHang_Activity extends AppCompatActivity {
     ActivityChiTietDonHangBinding binding;
     DonHang donHang ;
-    DonHangInfo hangInfo = new DonHangInfo();
     DatabaseReference reference;
     StorageReference storageRef;
     FirebaseStorage storage;
+    ArrayList<DonHangInfo> hangInfos = new ArrayList<>();
+    AdapterSoLuong adapterSoLuong;
+    RecyclerView rcySoluong;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +49,6 @@ public class ChiTietDonHang_Activity extends AppCompatActivity {
         binding = ActivityChiTietDonHangBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         reference = FirebaseDatabase.getInstance().getReference();
-
         storage = FirebaseStorage.getInstance();
         storageRef = storage.getReference();
 
@@ -57,8 +65,6 @@ public class ChiTietDonHang_Activity extends AppCompatActivity {
     private void LoadDataDonHang(){
         binding.tvmaDH.setText(donHang.getIDDonHang().substring(0,7));
         binding.tvTongDon.setText("Tổng đơn : " +donHang.getTongTien()+"");
-        binding.sdtNguoiNhan.setText("SĐT người nhận : "+donHang.getSoDienThoai());
-        binding.tvDiaChiNguoiNhan.setText("Địa chỉ người nhận :" +donHang.getDiaChi());
         binding.tvtrangThai.setText("Trạng thái : "+ donHang.getTrangThai().toString());
         binding.edtGhiChu.setText("Ghi chú : " +donHang.getGhiChu_KhachHang());
         reference.child("CuaHang").child(donHang.getIDCuaHang()).addValueEventListener(new ValueEventListener() {
@@ -80,6 +86,8 @@ public class ChiTietDonHang_Activity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 KhachHang khachHang = snapshot.getValue(KhachHang.class);
                 binding.tvtenNguoiNhan.setText("Tên người nhận : "+khachHang.getTenKhachHang());
+                binding.sdtNguoiNhan.setText("SĐT người nhận : "+khachHang.getSoDienThoai());
+                binding.tvDiaChiNguoiNhan.setText("Địa chỉ người nhận :" +khachHang.getDiaChi());
             }
 
             @Override
@@ -87,18 +95,28 @@ public class ChiTietDonHang_Activity extends AppCompatActivity {
 
             }
         });
-        reference.child("DonHangInfo").child(donHang.getIDDonHang()).addValueEventListener(new ValueEventListener() {
+        reference.child("DonHangInfo").orderByChild("iddonHang").equalTo(donHang.getIDDonHang()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                DonHangInfo donHangInfo = snapshot.getValue(DonHangInfo.class);
-                binding.tvsoluong.setText("Số lượng : "+donHangInfo.getSoLuong());
+                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    DonHangInfo donHangInfo = dataSnapshot.getValue(DonHangInfo.class);
+                    hangInfos.add(donHangInfo);
+                    //Toast.makeText(ChiTietDonHang_Activity.this, hangInfos.size()+"", Toast.LENGTH_SHORT).show();
+                }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
         });
+
+        adapterSoLuong = new AdapterSoLuong(ChiTietDonHang_Activity.this);
+        adapterSoLuong.setData(hangInfos);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(ChiTietDonHang_Activity.this, RecyclerView.VERTICAL,false);
+        binding.ryctenvasoluong.setLayoutManager(linearLayoutManager);
+        binding.ryctenvasoluong.setAdapter(adapterSoLuong);
+
+
         storageRef.child("SanPham").child(donHang.getIDDonHang()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {

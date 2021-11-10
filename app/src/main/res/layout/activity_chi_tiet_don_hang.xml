@@ -56,6 +56,16 @@
                         android:layout_width="198dp"
                         android:layout_height="150dp"
                         android:src="@drawable/background" />
+                    <TextView
+                        android:id="@+id/tvmaDH"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/madh"
+                        android:textColor="@color/madh"
+                        android:textStyle="bold"
+                        android:textSize="25dp"
+                        android:layout_marginLeft="50dp"
+                        />
                     <LinearLayout
                         android:layout_marginTop="5dp"
                         android:layout_width="wrap_content"
@@ -75,16 +85,7 @@
                     android:textColor="#E30834"
                     android:drawablePadding="5dp"
                     />
-                <TextView
-                    android:id="@+id/tvmaDH"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/madh"
-                    android:textColor="@color/madh"
-                    android:textStyle="bold"
-                    android:textSize="27dp"
-                    android:layout_marginLeft="50dp"
-                    />
+
 
                 <TextView
                     android:id="@+id/tvtenCuaHang"
@@ -92,7 +93,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Tên cửa hàng"
-                    android:textSize="23dp"
+                    android:textSize="20dp"
                     android:layout_marginLeft="10dp"
                     android:textColor="@color/black"
                     android:drawablePadding="5dp"
@@ -104,7 +105,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Địa chỉ cửa hàng"
-                    android:textSize="23dp"
+                    android:textSize="20dp"
                     android:layout_marginLeft="10dp"
                     android:textColor="@color/black"
                     android:drawablePadding="5dp"
@@ -116,7 +117,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="SĐT cửa hàng"
-                    android:textSize="23dp"
+                    android:textSize="20dp"
                     android:layout_marginLeft="10dp"
                     android:textColor="@color/black"
                     android:drawablePadding="5dp"
@@ -128,7 +129,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="SĐT người nhận"
-                    android:textSize="23dp"
+                    android:textSize="20dp"
                     android:layout_marginLeft="10dp"
                     android:textColor="@color/black"
                     android:drawablePadding="5dp"
@@ -140,7 +141,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Địa chỉ người nhận"
-                    android:textSize="23dp"
+                    android:textSize="20dp"
                     android:layout_marginLeft="10dp"
                     android:textColor="@color/black"
                     android:drawablePadding="5dp"
@@ -152,7 +153,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Tên người nhận"
-                    android:textSize="23dp"
+                    android:textSize="20dp"
                     android:layout_marginLeft="10dp"
                     android:textColor="@color/black"
                     android:drawablePadding="5dp"
@@ -160,9 +161,10 @@
                     />
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="ryctenvasoluong"/>
+                    android:layout_marginLeft="10dp"
+                    android:id="@+id/ryctenvasoluong"/>
                 <EditText
                     android:id="@+id/edtGhiChu"
                     android:layout_marginLeft="10dp"
