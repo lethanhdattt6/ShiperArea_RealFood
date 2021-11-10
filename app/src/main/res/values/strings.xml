@@ -33,4 +33,11 @@
     <string name="tendangnhap">Tên đăng nhập</string>
     <string name="matkhau">Mật khẩu</string>
     <string name="dangnhap">Đăng nhập</string>
+
+    <array name="danhsach">
+        <item>Danh sách đơn hàng</item>
+        <item>Danh sách đơn hàng đã nhận</item>
+        <item>Danh sách đơn hàng đang giao</item>
+        <item>Danh sách đơn hàng đã giao</item>
+    </array>
 </resources>

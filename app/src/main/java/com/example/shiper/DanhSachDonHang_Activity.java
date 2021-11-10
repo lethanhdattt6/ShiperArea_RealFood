@@ -1,6 +1,5 @@
 package com.example.shiper;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -9,17 +8,16 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.ListView;
+import android.widget.Spinner;
 
 import com.example.shiper.Model.DonHang;
 import com.example.shiper.adapter.AdapterDonHang;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
@@ -27,8 +25,10 @@ public class DanhSachDonHang_Activity extends AppCompatActivity {
     RecyclerView recyclerDanhSach;
     ArrayList<DonHang>hangs = new ArrayList<>();
     AdapterDonHang adapterDonHang;
+    private FirebaseAuth auth;
     DatabaseReference reference;
     ImageView imgBack;
+    Spinner spdanhsach;
 
 
 
@@ -37,6 +37,7 @@ public class DanhSachDonHang_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_danh_sach_don_hang);
         reference = FirebaseDatabase.getInstance().getReference();
+        auth = FirebaseAuth.getInstance();
         LoadData();
 
         setConTrol();
@@ -44,14 +45,24 @@ public class DanhSachDonHang_Activity extends AppCompatActivity {
     }
 
     private void LoadData() {
+
         reference.child("DonHang").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange( DataSnapshot snapshot) {
                 hangs.clear();
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     DonHang donHang = dataSnapshot.getValue(DonHang.class);
-                    if(donHang.getTrangThai().toString().equals("SHOP_ChoXacNhanGiaoHangChoShipper")){
-                        hangs.add(donHang);
+//                    donHang.getTrangThai().toString().equals("SHOP_ChoXacNhanGiaoHangChoShipper")
+//                            &&
+                    if(donHang.getIDShipper().equals(auth.getUid())){
+                        if(donHang.getTrangThai().equals("SHOP_ChoXacNhanGiaoHangChoShipper")
+                                && spdanhsach.getSelectedItem().equals("Danh sách đơn hàng")){
+                                hangs.add(donHang);
+                        }
+                        if (donHang.getTrangThai().equals("SHOP_ChoXacNhanGiaoHangChoShipper")
+                                && spdanhsach.getSelectedItem().equals("Danh sách đơn hàng")){
+                            hangs.add(donHang);
+                        }
                     }
                 }
                 adapterDonHang = new AdapterDonHang(DanhSachDonHang_Activity.this);
@@ -95,5 +106,6 @@ public class DanhSachDonHang_Activity extends AppCompatActivity {
     private void setConTrol() {
         imgBack = findViewById(R.id.imgBack);
         recyclerDanhSach = findViewById(R.id.recycleDanhSach);
+        spdanhsach = findViewById(R.id.spdanhSach);
     }
 }
