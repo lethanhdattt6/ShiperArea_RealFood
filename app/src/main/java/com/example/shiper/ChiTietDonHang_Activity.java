@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -18,7 +19,9 @@ import com.example.shiper.Model.KhachHang;
 import com.example.shiper.adapter.AdapterDonHang;
 import com.example.shiper.adapter.AdapterSoLuong;
 import com.example.shiper.databinding.ActivityChiTietDonHangBinding;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -52,6 +55,7 @@ public class ChiTietDonHang_Activity extends AppCompatActivity {
         storage = FirebaseStorage.getInstance();
         storageRef = storage.getReference();
 
+
         if(getIntent()!= null ){
             Intent intent =  getIntent();
             String DataDonHang = intent.getStringExtra("DataDonHang");
@@ -59,8 +63,10 @@ public class ChiTietDonHang_Activity extends AppCompatActivity {
             donHang = gson.fromJson(DataDonHang, DonHang.class);
             LoadDataDonHang();
         }
-
+        setEvent();
     }
+
+
 
     private void LoadDataDonHang(){
         binding.tvmaDH.setText(donHang.getIDDonHang().substring(0,7));
@@ -126,5 +132,31 @@ public class ChiTietDonHang_Activity extends AppCompatActivity {
             }
         });
 
+        if(donHang.getTrangThai().toString().equals("SHOP_DangGiaoShipper")){
+            binding.btnNhanDon.setVisibility(View.VISIBLE);
+            binding.btnTuChoiDon.setVisibility(View.VISIBLE);
+        }
+
+
+    }
+    private void setEvent() {
+        binding.btnNhanDon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                donHang.setTrangThai(TrangThaiDonHang.SHOP_ChoXacNhanGiaoHangChoShipper);
+                reference.child("DonHang").child(donHang.getIDDonHang()).setValue(donHang).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful())
+                        {
+                            Toast.makeText(v.getContext(), "Đã nhận thành công đƠn Hàng", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+                binding.btnNhanDon.setVisibility(View.GONE);
+                binding.btnTuChoiDon.setVisibility(View.GONE);
+                LoadDataDonHang();
+            }
+        });
     }
 }
