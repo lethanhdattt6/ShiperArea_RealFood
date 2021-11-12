@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.shiper.Model.DonHang;
@@ -31,6 +32,7 @@ public class DanhSachDonHang_Activity extends AppCompatActivity {
     DatabaseReference reference;
     ImageView imgBack;
     Spinner spdanhsach;
+    TextView tvDanhSach;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,19 +57,18 @@ public class DanhSachDonHang_Activity extends AppCompatActivity {
                             hangs.add(donHang);
                     }
                     if(donHang.getIDShipper().equals(auth.getUid())
-                            && donHang.getTrangThai().toString().equals("SHOP_DangChuanBihang")
+                            && donHang.getTrangThai().toString().equals(TrangThaiDonHang.Shipper_DangGiaoHang)
                             && spdanhsach.getSelectedItem().toString().equals("Danh sách đơn hàng đang giao")){
                         hangs.add(donHang);
+                        tvDanhSach.setText("Danh sách đơn hàng đang giao");
+
                     }
                     if(donHang.getIDShipper().equals(auth.getUid())
-                            && donHang.getTrangThai().toString().equals("SHOP_DangChuanBihang")
+                            && donHang.getTrangThai().toString().equals(TrangThaiDonHang.SHOP_ChoShipperLayHang)
                             && spdanhsach.getSelectedItem().toString().equals("Danh sách đơn hàng đã nhận")){
                         Toast.makeText(DanhSachDonHang_Activity.this, "Danh sách đơn hàng đã nhận", Toast.LENGTH_SHORT).show();
-                    }
-                    if(donHang.getIDShipper().equals(auth.getUid())
-                            && donHang.getTrangThai().toString().equals("SHOP_DangChuanBihang")
-                            && spdanhsach.getSelectedItem().toString().equals("Danh sách đơn hàng đã giao")){
-                        Toast.makeText(DanhSachDonHang_Activity.this, "Danh sách đơn hàng đã giao", Toast.LENGTH_SHORT).show();
+                        hangs.add(donHang);
+                        tvDanhSach.setText("Danh sách đơn hàng đã nhận");
                     }
                 }
                 adapterDonHang = new AdapterDonHang(DanhSachDonHang_Activity.this);
@@ -122,5 +123,6 @@ public class DanhSachDonHang_Activity extends AppCompatActivity {
         imgBack = findViewById(R.id.imgBack);
         recyclerDanhSach = findViewById(R.id.recycleDanhSach);
         spdanhsach = findViewById(R.id.spdanhSach);
+        tvDanhSach = findViewById(R.id.tvDanhSach);
     }
 }

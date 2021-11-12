@@ -31,15 +31,26 @@
 
             <TextView
                 android:id="@+id/maDonHang"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="40dp"
                 android:text="@string/madh"
                 android:textColor="#ED2A1C"
                 android:textSize="20dp" />
             <TextView
+                android:singleLine="false"
+                android:id="@+id/tvtensanpham"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tên sản phẩm"
+                android:textColor="#000"
+                android:textSize="17dp"
+                android:drawableLeft="@drawable/ic_baseline_local_phone_24"
+                android:drawablePadding="5dp"
+                />
+            <TextView
                 android:id="@+id/tvsdtCuaHang"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/sodienthoaicuahang"
                 android:textColor="#000"
@@ -51,7 +62,7 @@
             <TextView
                 android:id="@+id/tvDiaChiCuaHang"
                 android:drawableLeft="@drawable/ic_baseline_location_on_24"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/diachicuahang"
                 android:textColor="#000"
@@ -60,7 +71,7 @@
             <TextView
                 android:id="@+id/tvDiaChiNguoiNhan"
                 android:drawableLeft="@drawable/ic_baseline_location_on_24"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/diachinguoinhan"
                 android:textColor="#000"
@@ -68,7 +79,7 @@
             <TextView
                 android:id="@+id/tvTongDon"
                 android:layout_marginLeft="40dp"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/tongdon"
                 android:textColor="#000"

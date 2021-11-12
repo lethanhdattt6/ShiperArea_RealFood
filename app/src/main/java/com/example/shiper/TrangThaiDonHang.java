@@ -1,6 +1,6 @@
 package com.example.shiper;
 
 public enum TrangThaiDonHang {
-    SHOP_ChoXacNhanChuyenTien , SHOP_DangChuanBihang , SHOP_DaChuanBiXong , SHOP_DangGiaoShipper , SHOP_ChoXacNhanGiaoHangChoShipper ,
-    Shipper_DaLayHang , Shipper_KhongNhanGiaoHang , Shipper_DangGiaoHang , Shipper_GiaoThanhCong , Shipper_GiaoKhongThanhCong ;
+    SHOP_ChoXacNhanChuyenTien, SHOP_DaGiaoChoBep, SHOP_DangChuanBihang , SHOP_DaChuanBiXong , SHOP_DangGiaoShipper ,SHOP_ChoShipperLayHang , SHOP_ChoXacNhanGiaoHangChoShipper ,
+    Shipper_DaLayHang ,Shipper_ChoDiGiao, Shipper_KhongNhanGiaoHang , Shipper_DangGiaoHang , Shipper_GiaoThanhCong , Shipper_GiaoKhongThanhCong ;
 }

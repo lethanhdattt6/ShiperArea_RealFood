@@ -262,6 +262,19 @@
                         android:layout_marginLeft="0dp"
                         android:layout_marginRight="15dp"
                         />
+                    <Button
+                        android:id="@+id/btnDiGiao"
+                        android:visibility="gone"
+                        android:layout_width="match_parent"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_height="50dp"
+                        android:text="Đi Giao"
+                        android:textColor="@color/black"
+                        android:textSize="15dp"
+                        android:background="@drawable/botronbtn"
+                        />
+
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
