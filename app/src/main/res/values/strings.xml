@@ -38,6 +38,6 @@
         <item>Danh sách đơn hàng</item>
         <item>Danh sách đơn hàng đã nhận</item>
         <item>Danh sách đơn hàng đang giao</item>
-        <item>Danh sách đơn hàng đã giao</item>
+        <item>Danh sách đơn hàng chờ đi giao</item>
     </array>
 </resources>

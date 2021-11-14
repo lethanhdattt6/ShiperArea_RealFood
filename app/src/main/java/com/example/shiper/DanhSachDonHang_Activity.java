@@ -57,18 +57,23 @@ public class DanhSachDonHang_Activity extends AppCompatActivity {
                             hangs.add(donHang);
                     }
                     if(donHang.getIDShipper().equals(auth.getUid())
-                            && donHang.getTrangThai().toString().equals(TrangThaiDonHang.Shipper_DangGiaoHang)
+                            && donHang.getTrangThai().toString().equals("Shipper_DangGiaoHang")
                             && spdanhsach.getSelectedItem().toString().equals("Danh sách đơn hàng đang giao")){
                         hangs.add(donHang);
-                        tvDanhSach.setText("Danh sách đơn hàng đang giao");
+                        Toast.makeText(DanhSachDonHang_Activity.this, "Danh sách đơn hàng đang giao", Toast.LENGTH_SHORT).show();
 
                     }
                     if(donHang.getIDShipper().equals(auth.getUid())
-                            && donHang.getTrangThai().toString().equals(TrangThaiDonHang.SHOP_ChoShipperLayHang)
+                            && donHang.getTrangThai().toString().equals("SHOP_ChoShipperLayHang")
                             && spdanhsach.getSelectedItem().toString().equals("Danh sách đơn hàng đã nhận")){
-                        Toast.makeText(DanhSachDonHang_Activity.this, "Danh sách đơn hàng đã nhận", Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(DanhSachDonHang_Activity.this, "Danh sách đơn hàng đã nhận", Toast.LENGTH_SHORT).show();
                         hangs.add(donHang);
-                        tvDanhSach.setText("Danh sách đơn hàng đã nhận");
+                    }
+                    if(donHang.getIDShipper().equals(auth.getUid())
+                            && donHang.getTrangThai().toString().equals("Shipper_DaLayHang")
+                            && spdanhsach.getSelectedItem().toString().equals("Danh sách đơn hàng chờ đi giao")){
+                        // Toast.makeText(DanhSachDonHang_Activity.this, "Danh sách đơn hàng đã nhận", Toast.LENGTH_SHORT).show();
+                        hangs.add(donHang);
                     }
                 }
                 adapterDonHang = new AdapterDonHang(DanhSachDonHang_Activity.this);
@@ -92,6 +97,18 @@ public class DanhSachDonHang_Activity extends AppCompatActivity {
         spdanhsach.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(spdanhsach.getSelectedItem().toString().equals("Danh sách đơn hàng")){
+                    tvDanhSach.setText("Danh sách đơn hàng");
+                }
+                if(spdanhsach.getSelectedItem().toString().equals("Danh sách đơn hàng đã nhận")){
+                    tvDanhSach.setText("Danh sách đơn hàng đã nhận");
+                }
+                if(spdanhsach.getSelectedItem().toString().equals("Danh sách đơn hàng đang giao")){
+                    tvDanhSach.setText("Danh sách đơn hàng đang giao");
+                }
+                if(spdanhsach.getSelectedItem().toString().equals("Danh sách đơn hàng chờ đi giao")){
+                    tvDanhSach.setText("Danh sách đơn hàng chờ đi giao");
+                }
                 LoadData();
             }
 
@@ -106,18 +123,12 @@ public class DanhSachDonHang_Activity extends AppCompatActivity {
                 finish();
             }
         });
+
+
+
     }
 
-//    private ArrayList<DonHang> getDataDonHang(){
-//        ArrayList<DonHang>hangs = new ArrayList<>();
-//        hangs.add(new DonHang("Mã ĐH : DH126", "", "","Tên cửa hàng: Bánh mì anh Hòa","Địa chỉ cửa hàng : 124 Võ Văn Ngân, Thủ Đức","Địa chỉ người nhận : 44 Võ Văn Ngân, Thủ đức","Tổng đơn : 123000đ","Số điện thoại cửa hàng : 0123456789",R.drawable.anhuser));
-//        hangs.add(new DonHang("Mã ĐH : DH125", "", "","Tên cửa hàng: Bánh mì anh Hòa","Địa chỉ cửa hàng : 124 Võ Văn Ngân, Thủ Đức","Địa chỉ người nhận : 98 Võ Văn Ngân, Thủ đức","Tổng đơn : 123000đ","Số điện thoại cửa hàng : 0123456789",R.drawable.anhuser));
-//        hangs.add(new DonHang("Mã ĐH : DH124", "", "","Tên cửa hàng: Bánh mì anh Hòa","Địa chỉ cửa hàng : 124 Võ Văn Ngân, Thủ Đức","Địa chỉ người nhận : 37 Võ Văn Ngân, Thủ đức","Tổng đơn : 123000đ","Số điện thoại cửa hàng : 0123456789",R.drawable.anhuser));
-//        hangs.add(new DonHang("Mã ĐH : DH123", "", "","Tên cửa hàng: Bánh mì anh Hòa","Địa chỉ cửa hàng : 124 Võ Văn Ngân, Thủ Đức","Địa chỉ người nhận : 150 Võ Văn Ngân, Thủ đức","Tổng đơn : 123000đ","Số điện thoại cửa hàng : 0123456789",R.drawable.anhuser));
-//        hangs.add(new DonHang("", "", "","123","124","1234","123","123",R.drawable.anhuser));
-//        return hangs;
 //
-//    }
 
     private void setConTrol() {
         imgBack = findViewById(R.id.imgBack);

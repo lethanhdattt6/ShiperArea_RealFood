@@ -143,11 +143,11 @@ public class ChiTietDonHang_Activity extends AppCompatActivity {
             binding.btnDaLayHang.setVisibility(View.VISIBLE);
             binding.btnHuyDon.setVisibility(View.VISIBLE);
         }
-        if(donHang.getTrangThai().toString().equals(TrangThaiDonHang.Shipper_DangGiaoHang)){
+        if(donHang.getTrangThai().toString().equals("Shipper_DangGiaoHang")){
             binding.btnGiaoThanhCong.setVisibility(View.VISIBLE);
             binding.btnGiaoThatBai.setVisibility(View.VISIBLE);
         }
-        if(donHang.getTrangThai().toString().equals(TrangThaiDonHang.Shipper_DaLayHang)){
+        if(donHang.getTrangThai().toString().equals("Shipper_DaLayHang")){
             binding.btnDiGiao.setVisibility(View.VISIBLE);
         }
 
@@ -171,6 +171,19 @@ public class ChiTietDonHang_Activity extends AppCompatActivity {
                 binding.btnNhanDon.setVisibility(View.GONE);
                 binding.btnTuChoiDon.setVisibility(View.GONE);
                 LoadDataDonHang();
+            }
+        });
+        binding.btnTuChoiDon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Gson gson = new Gson();
+                String data = gson.toJson(donHang);
+                Intent intent = new Intent(ChiTietDonHang_Activity.this, ChiTietDonHang_Activity.class);
+                intent.putExtra("DataChiTietDonHang",data);
+                ChiTietDonHang_Activity.this.startActivity(intent);
+
+                Intent intent1 = new Intent(getApplicationContext(),LyDo_Activity.class);
+                startActivity(intent1);
             }
         });
         binding.btnDaLayHang.setOnClickListener(new View.OnClickListener() {
