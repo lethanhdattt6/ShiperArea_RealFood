@@ -9,10 +9,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.developer.kalert.KAlertDialog;
 import com.example.shiper.Model.DonHang;
 import com.example.shiper.databinding.ActivityLyDoBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.Gson;
@@ -46,17 +48,26 @@ public class LyDo_Activity extends AppCompatActivity {
         binding.btnGui.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                donHang.setGhiChu_Shipper(binding.edtLyDo.getText().toString());
-                donHang.setTrangThai(TrangThaiDonHang.Shipper_KhongNhanGiaoHang);
-                reference.child("DonHang").child(donHang.getIDDonHang()).setValue(donHang).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            Toast.makeText(LyDo_Activity.this, "Gửi thành công", Toast.LENGTH_SHORT).show();
+                new KAlertDialog(LyDo_Activity.this, KAlertDialog.CUSTOM_IMAGE_TYPE)
+                        .setTitleText("Từ chối!!!")
+                        .setContentText("Bạn có chắn chắn muốn từ chối đơn hàng này??")
+                        .setCancelText("CANCEL")
+                        .setConfirmText("OK")
+                        .setConfirmClickListener(kAlertDialog -> {
+                            donHang.setGhiChu_Shipper(binding.edtLyDo.getText().toString());
+                            donHang.setTrangThai(TrangThaiDonHang.Shipper_KhongNhanGiaoHang);
+                            reference.child("DonHang").child(donHang.getIDDonHang()).setValue(donHang).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+
+                                    }
+                                }
+                            });
                             finish();
-                        }
-                    }
-                });
+                            kAlertDialog.dismiss();
+                        }).show();
+
             }
         });
         if(donHang.getTrangThai().toString().equals("Shipper_DangGiaoHang")){
@@ -64,21 +75,25 @@ public class LyDo_Activity extends AppCompatActivity {
             binding.btnGui.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    donHang.setGhiChu_Shipper(binding.edtLyDo.getText().toString());
-                    donHang.setTrangThai(TrangThaiDonHang.Shipper_GiaoKhongThanhCong);
-                    reference.child("DonHang").child(donHang.getIDDonHang()).setValue(donHang).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful()) {
-                                Toast.makeText(LyDo_Activity.this, "Gửi thành công", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
-                    Gson gson = new Gson();
-                    String data = gson.toJson(donHang);
-                    Intent intent = new Intent(LyDo_Activity.this, ChiTietDonHang_Activity.class);
-                    intent.putExtra("DataDonHang",data);
-                    startActivity(intent);
+                    new KAlertDialog(LyDo_Activity.this, KAlertDialog.CUSTOM_IMAGE_TYPE)
+                            .setTitleText("Từ chối!!!")
+                            .setContentText("Bạn có chắn chắn muốn từ chối đơn hàng này??")
+                            .setCancelText("CANCEL")
+                            .setConfirmText("OK")
+                            .setConfirmClickListener(kAlertDialog -> {
+                                donHang.setGhiChu_Shipper(binding.edtLyDo.getText().toString());
+                                donHang.setTrangThai(TrangThaiDonHang.Shipper_GiaoKhongThanhCong);
+                                reference.child("DonHang").child(donHang.getIDDonHang()).setValue(donHang).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if (task.isSuccessful()) {
+
+                                        }
+                                    }
+                                });
+                                finish();
+                                kAlertDialog.dismiss();
+                            }).show();
                 }
 
 
