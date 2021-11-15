@@ -5,28 +5,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     tools:context=".ChiTietDonHang_Activity">
-    <LinearLayout
-        android:background="#CD8C8C"
+    <FrameLayout
+        android:background="#93242A"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <ImageView
-            android:scaleType="centerCrop"
+            android:id="@+id/imgBack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_baseline_arrow_back_ios_24"
+            android:src="@drawable/ic_baseline_back"
             android:layout_marginTop="3dp"
             android:layout_marginLeft="5dp"
             />
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/tvdonhang"
+            android:gravity="center"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Chi tiết đơn hàng"
             android:textSize="22dp"
             android:textStyle="bold"
-            android:textColor="@color/black"
-            android:layout_marginLeft="100dp"/>
-    </LinearLayout>
+            android:textColor="@color/white" />
+    </FrameLayout>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -190,6 +191,7 @@
                     android:layout_marginRight="5dp"
                     android:gravity="end" />
                 <LinearLayout
+                    android:id="@+id/lndcdima"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -270,6 +272,30 @@
                         android:layout_marginRight="20dp"
                         android:layout_height="50dp"
                         android:text="Đi Giao"
+                        android:textColor="@color/black"
+                        android:textSize="15dp"
+                        android:background="@drawable/botronbtn"
+                        />
+                    <Button
+                        android:id="@+id/btnDaTraTien"
+                        android:visibility="gone"
+                        android:layout_width="match_parent"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_height="50dp"
+                        android:text="Đã chuyển tiền cho cửa hàng"
+                        android:textColor="@color/black"
+                        android:textSize="15dp"
+                        android:background="@drawable/botronbtn"
+                        />
+                    <Button
+                        android:id="@+id/btnDaTraHang"
+                        android:visibility="gone"
+                        android:layout_width="match_parent"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_height="50dp"
+                        android:text="Đã trả hàng cho cửa hàng"
                         android:textColor="@color/black"
                         android:textSize="15dp"
                         android:background="@drawable/botronbtn"

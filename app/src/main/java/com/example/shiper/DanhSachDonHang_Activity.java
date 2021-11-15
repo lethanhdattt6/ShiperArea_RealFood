@@ -75,6 +75,18 @@ public class DanhSachDonHang_Activity extends AppCompatActivity {
                         // Toast.makeText(DanhSachDonHang_Activity.this, "Danh sách đơn hàng đã nhận", Toast.LENGTH_SHORT).show();
                         hangs.add(donHang);
                     }
+                    if(donHang.getIDShipper().equals(auth.getUid())
+                            && donHang.getTrangThai().toString().equals("SHOP_ChoShipperLayHang")
+                            && spdanhsach.getSelectedItem().toString().equals("Danh sách đơn hàng chưa lấy")){
+                        // Toast.makeText(DanhSachDonHang_Activity.this, "Danh sách đơn hàng đã nhận", Toast.LENGTH_SHORT).show();
+                        hangs.add(donHang);
+                    }
+                    if(donHang.getIDShipper().equals(auth.getUid())
+                            && donHang.getTrangThai().toString().equals("Shipper_KhongNhanGiaoHang")
+                            && spdanhsach.getSelectedItem().toString().equals("Danh sách đơn hàng đã từ chối")){
+                        // Toast.makeText(DanhSachDonHang_Activity.this, "Danh sách đơn hàng đã nhận", Toast.LENGTH_SHORT).show();
+                        hangs.add(donHang);
+                    }
                 }
                 adapterDonHang = new AdapterDonHang(DanhSachDonHang_Activity.this);
                 adapterDonHang.setData(hangs);
@@ -108,6 +120,12 @@ public class DanhSachDonHang_Activity extends AppCompatActivity {
                 }
                 if(spdanhsach.getSelectedItem().toString().equals("Danh sách đơn hàng chờ đi giao")){
                     tvDanhSach.setText("Danh sách đơn hàng chờ đi giao");
+                }
+                if(spdanhsach.getSelectedItem().toString().equals("Danh sách đơn hàng chưa lấy")){
+                    tvDanhSach.setText("Danh sách đơn hàng chưa láy");
+                }
+                if(spdanhsach.getSelectedItem().toString().equals("Danh sách đơn hàng đã từ chối")){
+                    tvDanhSach.setText("Danh sách đơn hàng đã từ chối");
                 }
                 LoadData();
             }
