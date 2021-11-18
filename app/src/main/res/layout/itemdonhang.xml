@@ -45,7 +45,7 @@
                 android:text="Tên sản phẩm"
                 android:textColor="#000"
                 android:textSize="17dp"
-                android:drawableLeft="@drawable/ic_baseline_local_phone_24"
+                android:drawableLeft="@drawable/ic_baseline_wysiwyg_24"
                 android:drawablePadding="5dp"
                 />
             <TextView

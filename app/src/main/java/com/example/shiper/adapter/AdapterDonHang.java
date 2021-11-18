@@ -91,9 +91,13 @@ public class AdapterDonHang extends RecyclerView.Adapter<AdapterDonHang.DonHangV
                                 .child(donHangInfo.getSanPham().getImages().get(0)).getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
                             @Override
                             public void onComplete(@NonNull Task<Uri> task) {
-                                Glide.with(context)
-                                        .load(task.getResult().toString())
-                                        .into(holder.imganhDH);
+                                try {
+                                    Glide.with(context)
+                                            .load(task.getResult().toString())
+                                            .into(holder.imganhDH);
+                                }catch (Exception e){
+
+                                }
                             }
                         });
 
