@@ -71,19 +71,29 @@ public class DanhSachDonHang_Activity extends AppCompatActivity {
                             && spdanhsach.getSelectedItem().toString().equals("Danh sách đơn hàng chờ đi giao")){
                         hangs.add(donHang);
                     }
-                    if(donHang.getIDShipper().equals(auth.getUid())
-                            && donHang.getTrangThai().toString().equals("SHOP_ChoShipperLayHang")
-                            && spdanhsach.getSelectedItem().toString().equals("Danh sách đơn hàng chưa lấy")){
-                        hangs.add(donHang);
-                    }
-                    if(donHang.getIDShipper().equals(auth.getUid())
-                            && donHang.getTrangThai().toString().equals("Shipper_KhongNhanGiaoHang")
-                            && spdanhsach.getSelectedItem().toString().equals("Danh sách đơn hàng đã từ chối")){
-                        hangs.add(donHang);
-                    }
+//                    if(donHang.getIDShipper().equals(auth.getUid())
+//                            && donHang.getTrangThai().toString().equals("SHOP_ChoShipperLayHang")
+//                            && spdanhsach.getSelectedItem().toString().equals("Danh sách đơn hàng chưa lấy")){
+//                        hangs.add(donHang);
+//                    }
+//                    if(donHang.getIDShipper().equals(auth.getUid())
+//                            && donHang.getTrangThai().toString().equals("Shipper_KhongNhanGiaoHang")
+//                            && spdanhsach.getSelectedItem().toString().equals("Danh sách đơn hàng đã từ chối")){
+//                        hangs.add(donHang);
+//                    }
                     if(donHang.getIDShipper().equals(auth.getUid())
                             && donHang.getTrangThai().toString().equals("Shipper_GiaoKhongThanhCong")
                             && spdanhsach.getSelectedItem().toString().equals("Đơn hàng giao không thành công")){
+                        hangs.add(donHang);
+                    }
+                    if(donHang.getIDShipper().equals(auth.getUid())
+                            && donHang.getTrangThai().toString().equals("Shipper_GiaoThanhCong")
+                            && spdanhsach.getSelectedItem().toString().equals("Đơn hàng giao thành công")){
+                        hangs.add(donHang);
+                    }
+                    if(donHang.getIDShipper().equals(auth.getUid())
+                            && donHang.getTrangThai().toString().equals("SHOP_ChoXacNhanGiaoHangChoShipper")
+                            && spdanhsach.getSelectedItem().toString().equals("Danh sách đơn chờ xác nhận")){
                         hangs.add(donHang);
                     }
                 }
@@ -120,14 +130,20 @@ public class DanhSachDonHang_Activity extends AppCompatActivity {
                 if(spdanhsach.getSelectedItem().toString().equals("Danh sách đơn hàng chờ đi giao")){
                     tvDanhSach.setText("Danh sách đơn hàng chờ đi giao");
                 }
-                if(spdanhsach.getSelectedItem().toString().equals("Danh sách đơn hàng chưa lấy")){
-                    tvDanhSach.setText("Danh sách đơn hàng chưa láy");
-                }
-                if(spdanhsach.getSelectedItem().toString().equals("Danh sách đơn hàng đã từ chối")){
-                    tvDanhSach.setText("Danh sách đơn hàng đã từ chối");
-                }
+//                if(spdanhsach.getSelectedItem().toString().equals("Danh sách đơn hàng chưa lấy")){
+//                    tvDanhSach.setText("Danh sách đơn hàng chưa láy");
+//                }
+//                if(spdanhsach.getSelectedItem().toString().equals("Danh sách đơn hàng đã từ chối")){
+//                    tvDanhSach.setText("Danh sách đơn hàng đã từ chối");
+//                }
                 if(spdanhsach.getSelectedItem().toString().equals("Đơn hàng giao không thành công")){
                     tvDanhSach.setText("Đơn hàng giao không thành công");
+                }
+                if(spdanhsach.getSelectedItem().toString().equals("Đơn hàng giao thành công")){
+                    tvDanhSach.setText("Đơn hàng giao thành công");
+                }
+                if(spdanhsach.getSelectedItem().toString().equals("Danh sách đơn chờ xác nhận")){
+                    tvDanhSach.setText("Danh sách đơn chờ xác nhận");
                 }
                 LoadData();
             }

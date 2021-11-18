@@ -86,27 +86,27 @@ public class Home_Activity extends AppCompatActivity implements NavigationView.O
 
 
     private void setEvent() {
-        boolean flag = true;
-        reference.child("Shipper").child(auth.getUid()).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (flag == true){
-                    nguoidunghientai = snapshot.getValue(Shipper.class);
-                    nguoidunghientai.setTrangThaiHoatDong("Đang hoạt ");
-                    //reference.child("Shipper").child(auth.getUid()).setValue(nguoidunghientai);
-                }else {
-                    nguoidunghientai = snapshot.getValue(Shipper.class);
-                    nguoidunghientai.setTrangThaiHoatDong("Đang  ");
-                }
-                reference.child("Shipper").child(auth.getUid()).setValue(nguoidunghientai);
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
+//        boolean flag = true;
+//        reference.child("Shipper").child(auth.getUid()).addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                if (flag == true){
+//                    nguoidunghientai = snapshot.getValue(Shipper.class);
+//                    nguoidunghientai.setTrangThaiHoatDong("Đang hoạt ");
+//                    //reference.child("Shipper").child(auth.getUid()).setValue(nguoidunghientai);
+//                }else {
+//                    nguoidunghientai = snapshot.getValue(Shipper.class);
+//                    nguoidunghientai.setTrangThaiHoatDong("Đang  ");
+//                }
+//                reference.child("Shipper").child(auth.getUid()).setValue(nguoidunghientai);
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
         binding.danhsach.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

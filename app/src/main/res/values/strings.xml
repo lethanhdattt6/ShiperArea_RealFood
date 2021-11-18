@@ -37,10 +37,10 @@
     <array name="danhsach">
         <item>Danh sách đơn hàng</item>
         <item>Danh sách đơn hàng đã nhận</item>
+        <item>Danh sách đơn chờ xác nhận</item>
         <item>Danh sách đơn hàng đang giao</item>
         <item>Danh sách đơn hàng chờ đi giao</item>
-        <item>Danh sách đơn hàng chưa lấy</item>
-        <item>Danh sách đơn hàng đã từ chối</item>
         <item>Đơn hàng giao không thành công</item>
+        <item>Đơn hàng giao thành công</item>
     </array>
 </resources>
