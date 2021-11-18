@@ -41,5 +41,6 @@
         <item>Danh sách đơn hàng chờ đi giao</item>
         <item>Danh sách đơn hàng chưa lấy</item>
         <item>Danh sách đơn hàng đã từ chối</item>
+        <item>Đơn hàng giao không thành công</item>
     </array>
 </resources>

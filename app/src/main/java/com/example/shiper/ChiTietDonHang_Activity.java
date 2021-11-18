@@ -9,11 +9,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.developer.kalert.KAlertDialog;
 import com.example.shiper.Model.CuaHang;
 import com.example.shiper.Model.DonHang;
 import com.example.shiper.Model.DonHangInfo;
@@ -80,6 +80,7 @@ public class ChiTietDonHang_Activity extends AppCompatActivity {
             binding.btnTuChoiDon.setVisibility(View.GONE);
         }
         if(donHang.getTrangThai()==TrangThaiDonHang.Shipper_DangGiaoHang){
+            binding.tvdonhang.setText("Đang giao hàng");
             binding.btnGiaoThanhCong.setVisibility(View.VISIBLE);
             binding.btnGiaoThatBai.setVisibility(View.VISIBLE);
         }else {
@@ -87,30 +88,36 @@ public class ChiTietDonHang_Activity extends AppCompatActivity {
             binding.btnGiaoThatBai.setVisibility(View.GONE);
         }
         if(donHang.getTrangThai().toString().equals("Shipper_DaLayHang")){
+            binding.tvdonhang.setText("Chờ đi giao");
             binding.btnDiGiao.setVisibility(View.VISIBLE);
         }else {
             binding.btnDiGiao.setVisibility(View.GONE);
         }
 
         if(donHang.getTrangThai().toString().equals("SHOP_ChoShipperLayHang")){
+            binding.tvdonhang.setText("Chờ lấy hàng");
             binding.btnDaLayHang.setVisibility(View.VISIBLE);
         }else {
             binding.btnDaLayHang.setVisibility(View.GONE);
         }
         if(donHang.getTrangThai().toString().equals("Shipper_GiaoThanhCong")){
+            binding.tvdonhang.setText("Chuyển tiền cho cửa hàng");
             binding.btnDaTraTien.setVisibility(View.VISIBLE);
         }else {
             binding.btnDaTraTien.setVisibility(View.GONE);
         }
         if(donHang.getTrangThai().toString().equals("Shipper_GiaoKhongThanhCong")){
+            binding.tvdonhang.setText("Trả hàng cho cửa hàng");
             binding.btnDaTraHang.setVisibility(View.VISIBLE);
         }else {
             binding.btnDaTraHang.setVisibility(View.GONE);
         }
         if(donHang.getTrangThai().toString().equals("ChoShopXacNhan_Tien")){
+            binding.tvdonhang.setText("Đang chờ xác nhận");
             binding.btnDaTraTien.setVisibility(View.GONE);
         }
         if(donHang.getTrangThai().toString().equals("ChoShopXacNhan_TraHang")){
+            binding.tvdonhang.setText("Đang chờ xác nhận");
             binding.btnDaTraHang.setVisibility(View.GONE);
         }
         if(donHang.getTrangThai().toString().equals("Shipper_DaChuyenTien")){
@@ -218,15 +225,24 @@ public class ChiTietDonHang_Activity extends AppCompatActivity {
         binding.btnNhanDon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                donHang.setTrangThai(TrangThaiDonHang.SHOP_ChoShipperLayHang);
-                reference.child("DonHang").child(donHang.getIDDonHang()).setValue(donHang).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            Toast.makeText(v.getContext(), "Đã nhận thành công đƠn Hàng", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
+                new KAlertDialog(ChiTietDonHang_Activity.this, KAlertDialog.CUSTOM_IMAGE_TYPE)
+                        .setTitleText("Xác nhận!!!")
+                        .setContentText("Bạn có chắn chắn muốn nhận đơn hàng này??")
+                        .setCancelText("CANCEL")
+                        .setConfirmText("OK")
+                        .setConfirmClickListener(kAlertDialog -> {
+                            donHang.setTrangThai(TrangThaiDonHang.SHOP_ChoShipperLayHang);
+                            reference.child("DonHang").child(donHang.getIDDonHang()).setValue(donHang).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        Toast.makeText(v.getContext(), "Đã nhận thành công đƠn Hàng", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
+                            kAlertDialog.dismiss();
+                        }).show();
+
             }
         });
         binding.btnTuChoiDon.setOnClickListener(new View.OnClickListener() {

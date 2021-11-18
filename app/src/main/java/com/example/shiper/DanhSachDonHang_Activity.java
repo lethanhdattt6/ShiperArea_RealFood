@@ -60,31 +60,30 @@ public class DanhSachDonHang_Activity extends AppCompatActivity {
                             && donHang.getTrangThai().toString().equals("Shipper_DangGiaoHang")
                             && spdanhsach.getSelectedItem().toString().equals("Danh sách đơn hàng đang giao")){
                         hangs.add(donHang);
-                        Toast.makeText(DanhSachDonHang_Activity.this, "Danh sách đơn hàng đang giao", Toast.LENGTH_SHORT).show();
-
                     }
                     if(donHang.getIDShipper().equals(auth.getUid())
                             && donHang.getTrangThai().toString().equals("SHOP_ChoShipperLayHang")
                             && spdanhsach.getSelectedItem().toString().equals("Danh sách đơn hàng đã nhận")){
-                       // Toast.makeText(DanhSachDonHang_Activity.this, "Danh sách đơn hàng đã nhận", Toast.LENGTH_SHORT).show();
                         hangs.add(donHang);
                     }
                     if(donHang.getIDShipper().equals(auth.getUid())
                             && donHang.getTrangThai().toString().equals("Shipper_DaLayHang")
                             && spdanhsach.getSelectedItem().toString().equals("Danh sách đơn hàng chờ đi giao")){
-                        // Toast.makeText(DanhSachDonHang_Activity.this, "Danh sách đơn hàng đã nhận", Toast.LENGTH_SHORT).show();
                         hangs.add(donHang);
                     }
                     if(donHang.getIDShipper().equals(auth.getUid())
                             && donHang.getTrangThai().toString().equals("SHOP_ChoShipperLayHang")
                             && spdanhsach.getSelectedItem().toString().equals("Danh sách đơn hàng chưa lấy")){
-                        // Toast.makeText(DanhSachDonHang_Activity.this, "Danh sách đơn hàng đã nhận", Toast.LENGTH_SHORT).show();
                         hangs.add(donHang);
                     }
                     if(donHang.getIDShipper().equals(auth.getUid())
                             && donHang.getTrangThai().toString().equals("Shipper_KhongNhanGiaoHang")
                             && spdanhsach.getSelectedItem().toString().equals("Danh sách đơn hàng đã từ chối")){
-                        // Toast.makeText(DanhSachDonHang_Activity.this, "Danh sách đơn hàng đã nhận", Toast.LENGTH_SHORT).show();
+                        hangs.add(donHang);
+                    }
+                    if(donHang.getIDShipper().equals(auth.getUid())
+                            && donHang.getTrangThai().toString().equals("Shipper_GiaoKhongThanhCong")
+                            && spdanhsach.getSelectedItem().toString().equals("Đơn hàng giao không thành công")){
                         hangs.add(donHang);
                     }
                 }
@@ -126,6 +125,9 @@ public class DanhSachDonHang_Activity extends AppCompatActivity {
                 }
                 if(spdanhsach.getSelectedItem().toString().equals("Danh sách đơn hàng đã từ chối")){
                     tvDanhSach.setText("Danh sách đơn hàng đã từ chối");
+                }
+                if(spdanhsach.getSelectedItem().toString().equals("Đơn hàng giao không thành công")){
+                    tvDanhSach.setText("Đơn hàng giao không thành công");
                 }
                 LoadData();
             }

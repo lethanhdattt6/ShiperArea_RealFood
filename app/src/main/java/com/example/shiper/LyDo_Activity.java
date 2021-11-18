@@ -55,6 +55,7 @@ public class LyDo_Activity extends AppCompatActivity {
                         .setConfirmText("OK")
                         .setConfirmClickListener(kAlertDialog -> {
                             donHang.setGhiChu_Shipper(binding.edtLyDo.getText().toString());
+                            donHang.setIDShipper("");
                             donHang.setTrangThai(TrangThaiDonHang.Shipper_KhongNhanGiaoHang);
                             reference.child("DonHang").child(donHang.getIDDonHang()).setValue(donHang).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override

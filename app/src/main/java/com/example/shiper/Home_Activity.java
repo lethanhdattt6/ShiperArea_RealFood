@@ -11,15 +11,19 @@ import androidx.fragment.app.FragmentTransaction;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.developer.kalert.KAlertDialog;
 import com.example.shiper.Model.Shipper;
 import com.example.shiper.databinding.ActivityHomeBinding;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -30,6 +34,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import org.jetbrains.annotations.NotNull;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 
@@ -39,6 +45,7 @@ public class Home_Activity extends AppCompatActivity implements NavigationView.O
     StorageReference storageRef;
     DatabaseReference reference;
     Shipper shipper = new Shipper();
+    Shipper nguoidunghientai;
     ActivityHomeBinding binding;
 
 //    private static final int FRAMENT_DANHSACHDONHANG = 0;
@@ -68,16 +75,38 @@ public class Home_Activity extends AppCompatActivity implements NavigationView.O
         auth = FirebaseAuth.getInstance();
         reference = FirebaseDatabase.getInstance().getReference();
         GetData();
-        setConTrol();
         setEvent();
 
 
         NavigationView navigationView = findViewById(R.id.navigationView);
         navigationView.setNavigationItemSelectedListener(this);
 
+
     }
 
+
     private void setEvent() {
+        boolean flag = true;
+        reference.child("Shipper").child(auth.getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (flag == true){
+                    nguoidunghientai = snapshot.getValue(Shipper.class);
+                    nguoidunghientai.setTrangThaiHoatDong("Đang hoạt ");
+                    //reference.child("Shipper").child(auth.getUid()).setValue(nguoidunghientai);
+                }else {
+                    nguoidunghientai = snapshot.getValue(Shipper.class);
+                    nguoidunghientai.setTrangThaiHoatDong("Đang  ");
+                }
+                reference.child("Shipper").child(auth.getUid()).setValue(nguoidunghientai);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
         binding.danhsach.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -113,6 +142,8 @@ public class Home_Activity extends AppCompatActivity implements NavigationView.O
                 TextView tvemail = (TextView) headerView.findViewById(R.id.tvemail);
                 tvTen.setText(shipper.getHoVaTen().toString());
                 tvemail.setText(shipper.geteMail().toString());
+
+                //Log.d("okok", shipper.getHoVaTen());
                // CircleImageView imvavatar = (CircleImageView) headerView.findViewById(R.id.imvavatar);
 
             }
@@ -136,18 +167,9 @@ public class Home_Activity extends AppCompatActivity implements NavigationView.O
             }
         });
 
-    }
-
-
-
-    private void setConTrol() {
-//        tvTen = (TextView)findViewById(R.id.tvtenuser);
-//        tvemail =(TextView)findViewById(R.id.tvemail);
-//        tvemail.setText("fdshfsdhfksdhfksd");
-
-
 
     }
+
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {

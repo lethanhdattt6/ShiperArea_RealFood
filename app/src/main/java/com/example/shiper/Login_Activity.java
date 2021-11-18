@@ -13,12 +13,18 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.developer.kalert.KAlertDialog;
+import com.example.shiper.Model.Shipper;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import org.jetbrains.annotations.NotNull;
 
 
 public class Login_Activity extends AppCompatActivity {
@@ -28,7 +34,21 @@ public class Login_Activity extends AppCompatActivity {
     Button login;
     private FirebaseAuth auth;
     DatabaseReference reference;
+    Shipper shipper ;
 
+    boolean trangthai = true;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        trangthai = true;
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        trangthai = false;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +64,10 @@ public class Login_Activity extends AppCompatActivity {
             startActivity(intent);
         }
 
+
+
     }
+
 
     private boolean KiemTra() {
         boolean res = true;
@@ -85,6 +108,7 @@ public class Login_Activity extends AppCompatActivity {
                                     if (task.isSuccessful()) {
                                         Toast.makeText(Login_Activity.this, "Đăng Nhập Thành Công!", Toast.LENGTH_SHORT).show();
                                         Intent intent = new Intent(getApplicationContext(), Home_Activity.class);
+
                                         startActivity(intent);
                                         matkhau.setText("");
                                     } else {
@@ -93,6 +117,7 @@ public class Login_Activity extends AppCompatActivity {
 //                                        kAlertDialog.setTitleText("Đăng Nhập Không Thành Công!");
 //                                        kAlertDialog.setCancelable(true);
 //                                        kAlertDialog.showConfirmButton(true);
+
                                     }
                                 }
                             });
