@@ -127,6 +127,9 @@ public class ChiTietDonHang_Activity extends AppCompatActivity {
             binding.tvxacnhan.setText("Đã trả hàng cho cửa hàng");
             binding.tvxacnhan.setVisibility(View.VISIBLE);
         }
+        if(donHang.getTrangThai().toString().equals("SHOP_ChoXacNhanGiaoHangChoShipper")){
+            binding.tvdonhang.setText("Đang chờ cửa hàng xác nhận");
+        }
     }
 
     @Override
