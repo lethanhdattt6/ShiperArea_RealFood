@@ -9,21 +9,20 @@
     <FrameLayout
         android:background="#93242A"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:orientation="horizontal">
         <ImageView
             android:id="@+id/imgBack"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:src="@drawable/ic_baseline_back"
-            android:layout_marginTop="3dp"
             android:layout_marginLeft="5dp"
             />
         <TextView
             android:id="@+id/tvDanhSach"
             android:gravity="center"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:text="Danh sách đơn hàng"
             android:textSize="22dp"
             android:textStyle="bold"

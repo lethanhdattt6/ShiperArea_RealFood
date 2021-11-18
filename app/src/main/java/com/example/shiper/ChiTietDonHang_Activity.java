@@ -145,7 +145,6 @@ public class ChiTietDonHang_Activity extends AppCompatActivity {
                 binding.tvtrangThai.setText("Trạng thái : "+ temp.getTrangThai().toString());
                 binding.edtGhiChu.setText("Ghi chú : " +temp.getGhiChu_KhachHang());
                 donHang = temp;
-                Toast.makeText(getApplicationContext(), donHang.getTrangThai()+"", Toast.LENGTH_SHORT).show();
                 LoadBtn();
             }
 
@@ -199,7 +198,7 @@ public class ChiTietDonHang_Activity extends AppCompatActivity {
                                     .into(binding.anhsanpham);
                         }
                     });
-                    //Toast.makeText(ChiTietDonHang_Activity.this, hangInfos.size()+"", Toast.LENGTH_SHORT).show();
+
                 }
             }
             @Override
