@@ -54,47 +54,59 @@
                     <ImageView
                         android:scaleType="centerCrop"
                         android:id="@+id/anhsanpham"
-                        android:layout_width="198dp"
-                        android:layout_height="150dp"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
                         android:src="@drawable/background" />
-                    <TextView
-                        android:id="@+id/tvmaDH"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/madh"
-                        android:textColor="@color/madh"
-                        android:textStyle="bold"
-                        android:textSize="25dp"
-                        android:layout_marginLeft="50dp"
-                        />
                     <LinearLayout
-                        android:layout_marginTop="5dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        />
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:id="@+id/tvmaDH"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/madh"
+                            android:textColor="@color/madh"
+                            android:textStyle="bold"
+                            android:textSize="25dp"
+                            android:layout_marginLeft="10dp"
+                            />
+                        <TextView
+                            android:id="@+id/tvtrangThai"
+                            android:layout_marginTop="5dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Trạng thái"
+                            android:textSize="15dp"
+                            android:layout_marginLeft="10dp"
+                            android:textColor="#E30834"
+                            android:drawablePadding="5dp"
+                            />
+                    </LinearLayout>
+
 
                 </LinearLayout>
+
+
                 <TextView
-                    android:id="@+id/tvtrangThai"
+
                     android:layout_marginTop="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Trạng thái"
-                    android:textSize="15dp"
-                    android:layout_marginLeft="10dp"
-                    android:textColor="#E30834"
+                    android:text="Thông tin :"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
                     android:drawablePadding="5dp"
+
                     />
-
-
                 <TextView
                     android:id="@+id/tvtenCuaHang"
                     android:layout_marginTop="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Tên cửa hàng"
-                    android:textSize="20dp"
+                    android:textSize="16dp"
                     android:layout_marginLeft="10dp"
                     android:textColor="@color/black"
                     android:drawablePadding="5dp"
@@ -106,7 +118,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Địa chỉ cửa hàng"
-                    android:textSize="20dp"
+                    android:textSize="16dp"
                     android:layout_marginLeft="10dp"
                     android:textColor="@color/black"
                     android:drawablePadding="5dp"
@@ -118,7 +130,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="SĐT cửa hàng"
-                    android:textSize="20dp"
+                    android:textSize="16dp"
                     android:layout_marginLeft="10dp"
                     android:textColor="@color/black"
                     android:drawablePadding="5dp"
@@ -130,7 +142,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="SĐT người nhận"
-                    android:textSize="20dp"
+                    android:textSize="16dp"
                     android:layout_marginLeft="10dp"
                     android:textColor="@color/black"
                     android:drawablePadding="5dp"
@@ -142,7 +154,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Địa chỉ người nhận"
-                    android:textSize="20dp"
+                    android:textSize="16dp"
                     android:layout_marginLeft="10dp"
                     android:textColor="@color/black"
                     android:drawablePadding="5dp"
@@ -154,7 +166,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Tên người nhận"
-                    android:textSize="20dp"
+                    android:textSize="16dp"
                     android:layout_marginLeft="10dp"
                     android:textColor="@color/black"
                     android:drawablePadding="5dp"
@@ -165,8 +177,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Danh sách sản phẩm :"
-                    android:textSize="20dp"
-                    android:layout_marginLeft="10dp"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
                     android:textColor="@color/black"
                     android:drawablePadding="5dp"
                     />
@@ -175,7 +187,6 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
                     android:id="@+id/ryctenvasoluong"/>
                 <EditText
                     android:id="@+id/edtGhiChu"
@@ -207,27 +218,27 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
                     <Button
+                        android:layout_weight="1"
                         android:id="@+id/btnNhanDon"
                         android:visibility="gone"
-                        android:layout_width="180dp"
-                        android:layout_height="50dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:text="Nhận đơn"
                         android:textColor="@color/black"
                         android:textSize="15dp"
                         android:background="@drawable/botronbtn"
                         />
                     <Button
+                        android:layout_weight="1"
                         android:id="@+id/btnTuChoiDon"
                         android:visibility="gone"
-                        android:layout_marginHorizontal="20dp"
-                        android:layout_width="170dp"
-                        android:layout_height="50dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:text="Từ chối đơn"
                         android:textColor="@color/black"
                         android:textSize="15dp"
                         android:background="@drawable/botronbtnfail"
-                        android:layout_marginLeft="0dp"
-                        android:layout_marginRight="15dp"
                         />
                     <Button
                         android:id="@+id/btnDaLayHang"

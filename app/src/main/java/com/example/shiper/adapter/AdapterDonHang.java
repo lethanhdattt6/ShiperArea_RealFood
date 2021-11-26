@@ -60,7 +60,7 @@ public class AdapterDonHang extends RecyclerView.Adapter<AdapterDonHang.DonHangV
             return;
         }
         //
-        holder.maDH.setText("Mã ĐH : " + donHang.getIDDonHang().substring(0,7));
+        holder.maDH.setText("Mã ĐH : " + donHang.getIDDonHang().substring(0,10));
         holder.tvDiaChiNN.setText("Địa chỉ người nhận : "+ donHang.getDiaChi());
         holder.tvTongDon.setText("Tổng đơn : "+ donHang.getTongTien());
         reference.child("CuaHang").addValueEventListener(new ValueEventListener() {

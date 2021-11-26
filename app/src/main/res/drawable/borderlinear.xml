@@ -10,8 +10,8 @@
 
     <!-- đặt thuộc tính màu và độ rộng của đường viền -->
     <stroke
-        android:width="3dp"
-        android:color="#100E0E">
+        android:width="2dp"
+        android:color="#CFCFCF">
     </stroke>
 
     <!-- các thuộc tính căn chỉnh-->
