@@ -207,7 +207,7 @@ public class ChiTietDonHang_Activity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 DonHang temp = snapshot.getValue(DonHang .class);
                 binding.tvmaDH.setText(donHang.getIDDonHang().substring(0,7));
-                binding.tvTongDon.setText("Tổng đơn : " +temp.getTongTien()+"");
+                binding.tvTongDon.setText("Tổng đơn : " +temp.getTongTien()+ "VNĐ");
                 binding.tvtrangThai.setText("Trạng thái : "+ GetStringTrangThaiDonHang(temp.getTrangThai()));
                 binding.edtGhiChu.setText("Ghi chú : " +temp.getGhiChu_KhachHang());
                 donHang = temp;
@@ -394,7 +394,7 @@ public class ChiTietDonHang_Activity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(v.getContext(), "Giao hàng thành công", Toast.LENGTH_SHORT).show();
+                           // Toast.makeText(v.getContext(), "Giao hàng thành công", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -449,20 +449,20 @@ public class ChiTietDonHang_Activity extends AppCompatActivity {
         });
 
     }
-    public String GetStringTrangThaiShipper(TrangThaiShipper trangThaiShipper){
-        String res ="";
-        if (trangThaiShipper == TrangThaiShipper.KhongHoatDong)
-        {
-            res ="Offline";
-        }
-        if (trangThaiShipper == TrangThaiShipper.DangHoatDong)
-        {
-            res ="Đang hoạt động";
-        }
-        if (trangThaiShipper == TrangThaiShipper.DangGiaoHang)
-        {
-            res ="Đang giao hàng";
-        }
-        return res;
-    }
+//    public String GetStringTrangThaiShipper(TrangThaiShipper trangThaiShipper){
+//        String res ="";
+//        if (trangThaiShipper == TrangThaiShipper.KhongHoatDong)
+//        {
+//            res ="Offline";
+//        }
+//        if (trangThaiShipper == TrangThaiShipper.DangHoatDong)
+//        {
+//            res ="Đang hoạt động";
+//        }
+//        if (trangThaiShipper == TrangThaiShipper.DangGiaoHang)
+//        {
+//            res ="Đang giao hàng";
+//        }
+//        return res;
+//    }
 }

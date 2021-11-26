@@ -19,6 +19,7 @@ import com.example.shiper.Model.CuaHang;
 import com.example.shiper.Model.DonHang;
 import com.example.shiper.Model.DonHangInfo;
 import com.example.shiper.R;
+import com.example.shiper.TrangThaiDonHang;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
@@ -59,8 +60,8 @@ public class AdapterLichSuGiaoHang extends RecyclerView.Adapter<AdapterLichSuGia
         //
         holder.maDH.setText("Mã ĐH : " + donHang.getIDDonHang().substring(0,7));
         holder.tvDiaChiNN.setText("Địa chỉ người nhận : "+ donHang.getDiaChi());
-        holder.tvTongDon.setText("Tổng đơn : "+ donHang.getTongTien());
-        holder.tvTrangThai.setText(donHang.getTrangThai()+"");
+        holder.tvTongDon.setText("Tổng đơn : "+ donHang.getTongTien() + "VNĐ");
+        holder.tvTrangThai.setText(GetStringTrangThaiDonHang(donHang.getTrangThai()));
         reference.child("CuaHang").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -131,6 +132,58 @@ public class AdapterLichSuGiaoHang extends RecyclerView.Adapter<AdapterLichSuGia
     public void setData(ArrayList<DonHang> data){
         this.donHangs = data;
         notifyDataSetChanged();
+    }
+    public String GetStringTrangThaiDonHang(TrangThaiDonHang trangThaiDonHang){
+        String res ="";
+        if (trangThaiDonHang == TrangThaiDonHang.SHOP_DangGiaoShipper)
+        {
+            res ="Đơn hàng có thể nhận";
+        }
+        if (trangThaiDonHang == TrangThaiDonHang.SHOP_ChoShipperLayHang)
+        {
+            res ="Chờ shipper lấy hàng";
+        }
+        if (trangThaiDonHang == TrangThaiDonHang.SHOP_ChoXacNhanGiaoHangChoShipper)
+        {
+            res ="Chờ Shop xác nhận giao hàng";
+        }
+        if (trangThaiDonHang == TrangThaiDonHang.ChoShopXacNhan_Tien)
+        {
+            res ="Chờ Shop xác nhận đã nhận tiền hàng từ Shipper";
+        }
+        if (trangThaiDonHang == TrangThaiDonHang.ChoShopXacNhan_TraHang)
+        {
+            res ="Chờ Shop xác nhận đã nhận hàng trả về từ Shipper";
+        }
+        if (trangThaiDonHang == TrangThaiDonHang.Shipper_DaLayHang)
+        {
+            res ="Đã lấy hàng";
+        }
+        if (trangThaiDonHang == TrangThaiDonHang.Shipper_KhongNhanGiaoHang)
+        {
+            res ="Đã từ chối đơn hàng này";
+        }
+        if (trangThaiDonHang == TrangThaiDonHang.Shipper_DaTraHang)
+        {
+            res ="Đã trả hàng cho cửa hàng";
+        }
+        if (trangThaiDonHang == TrangThaiDonHang.Shipper_DaChuyenTien)
+        {
+            res ="Đã chuyển tiền cho cửa hàng";
+        }
+        if (trangThaiDonHang == TrangThaiDonHang.Shipper_GiaoKhongThanhCong)
+        {
+            res ="Giao hàng không thành công";
+        }
+        if (trangThaiDonHang == TrangThaiDonHang.Shipper_DangGiaoHang)
+        {
+            res ="Đang giao hàng";
+        }
+        if (trangThaiDonHang == TrangThaiDonHang.Shipper_GiaoThanhCong)
+        {
+            res ="Giao hàng thành công";
+        }
+        return res;
     }
 
     public class LichSuViewHolder extends RecyclerView.ViewHolder {

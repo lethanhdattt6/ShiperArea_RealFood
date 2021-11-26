@@ -62,7 +62,7 @@ public class AdapterDonHang extends RecyclerView.Adapter<AdapterDonHang.DonHangV
         //
         holder.maDH.setText("Mã ĐH : " + donHang.getIDDonHang().substring(0,10));
         holder.tvDiaChiNN.setText("Địa chỉ người nhận : "+ donHang.getDiaChi());
-        holder.tvTongDon.setText("Tổng đơn : "+ donHang.getTongTien());
+        holder.tvTongDon.setText("Tổng đơn : "+ donHang.getTongTien() + "VNĐ");
         reference.child("CuaHang").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
