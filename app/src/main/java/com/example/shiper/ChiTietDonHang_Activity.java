@@ -150,29 +150,9 @@ public class ChiTietDonHang_Activity extends AppCompatActivity {
     }
     public String GetStringTrangThaiDonHang(TrangThaiDonHang trangThaiDonHang){
         String res ="";
-        if (trangThaiDonHang == TrangThaiDonHang.SHOP_HuyDonHang)
-        {
-            res ="Đã hủy";
-        }
-        if (trangThaiDonHang == TrangThaiDonHang.SHOP_ChoXacNhanChuyenTien)
-        {
-            res ="Chờ xác nhận chuyển tiền cọc";
-        }
-        if (trangThaiDonHang == TrangThaiDonHang.SHOP_DaGiaoChoBep)
-        {
-            res ="Đã giao đơn hàng cho bếp";
-        }
-        if (trangThaiDonHang == TrangThaiDonHang.SHOP_DangChuanBihang)
-        {
-            res ="Đang chuẩn bị hàng";
-        }
-        if (trangThaiDonHang == TrangThaiDonHang.SHOP_DaChuanBiXong)
-        {
-            res ="Đã chuẩn bị xong";
-        }
         if (trangThaiDonHang == TrangThaiDonHang.SHOP_DangGiaoShipper)
         {
-            res ="Đang giao shipper đi phát";
+            res ="Đơn hàng có thể nhận";
         }
         if (trangThaiDonHang == TrangThaiDonHang.SHOP_ChoShipperLayHang)
         {
@@ -180,7 +160,7 @@ public class ChiTietDonHang_Activity extends AppCompatActivity {
         }
         if (trangThaiDonHang == TrangThaiDonHang.SHOP_ChoXacNhanGiaoHangChoShipper)
         {
-            res ="Chờ Shop xác nhận giao hàng cho Shipper";
+            res ="Chờ Shop xác nhận giao hàng";
         }
         if (trangThaiDonHang == TrangThaiDonHang.ChoShopXacNhan_Tien)
         {
@@ -192,19 +172,19 @@ public class ChiTietDonHang_Activity extends AppCompatActivity {
         }
         if (trangThaiDonHang == TrangThaiDonHang.Shipper_DaLayHang)
         {
-            res ="Shipper đã lấy hàng đi giao";
+            res ="Đã lấy hàng";
         }
         if (trangThaiDonHang == TrangThaiDonHang.Shipper_KhongNhanGiaoHang)
         {
-            res ="Shipper không nhận giao hàng";
+            res ="Đã từ chối đơn hàng này";
         }
         if (trangThaiDonHang == TrangThaiDonHang.Shipper_DaTraHang)
         {
-            res ="Đơn hàng đã được hoàn về";
+            res ="Đã trả hàng cho cửa hàng";
         }
         if (trangThaiDonHang == TrangThaiDonHang.Shipper_DaChuyenTien)
         {
-            res ="Thanh toán thành công";
+            res ="Đã chuyển tiền cho cửa hàng";
         }
         if (trangThaiDonHang == TrangThaiDonHang.Shipper_GiaoKhongThanhCong)
         {
@@ -212,17 +192,11 @@ public class ChiTietDonHang_Activity extends AppCompatActivity {
         }
         if (trangThaiDonHang == TrangThaiDonHang.Shipper_DangGiaoHang)
         {
-            res ="Shipper đang giao hàng";
-        }if (trangThaiDonHang == TrangThaiDonHang.Shipper_GiaoThanhCong)
-        {
-            res ="Shipper giao hàng thành công";
+            res ="Đang giao hàng";
         }
-        if (trangThaiDonHang == TrangThaiDonHang.KhachHang_HuyDon)
+        if (trangThaiDonHang == TrangThaiDonHang.Shipper_GiaoThanhCong)
         {
-            res ="Khách hàng hủy đơn hàng";
-        }if (trangThaiDonHang == TrangThaiDonHang.Bep_DaHuyDonHang)
-        {
-            res ="Bếp đã hủy đơn";
+            res ="Giao hàng thành công";
         }
         return res;
     }

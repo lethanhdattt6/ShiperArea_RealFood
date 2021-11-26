@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Shiper">
-        <activity android:name=".Lichsugiaohang_Activity"></activity>
+        <activity android:name=".ThongKe_activity"></activity>
+        <activity android:name=".Lichsugiaohang_Activity" />
         <activity android:name=".LyDo_Activity" />
         <activity android:name=".DanhSachDonHang_Activity" />
         <activity android:name=".QuenMatKhau_Activity" />

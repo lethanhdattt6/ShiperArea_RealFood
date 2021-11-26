@@ -30,6 +30,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.tapadoo.alerter.Alerter;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -74,13 +75,13 @@ public class Home_Activity extends AppCompatActivity implements NavigationView.O
         GetData();
         setEvent();
 
-
         NavigationView navigationView = findViewById(R.id.navigationView);
         navigationView.setNavigationItemSelectedListener(this);
 
         reference.child("Shipper").child(auth.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+
                 nguoidunghientai = snapshot.getValue(Shipper.class);
                 if (nguoidunghientai.getTrangThaiShipper() == (TrangThaiShipper.DangHoatDong)){
                     binding.btnssdigiao.setVisibility(View.GONE);
@@ -88,6 +89,12 @@ public class Home_Activity extends AppCompatActivity implements NavigationView.O
                 if (nguoidunghientai.getTrangThaiShipper() == (TrangThaiShipper.KhongHoatDong)){
                     binding.btnssdigiao.setVisibility(View.VISIBLE);
                 }
+                Alerter.create(Home_Activity.this)
+                        .setTitle("Xin Chào")
+                        .setText(nguoidunghientai.getHoVaTen()+ ",Chúc bạn 1 ngày làm việc an toàn và vui vẻ")
+                        .setDuration(5000)
+                        .setBackgroundColorRes(R.color.teal_200)
+                        .show();
             }
 
             @Override
@@ -104,7 +111,14 @@ public class Home_Activity extends AppCompatActivity implements NavigationView.O
         binding.btnssdigiao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Alerter.create(Home_Activity.this)
+                        .setTitle("Xin Chào")
+                        .setText(nguoidunghientai.getHoVaTen()+ ",Chúc bạn 1 ngày làm việc may mắn")
+                        .setDuration(5000)
+                        .setBackgroundColorRes(R.color.teal_200)
+                        .show();
                 reference.child("Shipper").child(auth.getUid()).child("trangThaiShipper").setValue(TrangThaiShipper.DangHoatDong);
+
             }
         });
 
@@ -127,7 +141,8 @@ public class Home_Activity extends AppCompatActivity implements NavigationView.O
         binding.doanhthu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(getApplicationContext(), ThongKe_activity.class);
+                startActivity(intent);
             }
         });
         binding.lnLichsudonhang.setOnClickListener(new View.OnClickListener() {

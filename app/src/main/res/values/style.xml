@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Title_Label_green">
+        <item name="android:textSize" >26dp</item>
+        <item name="android:textStyle" >bold</item>
+        <item name="android:textColor" >#1D8821</item>
+        <item name="android:gravity" >left</item>
+        <item name="android:padding" >5dp</item>
+    </style>
+    <style name="Title_Label_padding5">
+        <item name="android:textSize" >26dp</item>
+        <item name="android:textStyle" >bold</item>
+        <item name="android:textColor" >@color/black</item>
+        <item name="android:gravity" >left</item>
+        <item name="android:padding" >5dp</item>
+    </style>
+</resources>
