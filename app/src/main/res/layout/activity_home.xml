@@ -33,6 +33,12 @@
             android:background="@drawable/background">
 
         </LinearLayout>
+        <Button
+            android:visibility="gone"
+            android:id="@+id/btnssdigiao"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sẵn sàn đi giao"/>
 
         <ScrollView
             android:layout_width="match_parent"
@@ -96,6 +102,7 @@
                         >
 
                         <LinearLayout
+                            android:id="@+id/lnLichsudonhang"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:orientation="vertical"
@@ -209,6 +216,8 @@
 
 
                 </LinearLayout>
+
+
             </LinearLayout>
         </ScrollView>
 

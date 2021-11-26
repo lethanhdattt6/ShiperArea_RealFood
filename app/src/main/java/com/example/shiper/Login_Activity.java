@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.developer.kalert.KAlertDialog;
 import com.example.shiper.Model.Shipper;
+import com.example.shiper.Model.TrangThaiShipper;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -23,6 +24,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.tapadoo.alerter.Alerter;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -36,19 +38,6 @@ public class Login_Activity extends AppCompatActivity {
     DatabaseReference reference;
     Shipper shipper ;
 
-    boolean trangthai = true;
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        trangthai = true;
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        trangthai = false;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,20 +94,43 @@ public class Login_Activity extends AppCompatActivity {
                             .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
-                                    if (task.isSuccessful()) {
-                                        Toast.makeText(Login_Activity.this, "Đăng Nhập Thành Công!", Toast.LENGTH_SHORT).show();
-                                        Intent intent = new Intent(getApplicationContext(), Home_Activity.class);
+                                    reference.child("Shipper").child(auth.getUid()).addValueEventListener(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                                            Shipper shipper1 = snapshot.getValue(Shipper.class);
+                                            if (task.isSuccessful()) {
+                                                if (shipper1.getTrangThaiShipper() == TrangThaiShipper.BiKhoa){
+                                                    //Toast.makeText(Login_Activity.this, "Tài khoản của bạn bị khóa", Toast.LENGTH_SHORT).show();
+                                                    Alerter.create(Login_Activity.this)
+                                                            .setTitle("Thông báo")
+                                                            .setText("Tài khoản của bạn đã bị khóa")
+                                                            .setBackgroundColorRes(R.color.madh)
+                                                            .show();
+                                                    auth.signOut();
+                                                }
+                                                else {
+                                                    Toast.makeText(Login_Activity.this, "Đăng Nhập Thành Công!", Toast.LENGTH_SHORT).show();
+                                                    Intent intent = new Intent(getApplicationContext(), Home_Activity.class);
+                                                    startActivity(intent);
+                                                    matkhau.setText("");
+                                                }
 
-                                        startActivity(intent);
-                                        matkhau.setText("");
-                                    } else {
-                                       Toast.makeText(Login_Activity.this, "Thông tin tài khoản hoặc mật khẩu không chính xác", Toast.LENGTH_SHORT).show();
-//                                        kAlertDialog.changeAlertType(KAlertDialog.ERROR_TYPE);
-//                                        kAlertDialog.setTitleText("Đăng Nhập Không Thành Công!");
-//                                        kAlertDialog.setCancelable(true);
-//                                        kAlertDialog.showConfirmButton(true);
+                                            } else {
+                                                Toast.makeText(Login_Activity.this, "Thông tin tài khoản hoặc mật khẩu không chính xác", Toast.LENGTH_SHORT).show();
+                                                Alerter.create(Login_Activity.this)
+                                                        .setTitle("Thông báo")
+                                                        .setText("Thông tin tài khoản hoặc mật khẩu không chính xác")
+                                                        .setBackgroundColorRes(R.color.madh)
+                                                        .show();
+                                            }
+                                        }
 
-                                    }
+                                        @Override
+                                        public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                                        }
+                                    });
+
                                 }
                             });
                 }

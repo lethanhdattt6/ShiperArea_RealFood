@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Lichsugiaohang">
+    tools:context=".Lichsugiaohang_Activity">
     <FrameLayout
         android:background="#93242A"
         android:layout_width="match_parent"
@@ -27,6 +27,19 @@
             android:textSize="22dp"
             android:textStyle="bold"
             android:textColor="@color/white" />
+    </FrameLayout>
+    <FrameLayout
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <Spinner
+            android:background="@drawable/botronsp"
+            android:id="@+id/lichsu"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:entries="@array/lichsu"
+            android:layout_height="35dp"/>
     </FrameLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:layout_marginTop="10dp"

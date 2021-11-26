@@ -11,19 +11,16 @@ import androidx.fragment.app.FragmentTransaction;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.developer.kalert.KAlertDialog;
 import com.example.shiper.Model.Shipper;
+import com.example.shiper.Model.TrangThaiShipper;
 import com.example.shiper.databinding.ActivityHomeBinding;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -81,32 +78,37 @@ public class Home_Activity extends AppCompatActivity implements NavigationView.O
         NavigationView navigationView = findViewById(R.id.navigationView);
         navigationView.setNavigationItemSelectedListener(this);
 
+        reference.child("Shipper").child(auth.getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                nguoidunghientai = snapshot.getValue(Shipper.class);
+                if (nguoidunghientai.getTrangThaiShipper() == (TrangThaiShipper.DangHoatDong)){
+                    binding.btnssdigiao.setVisibility(View.GONE);
+                }
+                if (nguoidunghientai.getTrangThaiShipper() == (TrangThaiShipper.KhongHoatDong)){
+                    binding.btnssdigiao.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+        });
+
 
     }
 
 
     private void setEvent() {
-//        boolean flag = true;
-//        reference.child("Shipper").child(auth.getUid()).addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                if (flag == true){
-//                    nguoidunghientai = snapshot.getValue(Shipper.class);
-//                    nguoidunghientai.setTrangThaiHoatDong("Đang hoạt ");
-//                    //reference.child("Shipper").child(auth.getUid()).setValue(nguoidunghientai);
-//                }else {
-//                    nguoidunghientai = snapshot.getValue(Shipper.class);
-//                    nguoidunghientai.setTrangThaiHoatDong("Đang  ");
-//                }
-//                reference.child("Shipper").child(auth.getUid()).setValue(nguoidunghientai);
-//
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
+        binding.btnssdigiao.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                reference.child("Shipper").child(auth.getUid()).child("trangThaiShipper").setValue(TrangThaiShipper.DangHoatDong);
+            }
+        });
+
+
         binding.danhsach.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -128,7 +130,30 @@ public class Home_Activity extends AppCompatActivity implements NavigationView.O
 
             }
         });
+        binding.lnLichsudonhang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Lichsugiaohang_Activity.class);
+                startActivity(intent);
+            }
+        });
 
+    }
+    public String GetStringTrangThaiShipper(TrangThaiShipper trangThaiShipper){
+        String res ="";
+        if (trangThaiShipper == TrangThaiShipper.KhongHoatDong)
+        {
+            res ="Offline";
+        }
+        if (trangThaiShipper == TrangThaiShipper.DangHoatDong)
+        {
+            res ="Đang hoạt động";
+        }
+        if (trangThaiShipper == TrangThaiShipper.DangGiaoHang)
+        {
+            res ="Đang giao hàng";
+        }
+        return res;
     }
 
     private void GetData() {
@@ -140,11 +165,11 @@ public class Home_Activity extends AppCompatActivity implements NavigationView.O
                 View headerView = navigationView.getHeaderView(0);
                 TextView tvTen = (TextView) headerView.findViewById(R.id.tvtenuser);
                 TextView tvemail = (TextView) headerView.findViewById(R.id.tvemail);
+                TextView tvTrangThai = (TextView) headerView.findViewById(R.id.tvTrangThai);
                 tvTen.setText(shipper.getHoVaTen().toString());
                 tvemail.setText(shipper.geteMail().toString());
+                tvTrangThai.setText(GetStringTrangThaiShipper(shipper.getTrangThaiShipper()));
 
-                //Log.d("okok", shipper.getHoVaTen());
-               // CircleImageView imvavatar = (CircleImageView) headerView.findViewById(R.id.imvavatar);
 
             }
 
@@ -182,7 +207,8 @@ public class Home_Activity extends AppCompatActivity implements NavigationView.O
             Intent intent = new Intent(getApplicationContext(), DanhSachDonHang_Activity.class);
             startActivity(intent);
         }else if(id == R.id.lichsugiaohang){
-
+            Intent intent = new Intent(getApplicationContext(), Lichsugiaohang_Activity.class);
+            startActivity(intent);
         }else if(id == R.id.doanhthu){
 
         }else if(id == R.id.thongtincanhan){
@@ -195,9 +221,11 @@ public class Home_Activity extends AppCompatActivity implements NavigationView.O
                     .setCustomImage(R.drawable.dangxuat,getApplicationContext())
                     .setConfirmText("OK")
                     .setCancelText("CANCEL").setConfirmClickListener(kAlertDialog -> {
-                        FirebaseAuth.getInstance().signOut();
-                        finish();
-                        kAlertDialog.dismiss();
+
+                reference.child("Shipper").child(auth.getUid()).child("trangThaiShipper").setValue(TrangThaiShipper.KhongHoatDong);
+                                FirebaseAuth.getInstance().signOut();
+                                finish();
+                                kAlertDialog.dismiss();
                     })
                     .show();
 

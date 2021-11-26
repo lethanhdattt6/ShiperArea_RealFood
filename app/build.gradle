@@ -55,4 +55,6 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation 'com.github.jrvansuita:PickImage:+'
     implementation 'com.github.TutorialsAndroid:KAlertDialog:v14.0.19'
+
+    implementation 'com.github.tapadoo:alerter:7.2.4'
 }

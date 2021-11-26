@@ -43,4 +43,9 @@
         <item>Đơn hàng giao không thành công</item>
         <item>Đơn hàng giao thành công</item>
     </array>
+    <array name="lichsu">
+        <item>Tất cả lịch sử giao hàng</item>
+        <item>Đã giao thành công</item>
+        <item>Đã giao thất bại</item>
+    </array>
 </resources>

@@ -7,7 +7,7 @@
     android:background="@drawable/borderlinear"
     android:layout_margin="5dp"
     android:layout_marginTop="10dp"
-    >
+    android:id="@+id/lnlichsu">
     <LinearLayout
         android:layout_width="429dp"
         android:layout_height="wrap_content"
@@ -19,6 +19,7 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/trangthai"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
@@ -28,15 +29,6 @@
                 android:textSize="15dp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="150dp"
-                android:layout_marginTop="10dp"
-                android:text="30-1-2020"
-                android:textColor="#D5A926"
-                android:textSize="20dp"
-                android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout
@@ -62,6 +54,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/maDonHang"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="40dp"
@@ -70,6 +63,7 @@
                     android:textSize="25dp" />
 
                 <TextView
+                    android:id="@+id/tvTenCuaHang"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/ic_baseline_store_24"
@@ -79,12 +73,13 @@
                     android:textSize="20dp" />
 
                 <TextView
+                    android:id="@+id/tvTenSanPham"
                     android:layout_marginTop="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/ic_baseline_wysiwyg_24"
                     android:drawablePadding="5dp"
-                    android:text="Tên mặt hàng"
+                    android:text="Tên sản phẩm"
                     android:textColor="#000"
                     android:textSize="20dp" />
 
@@ -100,6 +95,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/diaChiCuaHang"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="-7dp"
@@ -109,6 +105,7 @@
                 android:textSize="20dp" />
 
             <TextView
+                android:id="@+id/diaChiNguoiNhan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/ic_baseline_location_on_24"
@@ -117,6 +114,7 @@
                 android:textSize="20dp" />
 
             <TextView
+                android:id="@+id/tvTongDon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"

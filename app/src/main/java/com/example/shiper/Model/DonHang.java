@@ -5,23 +5,13 @@ import com.example.shiper.TrangThaiDonHang;
 import java.util.Date;
 
 public class DonHang {
-    String  IDDonHang , IDKhachHang , IDShipper , diaChi, soDienThoai, ghiChu_KhachHang, ghiChu_Shipper,IDCuaHang;
+    String IDDonHang, IDCuaHang, IDKhachHang, IDShipper, diaChi, soDienThoai, ghiChu_KhachHang, ghiChu_Shipper;
     double tongTien;
-    Date ngayTao;
+    Date ngayTao, ngayGiaoHang;
     TrangThaiDonHang trangThai;
+    String ghiChuCuaHang;
 
-    public DonHang(String IDDonHang, String IDKhachHang, String IDShipper, String diaChi, String soDienThoai, String ghiChu_KhachHang, String ghiChu_Shipper, String IDCuaHang, double tongTien, Date ngayTao, TrangThaiDonHang trangThai) {
-        this.IDDonHang = IDDonHang;
-        this.IDKhachHang = IDKhachHang;
-        this.IDShipper = IDShipper;
-        this.diaChi = diaChi;
-        this.soDienThoai = soDienThoai;
-        this.ghiChu_KhachHang = ghiChu_KhachHang;
-        this.ghiChu_Shipper = ghiChu_Shipper;
-        this.IDCuaHang = IDCuaHang;
-        this.tongTien = tongTien;
-        this.ngayTao = ngayTao;
-        this.trangThai = trangThai;
+    public DonHang() {
     }
 
     public String getIDDonHang() {
@@ -30,6 +20,14 @@ public class DonHang {
 
     public void setIDDonHang(String IDDonHang) {
         this.IDDonHang = IDDonHang;
+    }
+
+    public String getIDCuaHang() {
+        return IDCuaHang;
+    }
+
+    public void setIDCuaHang(String IDCuaHang) {
+        this.IDCuaHang = IDCuaHang;
     }
 
     public String getIDKhachHang() {
@@ -80,14 +78,6 @@ public class DonHang {
         this.ghiChu_Shipper = ghiChu_Shipper;
     }
 
-    public String getIDCuaHang() {
-        return IDCuaHang;
-    }
-
-    public void setIDCuaHang(String IDCuaHang) {
-        this.IDCuaHang = IDCuaHang;
-    }
-
     public double getTongTien() {
         return tongTien;
     }
@@ -104,6 +94,14 @@ public class DonHang {
         this.ngayTao = ngayTao;
     }
 
+    public Date getNgayGiaoHang() {
+        return ngayGiaoHang;
+    }
+
+    public void setNgayGiaoHang(Date ngayGiaoHang) {
+        this.ngayGiaoHang = ngayGiaoHang;
+    }
+
     public TrangThaiDonHang getTrangThai() {
         return trangThai;
     }
@@ -112,6 +110,27 @@ public class DonHang {
         this.trangThai = trangThai;
     }
 
-    public DonHang() {
+    public String getGhiChuCuaHang() {
+        return ghiChuCuaHang;
+    }
+
+    public void setGhiChuCuaHang(String ghiChuCuaHang) {
+        this.ghiChuCuaHang = ghiChuCuaHang;
+    }
+
+    public DonHang(String IDDonHang, String IDCuaHang, String IDKhachHang, String IDShipper, String diaChi, String soDienThoai, String ghiChu_KhachHang, String ghiChu_Shipper, double tongTien, Date ngayTao, Date ngayGiaoHang, TrangThaiDonHang trangThai, String ghiChuCuaHang) {
+        this.IDDonHang = IDDonHang;
+        this.IDCuaHang = IDCuaHang;
+        this.IDKhachHang = IDKhachHang;
+        this.IDShipper = IDShipper;
+        this.diaChi = diaChi;
+        this.soDienThoai = soDienThoai;
+        this.ghiChu_KhachHang = ghiChu_KhachHang;
+        this.ghiChu_Shipper = ghiChu_Shipper;
+        this.tongTien = tongTien;
+        this.ngayTao = ngayTao;
+        this.ngayGiaoHang = ngayGiaoHang;
+        this.trangThai = trangThai;
+        this.ghiChuCuaHang = ghiChuCuaHang;
     }
 }

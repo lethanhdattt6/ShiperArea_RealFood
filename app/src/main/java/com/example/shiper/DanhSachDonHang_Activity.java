@@ -1,10 +1,12 @@
 package com.example.shiper;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -42,19 +44,22 @@ public class DanhSachDonHang_Activity extends AppCompatActivity {
         LoadData();
         setConTrol();
         setEvent();
+
     }
 
     private void LoadData() {
         reference.child("DonHang").addValueEventListener(new ValueEventListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onDataChange( DataSnapshot snapshot) {
                 hangs.clear();
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     DonHang donHang = dataSnapshot.getValue(DonHang.class);
+
                     if(donHang.getIDShipper().equals(auth.getUid())
                             && donHang.getTrangThai().toString().equals("SHOP_DangGiaoShipper")
                             && spdanhsach.getSelectedItem().toString().equals("Danh sách đơn hàng")){
-                            hangs.add(donHang);
+                        hangs.add(donHang);
                     }
                     if(donHang.getIDShipper().equals(auth.getUid())
                             && donHang.getTrangThai().toString().equals("Shipper_DangGiaoHang")
@@ -111,6 +116,7 @@ public class DanhSachDonHang_Activity extends AppCompatActivity {
             }
         });
     }
+
 
     private void setEvent() {
         Context context = this;

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="190dp"
+    android:layout_height="210dp"
     android:background="#F3E761"
     android:orientation="vertical"
     android:padding="20dp"
@@ -17,7 +17,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="LeThanhDat06"
-        android:textSize="16dp"
+        android:textSize="20dp"
         android:textStyle="bold"
         android:textColor="@color/black"
         android:layout_marginTop="8dp"/>
@@ -29,6 +29,14 @@
         android:textSize="16dp"
         android:textColor="@color/black"
       />
+    <TextView
+        android:id="@+id/tvTrangThai"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Trangthai"
+        android:textSize="16dp"
+        android:textColor="@color/black"
+        />
 
 
 </LinearLayout>

@@ -48,7 +48,6 @@ public class AdapterLichSuGiaoHang extends RecyclerView.Adapter<AdapterLichSuGia
         storageRef = storage.getReference();
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.itemlichsu,parent, false);
         return new LichSuViewHolder(view);
-
     }
 
     @Override
@@ -61,6 +60,7 @@ public class AdapterLichSuGiaoHang extends RecyclerView.Adapter<AdapterLichSuGia
         holder.maDH.setText("Mã ĐH : " + donHang.getIDDonHang().substring(0,7));
         holder.tvDiaChiNN.setText("Địa chỉ người nhận : "+ donHang.getDiaChi());
         holder.tvTongDon.setText("Tổng đơn : "+ donHang.getTongTien());
+        holder.tvTrangThai.setText(donHang.getTrangThai()+"");
         reference.child("CuaHang").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -68,7 +68,7 @@ public class AdapterLichSuGiaoHang extends RecyclerView.Adapter<AdapterLichSuGia
                     CuaHang cuaHang = dataSnapshot.getValue(CuaHang.class);
                     if(cuaHang.getIDCuaHang().equals(donHang.getIDCuaHang())){
                         holder.tvDiaChiCuaHang.setText("Địa chỉ cửa hàng : "+ cuaHang.getDiaChi());
-                        holder.tvsdtCH.setText("SĐT cửa hàng" + cuaHang.getSoDienThoai());
+                        holder.tvTenCuaHang.setText("Cửa hàng : " + cuaHang.getTenCuaHang());
                     }
                 }
             }
@@ -91,9 +91,13 @@ public class AdapterLichSuGiaoHang extends RecyclerView.Adapter<AdapterLichSuGia
                             .child(donHangInfo.getSanPham().getImages().get(0)).getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
                         @Override
                         public void onComplete(@NonNull Task<Uri> task) {
-                            Glide.with(context)
-                                    .load(task.getResult().toString())
-                                    .into(holder.imganhDH);
+                            try{
+                                Glide.with(context)
+                                        .load(task.getResult().toString())
+                                        .into(holder.imganhDH);
+                            }catch (Exception e){
+
+                            }
                         }
                     });
 
@@ -131,18 +135,19 @@ public class AdapterLichSuGiaoHang extends RecyclerView.Adapter<AdapterLichSuGia
 
     public class LichSuViewHolder extends RecyclerView.ViewHolder {
         ImageView imganhDH;
-        TextView tvsdtCH, tvDiaChiCuaHang, tvDiaChiNN, tvTongDon, maDH, tvTenSanPham;
+        TextView tvTenCuaHang, tvDiaChiCuaHang, tvDiaChiNN, tvTongDon, maDH, tvTenSanPham,tvTrangThai;
         LinearLayout lineardonhang;
         public LichSuViewHolder(View view){
             super(view);
             maDH = view.findViewById(R.id.maDonHang);
-            imganhDH = view.findViewById(R.id.imganhdonhang);
-            tvDiaChiCuaHang = view.findViewById(R.id.tvDiaChiCuaHang);
-            tvDiaChiNN = view.findViewById(R.id.tvDiaChiNguoiNhan);
-            tvsdtCH = view.findViewById(R.id.tvsdtCuaHang);
+            imganhDH = view.findViewById(R.id.productimg);
+            tvDiaChiCuaHang = view.findViewById(R.id.diaChiCuaHang);
+            tvDiaChiNN = view.findViewById(R.id.diaChiNguoiNhan);
             tvTongDon = view.findViewById(R.id.tvTongDon);
-            lineardonhang = view.findViewById(R.id.lndonhang);
-            tvTenSanPham = view.findViewById(R.id.tvtensanpham);
+            lineardonhang = view.findViewById(R.id.lnlichsu);
+            tvTenSanPham = view.findViewById(R.id.tvTenSanPham);
+            tvTenCuaHang = view.findViewById(R.id.tvTenCuaHang);
+            tvTrangThai = view.findViewById(R.id.trangthai);
 
         }
     }
