@@ -9,6 +9,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -184,8 +185,12 @@ public class Home_Activity extends AppCompatActivity implements NavigationView.O
                 tvTen.setText(shipper.getHoVaTen().toString());
                 tvemail.setText(shipper.geteMail().toString());
                 tvTrangThai.setText(GetStringTrangThaiShipper(shipper.getTrangThaiShipper()));
-
-
+                if (shipper.getTrangThaiShipper()==(TrangThaiShipper.DangHoatDong)){
+                    tvTrangThai.setTextColor(getResources().getColor(android.R.color.holo_green_dark));
+                }
+                if (shipper.getTrangThaiShipper()==(TrangThaiShipper.DangGiaoHang)){
+                    tvTrangThai.setTextColor(getResources().getColor(android.R.color.holo_blue_dark));
+                }
             }
 
             @Override
