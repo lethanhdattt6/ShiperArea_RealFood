@@ -252,6 +252,7 @@
                         android:textSize="15dp"
                         android:background="@drawable/botronbtn"
                         />
+
                     <Button
                         android:id="@+id/btnGiaoThanhCong"
                         android:visibility="gone"
@@ -323,6 +324,16 @@
                         android:textColor="#B58686"/>
 
                 </LinearLayout>
+                <Button
+                    android:id="@+id/btnGotoMap"
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:text="Go to Maps"
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:background="@drawable/botronbtn"
+                    />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

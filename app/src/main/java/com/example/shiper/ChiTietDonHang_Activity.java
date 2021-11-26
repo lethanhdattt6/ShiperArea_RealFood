@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -24,6 +26,7 @@ import com.example.shiper.Model.TrangThaiShipper;
 import com.example.shiper.adapter.AdapterDonHang;
 import com.example.shiper.adapter.AdapterSoLuong;
 import com.example.shiper.databinding.ActivityChiTietDonHangBinding;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -36,10 +39,12 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.gson.Gson;
+import com.tapadoo.alerter.Alerter;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class ChiTietDonHang_Activity extends AppCompatActivity {
@@ -72,6 +77,7 @@ public class ChiTietDonHang_Activity extends AppCompatActivity {
         }
         setEvent();
 
+
     }
 
     private void LoadBtn() {
@@ -87,9 +93,11 @@ public class ChiTietDonHang_Activity extends AppCompatActivity {
             binding.tvdonhang.setText("Đang giao hàng");
             binding.btnGiaoThanhCong.setVisibility(View.VISIBLE);
             binding.btnGiaoThatBai.setVisibility(View.VISIBLE);
+            binding.btnGotoMap.setVisibility(View.VISIBLE);
         }else {
             binding.btnGiaoThanhCong.setVisibility(View.GONE);
             binding.btnGiaoThatBai.setVisibility(View.GONE);
+            binding.btnGotoMap.setVisibility(View.GONE);
         }
         if(donHang.getTrangThai().toString().equals("Shipper_DaLayHang")){
             binding.tvdonhang.setText("Chờ đi giao");
@@ -211,6 +219,8 @@ public class ChiTietDonHang_Activity extends AppCompatActivity {
                 binding.tvtrangThai.setText("Trạng thái : "+ GetStringTrangThaiDonHang(temp.getTrangThai()));
                 binding.edtGhiChu.setText("Ghi chú : " +temp.getGhiChu_KhachHang());
                 donHang = temp;
+                binding.sdtNguoiNhan.setText("SĐT người nhận : "+donHang.getSoDienThoai());
+                binding.tvDiaChiNguoiNhan.setText("Địa chỉ người nhận :" +donHang.getDiaChi());
                 LoadBtn();
             }
 
@@ -238,8 +248,7 @@ public class ChiTietDonHang_Activity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 KhachHang khachHang = snapshot.getValue(KhachHang.class);
                 binding.tvtenNguoiNhan.setText("Tên người nhận : "+khachHang.getTenKhachHang());
-                binding.sdtNguoiNhan.setText("SĐT người nhận : "+khachHang.getSoDienThoai());
-                binding.tvDiaChiNguoiNhan.setText("Địa chỉ người nhận :" +khachHang.getDiaChi());
+
             }
 
             @Override
@@ -416,7 +425,37 @@ public class ChiTietDonHang_Activity extends AppCompatActivity {
 
             }
         });
+        binding.btnGotoMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                List<Address> addresses = null;
+                if (addresses == null) {
+                    Geocoder geocoder = new Geocoder(ChiTietDonHang_Activity.this);
+                    try {
+                        addresses = geocoder.getFromLocationName(donHang.getDiaChi(), 1);
 
+                    } catch (Exception e) {
+
+                    }
+                    if (addresses.size() != 0) {
+
+                        Address address = addresses.get(0);
+                        LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
+                        Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
+                                Uri.parse("http://maps.google.com/maps?daddr="+latLng.latitude+","+latLng.longitude));
+                        startActivity(intent);
+                    }
+                    else {
+                        Alerter.create(ChiTietDonHang_Activity.this)
+                                .setTitle("Thông báo")
+                                .setText("Không tìm thấy địa chỉ : "+ donHang.getDiaChi())
+                                .setDuration(5000)
+                                .setBackgroundColorRes(R.color.error_stroke_color)
+                                .show();
+                    }
+                }
+            }
+        });
 
     }
     boolean res = true;
