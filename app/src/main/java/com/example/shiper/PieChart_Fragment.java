@@ -22,9 +22,7 @@ public class PieChart_Fragment extends Fragment {
     int danggiaoShipper = 0, daNhanDonHang = 0, dangGiaoHang = 0, giaoHangThanhCong = 0, giaoHangThatBai = 0;
     AnyChartView anyChartView;
 
-    public PieChart_Fragment(int danggiaoShipper, int daNhanDonHang, int dangGiaoHang, int giaoHangThanhCong, int giaoHangThatBai) {
-        this.danggiaoShipper = danggiaoShipper;
-        this.daNhanDonHang = daNhanDonHang;
+    public PieChart_Fragment( int dangGiaoHang, int giaoHangThanhCong, int giaoHangThatBai) {
         this.dangGiaoHang = dangGiaoHang;
         this.giaoHangThanhCong = giaoHangThanhCong;
         this.giaoHangThatBai = giaoHangThatBai;

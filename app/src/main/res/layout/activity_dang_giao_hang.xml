@@ -5,29 +5,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     tools:context=".DangGiaoHang_Activity">
-    <LinearLayout
-        android:background="#CD8C8C"
+    <FrameLayout
+        android:background="#93242A"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
         android:orientation="horizontal">
         <ImageView
-
+            android:id="@+id/imgBack"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_baseline_arrow_back_ios_24"
-            android:layout_marginTop="3dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_baseline_back"
             android:layout_marginLeft="5dp"
             />
         <TextView
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Đang Giao hàng"
+            android:id="@+id/tvdonhang"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Đang giao hàng"
             android:textSize="22dp"
             android:textStyle="bold"
-            android:textColor="@color/black"
-            android:layout_marginLeft="100dp"/>
-    </LinearLayout>
+            android:textColor="@color/white" />
+    </FrameLayout>
     <LinearLayout
         android:background="@drawable/borderlinear"
         android:layout_marginRight="3dp"

@@ -106,11 +106,18 @@ public class Lichsugiaohang_Activity extends AppCompatActivity {
 
             }
         });
+        imgBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     private void setConTrol() {
         recyclerDanhSach = findViewById(R.id.recycleLichSu);
         spdanhsach = findViewById(R.id.lichsu);
         tvDanhSach = findViewById(R.id.tvDanhSach);
+        imgBack = findViewById(R.id.imgBack);
     }
 }

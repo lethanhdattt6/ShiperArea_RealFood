@@ -230,7 +230,8 @@ public class Home_Activity extends AppCompatActivity implements NavigationView.O
             Intent intent = new Intent(getApplicationContext(), Lichsugiaohang_Activity.class);
             startActivity(intent);
         }else if(id == R.id.doanhthu){
-
+            Intent intent = new Intent(getApplicationContext(), ThongKe_activity.class);
+            startActivity(intent);
         }else if(id == R.id.thongtincanhan){
             Intent intent = new Intent(getApplicationContext(), Thongtincanhan_Activity.class);
             startActivity(intent);

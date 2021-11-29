@@ -76,8 +76,6 @@ public class ChiTietDonHang_Activity extends AppCompatActivity {
             LoadDataDonHang();
         }
         setEvent();
-
-
     }
 
     private void LoadBtn() {

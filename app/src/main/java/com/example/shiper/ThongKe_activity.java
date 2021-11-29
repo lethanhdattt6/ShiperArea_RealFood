@@ -35,7 +35,7 @@ public class ThongKe_activity extends AppCompatActivity {
     FirebaseAuth auth;
     DatabaseReference reference;
 
-    int choXacNhanCoc = 0, dangXuLy = 0, dangGiaoHang = 0, giaoHangThanhCong = 0, giaoHangThatBai = 0;
+    int  dangGiaoHang = 0, giaoHangThanhCong = 0, giaoHangThatBai = 0;
     String[] info = {"Đã nhận đơn", "Đang xử lý", "Đang giao hàng", "Giao hàng thành công", "Giao hàng thất bạt"};
     TextView txtTongSoDonHang, txtTongDoanhThu, txtDaGiaoThanhCong, txtChoChuyenCoc, txtDangXuLy, txtDangGiaoHang, txtGiaoHangKhongThanhCong;
     Button btnNgayBatDau, btnNgayKetThuc;
@@ -157,7 +157,6 @@ public class ThongKe_activity extends AppCompatActivity {
         giaoHangThatBai = 0;
         lnLayout.setVisibility(View.GONE);
         progressBar.setVisibility(View.VISIBLE);
-
         for (DonHang donHang : donHangs) {
             if (donHang.getTrangThai() == TrangThaiDonHang.Shipper_DaLayHang ||
                     donHang.getTrangThai() == TrangThaiDonHang.Shipper_DangGiaoHang) {
@@ -165,8 +164,7 @@ public class ThongKe_activity extends AppCompatActivity {
             }
             if (donHang.getTrangThai() == TrangThaiDonHang.Shipper_GiaoKhongThanhCong ||
                     donHang.getTrangThai() == TrangThaiDonHang.ChoShopXacNhan_TraHang ||
-                    donHang.getTrangThai() == TrangThaiDonHang.Shipper_DaTraHang ||
-                    donHang.getTrangThai() == TrangThaiDonHang.KhachHang_HuyDon) {
+                    donHang.getTrangThai() == TrangThaiDonHang.Shipper_DaTraHang ) {
                 giaoHangThatBai++;
             }
             if (donHang.getTrangThai() == TrangThaiDonHang.Shipper_GiaoThanhCong ||
@@ -175,7 +173,6 @@ public class ThongKe_activity extends AppCompatActivity {
                 giaoHangThanhCong++;
                 tong += donHang.getTongTien();
             }
-
         }
         LoadPieChart();
         txtTongDoanhThu.setText(tong + " VND");
@@ -196,7 +193,7 @@ public class ThongKe_activity extends AppCompatActivity {
     }
 
     private void LoadPieChart() {
-        loadFragment(new PieChart_Fragment(choXacNhanCoc, dangXuLy, dangGiaoHang, giaoHangThanhCong, giaoHangThatBai));
+        loadFragment(new PieChart_Fragment( dangGiaoHang, giaoHangThanhCong, giaoHangThatBai));
     }
 
     @Override
