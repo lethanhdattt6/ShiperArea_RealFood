@@ -2,34 +2,33 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single">
         <item
-            android:icon="@drawable/ic_baseline_list_alt_24"
-            android:title="@string/danhsachdonhang"
             android:id="@+id/nav_danhsachdonhang"
-            />
+            android:icon="@drawable/ic_baseline_list_alt_24"
+            android:title="@string/danhsachdonhang" />
         <item
-            android:icon="@drawable/ic_baseline_access_time_24"
-            android:title="@string/menu_lichsu"
             android:id="@+id/lichsugiaohang"
-            />
+            android:icon="@drawable/ic_baseline_access_time_24"
+            android:title="@string/menu_lichsu" />
         <item
-            android:icon="@drawable/ic_baseline_person_24"
-            android:title="@string/menu_thongtincanhan"
             android:id="@+id/thongtincanhan"
-            />
+            android:icon="@drawable/ic_baseline_person_24"
+            android:title="@string/menu_thongtincanhan" />
         <item
-            android:icon="@drawable/ic_baseline_trending_up_24"
-            android:title="@string/doanhthu"
             android:id="@+id/doanhthu"
-            />
+            android:icon="@drawable/ic_baseline_trending_up_24"
+            android:title="@string/doanhthu" />
         <item
-            android:icon="@drawable/ic_baseline_autorenew_24"
-            android:title="Đổi mật khẩu"
+            android:id="@+id/thongbao"
+            android:icon="@drawable/ic_baseline_notifications_24"
+            android:title="@string/thong_bao" />
+        <item
             android:id="@+id/doimatkhau"
-            />
+            android:icon="@drawable/ic_baseline_autorenew_24"
+            android:title="Đổi mật khẩu" />
         <item
-            android:icon="@drawable/ic_sharp_keyboard_return_24"
-            android:title="Đăng xuất"
             android:id="@+id/dangxuat"
-            />
+            android:icon="@drawable/ic_sharp_keyboard_return_24"
+            android:title="Đăng xuất" />
+
     </group>
 </menu>

@@ -6,59 +6,65 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".Login_Activity">
+
     <androidx.cardview.widget.CardView
-        android:layout_marginTop="-35dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="-35dp"
 
         app:cardCornerRadius="40dp">
+
         <FrameLayout
-            android:backgroundTint="#93242A"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:backgroundTint="#93242A">
+
             <ImageView
 
-                android:adjustViewBounds="true"
-                android:background="@drawable/logo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="33dp"
+                android:adjustViewBounds="true"
+                android:background="@drawable/logo"
                 android:scaleType="fitXY"
-                android:src="@drawable/logo"
-                android:layout_marginTop="33dp"/>
+                android:src="@drawable/logo" />
         </FrameLayout>
     </androidx.cardview.widget.CardView>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="10dp"
         android:orientation="vertical">
-        <EditText
-            android:id="@+id/tendangnhap"
+
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:padding="10dp"
-            android:drawableStart="@drawable/ic_baseline_perm_identity_24"
-            android:hint="@string/tendangnhap"
-            android:textColor="@color/black"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:drawablePadding="10dp"
-            android:background="@drawable/botron"
-            />
-        <EditText
-            android:id="@+id/matkhau"
+            android:layout_height="wrap_content"
+            app:boxStrokeWidth="0dp"
+            app:boxStrokeWidthFocused="0dp">
+
+            <EditText
+                android:id="@+id/tendangnhap"
+                style="@style/Edittext_v1"
+                android:drawablePadding="10dp"
+                android:hint="@string/tendangnhap" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:drawableStart="@drawable/ic_baseline_lock_24"
-            android:hint="@string/matkhau"
-            android:drawablePadding="10dp"
-            android:textColor="@color/black"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/botron"
-            android:inputType="textPassword"
-            />
+            android:layout_height="wrap_content"
+            app:boxStrokeWidth="0dp"
+            app:boxStrokeWidthFocused="0dp"
+            app:passwordToggleEnabled="true">
+
+            <EditText
+                android:id="@+id/matkhau"
+                style="@style/Edittext_v1"
+                android:drawablePadding="10dp"
+                android:hint="@string/matkhau"
+                android:inputType="textPassword" />
+        </com.google.android.material.textfield.TextInputLayout>
+
 
         <TextView
             android:id="@+id/txtQuenMatKhau"
@@ -70,16 +76,16 @@
             android:text="Quên mật khẩu"
             android:textColor="@color/black"
             android:textSize="17dp" />
+
         <Button
             android:id="@+id/btnLogin"
-            android:layout_marginRight="80dp"
-            android:layout_marginLeft="80dp"
-            android:layout_marginTop="40dp"
-            android:background="@drawable/botronbtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginRight="80dp"
+            android:background="@drawable/botronbtn"
             android:text="@string/dangnhap"
-            />
+            android:textColor="@color/white" />
     </LinearLayout>
 </LinearLayout>

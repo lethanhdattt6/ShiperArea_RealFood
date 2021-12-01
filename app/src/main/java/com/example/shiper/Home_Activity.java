@@ -8,6 +8,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
@@ -19,6 +20,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.developer.kalert.KAlertDialog;
 import com.example.shiper.Model.Shipper;
+import com.example.shiper.Model.ThongBao;
 import com.example.shiper.Model.TrangThaiShipper;
 import com.example.shiper.databinding.ActivityHomeBinding;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -53,6 +55,7 @@ public class Home_Activity extends AppCompatActivity implements NavigationView.O
 //    private int mCurrentFragment = FRAMENT_DANHSACHDONHANG;
 
     private DrawerLayout drawerLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,7 +70,7 @@ public class Home_Activity extends AppCompatActivity implements NavigationView.O
 
 
         drawerLayout = findViewById(R.id.drawerlayout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolBar,R.string.nav_close,R.string.nav_open);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolBar, R.string.nav_close, R.string.nav_open);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
         // du lieu firebase
@@ -84,15 +87,15 @@ public class Home_Activity extends AppCompatActivity implements NavigationView.O
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
 
                 nguoidunghientai = snapshot.getValue(Shipper.class);
-                if (nguoidunghientai.getTrangThaiShipper() == (TrangThaiShipper.DangHoatDong)){
+                if (nguoidunghientai.getTrangThaiShipper() == (TrangThaiShipper.DangHoatDong)) {
                     binding.btnssdigiao.setVisibility(View.GONE);
                 }
-                if (nguoidunghientai.getTrangThaiShipper() == (TrangThaiShipper.KhongHoatDong)){
+                if (nguoidunghientai.getTrangThaiShipper() == (TrangThaiShipper.KhongHoatDong)) {
                     binding.btnssdigiao.setVisibility(View.VISIBLE);
                 }
                 Alerter.create(Home_Activity.this)
                         .setTitle("Xin Chào")
-                        .setText(nguoidunghientai.getHoVaTen()+ ",Chúc bạn 1 ngày làm việc an toàn và vui vẻ")
+                        .setText(nguoidunghientai.getHoVaTen() + ",Chúc bạn 1 ngày làm việc an toàn và vui vẻ")
                         .setDuration(5000)
                         .setBackgroundColorRes(R.color.teal_200)
                         .show();
@@ -114,7 +117,7 @@ public class Home_Activity extends AppCompatActivity implements NavigationView.O
             public void onClick(View v) {
                 Alerter.create(Home_Activity.this)
                         .setTitle("Xin Chào")
-                        .setText(nguoidunghientai.getHoVaTen()+ ",Chúc bạn 1 ngày làm việc may mắn")
+                        .setText(nguoidunghientai.getHoVaTen() + ",Chúc bạn 1 ngày làm việc may mắn")
                         .setDuration(5000)
                         .setBackgroundColorRes(R.color.teal_200)
                         .show();
@@ -155,19 +158,17 @@ public class Home_Activity extends AppCompatActivity implements NavigationView.O
         });
 
     }
-    public String GetStringTrangThaiShipper(TrangThaiShipper trangThaiShipper){
-        String res ="";
-        if (trangThaiShipper == TrangThaiShipper.KhongHoatDong)
-        {
-            res ="Offline";
+
+    public String GetStringTrangThaiShipper(TrangThaiShipper trangThaiShipper) {
+        String res = "";
+        if (trangThaiShipper == TrangThaiShipper.KhongHoatDong) {
+            res = "Offline";
         }
-        if (trangThaiShipper == TrangThaiShipper.DangHoatDong)
-        {
-            res ="Đang hoạt động";
+        if (trangThaiShipper == TrangThaiShipper.DangHoatDong) {
+            res = "Đang hoạt động";
         }
-        if (trangThaiShipper == TrangThaiShipper.DangGiaoHang)
-        {
-            res ="Đang giao hàng";
+        if (trangThaiShipper == TrangThaiShipper.DangGiaoHang) {
+            res = "Đang giao hàng";
         }
         return res;
     }
@@ -185,10 +186,10 @@ public class Home_Activity extends AppCompatActivity implements NavigationView.O
                 tvTen.setText(shipper.getHoVaTen().toString());
                 tvemail.setText(shipper.geteMail().toString());
                 tvTrangThai.setText(GetStringTrangThaiShipper(shipper.getTrangThaiShipper()));
-                if (shipper.getTrangThaiShipper()==(TrangThaiShipper.DangHoatDong)){
+                if (shipper.getTrangThaiShipper() == (TrangThaiShipper.DangHoatDong)) {
                     tvTrangThai.setTextColor(getResources().getColor(android.R.color.holo_green_dark));
                 }
-                if (shipper.getTrangThaiShipper()==(TrangThaiShipper.DangGiaoHang)){
+                if (shipper.getTrangThaiShipper() == (TrangThaiShipper.DangGiaoHang)) {
                     tvTrangThai.setTextColor(getResources().getColor(android.R.color.holo_blue_dark));
                 }
             }
@@ -218,43 +219,45 @@ public class Home_Activity extends AppCompatActivity implements NavigationView.O
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        int id  = item.getItemId();
-        if(id == R.id.nav_danhsachdonhang){
+        int id = item.getItemId();
+        if (id == R.id.nav_danhsachdonhang) {
 //            if(mCurrentFragment != FRAMENT_DANHSACHDONHANG){
 //                replaceFragment(new DanhSachDonHang_Activity());
 //                mCurrentFragment = FRAMENT_DANHSACHDONHANG;
 //            }
             Intent intent = new Intent(getApplicationContext(), DanhSachDonHang_Activity.class);
             startActivity(intent);
-        }else if(id == R.id.lichsugiaohang){
+        } else if (id == R.id.lichsugiaohang) {
             Intent intent = new Intent(getApplicationContext(), Lichsugiaohang_Activity.class);
             startActivity(intent);
-        }else if(id == R.id.doanhthu){
+        } else if (id == R.id.doanhthu) {
             Intent intent = new Intent(getApplicationContext(), ThongKe_activity.class);
             startActivity(intent);
-        }else if(id == R.id.thongtincanhan){
+        } else if (id == R.id.thongtincanhan) {
             Intent intent = new Intent(getApplicationContext(), Thongtincanhan_Activity.class);
             startActivity(intent);
-        }else if(id == R.id.dangxuat){
+        } else if (id == R.id.dangxuat) {
             new KAlertDialog(this, KAlertDialog.CUSTOM_IMAGE_TYPE)
                     .setTitleText("Đăng xuất!!!")
                     .setContentText("Bạn có chắn chắn muốn đăng xuất??")
-                    .setCustomImage(R.drawable.dangxuat,getApplicationContext())
+                    .setCustomImage(R.drawable.dangxuat, getApplicationContext())
                     .setConfirmText("OK")
                     .setCancelText("CANCEL").setConfirmClickListener(kAlertDialog -> {
 
                 reference.child("Shipper").child(auth.getUid()).child("trangThaiShipper").setValue(TrangThaiShipper.KhongHoatDong);
-                                FirebaseAuth.getInstance().signOut();
-                                finish();
-                                kAlertDialog.dismiss();
-                    })
+                FirebaseAuth.getInstance().signOut();
+                finish();
+                kAlertDialog.dismiss();
+            })
                     .show();
 
 
-
-        }
-        else if(id == R.id.doimatkhau){
+        } else if (id == R.id.doimatkhau) {
             Intent intent = new Intent(getApplicationContext(), Doi_Mat_Khau_Activity.class);
+            startActivity(intent);
+        }
+        else if(id == R.id.thongbao){
+            Intent intent = new Intent(getApplicationContext(), ThongBao_Activity.class);
             startActivity(intent);
         }
         drawerLayout.closeDrawer(GravityCompat.START);
@@ -263,14 +266,14 @@ public class Home_Activity extends AppCompatActivity implements NavigationView.O
 
     @Override
     public void onBackPressed() {
-        if(drawerLayout.isDrawerOpen(GravityCompat.START)){
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
-        }
-        else {
+        } else {
             super.onBackPressed();
         }
     }
-    private void replaceFragment(Fragment fragment){
+
+    private void replaceFragment(Fragment fragment) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.contentfram, fragment);
         fragmentTransaction.commit();

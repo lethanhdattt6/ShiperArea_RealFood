@@ -22,6 +22,7 @@ import com.example.shiper.Model.CuaHang;
 import com.example.shiper.Model.DonHang;
 import com.example.shiper.Model.DonHangInfo;
 import com.example.shiper.Model.KhachHang;
+import com.example.shiper.Model.ThongBao;
 import com.example.shiper.Model.TrangThaiShipper;
 import com.example.shiper.adapter.AdapterDonHang;
 import com.example.shiper.adapter.AdapterSoLuong;
@@ -44,12 +45,14 @@ import com.tapadoo.alerter.Alerter;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 
 public class ChiTietDonHang_Activity extends AppCompatActivity {
     ActivityChiTietDonHangBinding binding;
-    DonHang donHang ;
+    DonHang donHang;
     FirebaseAuth auth;
     DatabaseReference reference;
     StorageReference storageRef;
@@ -68,8 +71,8 @@ public class ChiTietDonHang_Activity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
 
 
-        if(getIntent()!= null ){
-            Intent intent =  getIntent();
+        if (getIntent() != null) {
+            Intent intent = getIntent();
             String DataDonHang = intent.getStringExtra("DataDonHang");
             Gson gson = new Gson();
             donHang = gson.fromJson(DataDonHang, DonHang.class);
@@ -79,70 +82,69 @@ public class ChiTietDonHang_Activity extends AppCompatActivity {
     }
 
     private void LoadBtn() {
-        if(donHang.getTrangThai() == TrangThaiDonHang.SHOP_DangGiaoShipper){
+        if (donHang.getTrangThai() == TrangThaiDonHang.SHOP_DangGiaoShipper) {
             binding.btnNhanDon.setVisibility(View.VISIBLE);
             binding.btnTuChoiDon.setVisibility(View.VISIBLE);
-        }
-        else {
+        } else {
             binding.btnNhanDon.setVisibility(View.GONE);
             binding.btnTuChoiDon.setVisibility(View.GONE);
         }
-        if(donHang.getTrangThai()==TrangThaiDonHang.Shipper_DangGiaoHang){
+        if (donHang.getTrangThai() == TrangThaiDonHang.Shipper_DangGiaoHang) {
             binding.tvdonhang.setText("Đang giao hàng");
             binding.btnGiaoThanhCong.setVisibility(View.VISIBLE);
             binding.btnGiaoThatBai.setVisibility(View.VISIBLE);
             binding.btnGotoMap.setVisibility(View.VISIBLE);
-        }else {
+        } else {
             binding.btnGiaoThanhCong.setVisibility(View.GONE);
             binding.btnGiaoThatBai.setVisibility(View.GONE);
             binding.btnGotoMap.setVisibility(View.GONE);
         }
-        if(donHang.getTrangThai().toString().equals("Shipper_DaLayHang")){
+        if (donHang.getTrangThai().toString().equals("Shipper_DaLayHang")) {
             binding.tvdonhang.setText("Chờ đi giao");
             binding.btnDiGiao.setVisibility(View.VISIBLE);
-        }else {
+        } else {
             binding.btnDiGiao.setVisibility(View.GONE);
         }
 
-        if(donHang.getTrangThai().toString().equals("SHOP_ChoShipperLayHang")){
+        if (donHang.getTrangThai().toString().equals("SHOP_ChoShipperLayHang")) {
             binding.tvdonhang.setText("Chờ lấy hàng");
             binding.btnDaLayHang.setVisibility(View.VISIBLE);
-        }else {
+        } else {
             binding.btnDaLayHang.setVisibility(View.GONE);
         }
-        if(donHang.getTrangThai().toString().equals("Shipper_GiaoThanhCong")){
+        if (donHang.getTrangThai().toString().equals("Shipper_GiaoThanhCong")) {
             binding.tvdonhang.setText("Chuyển tiền cho cửa hàng");
             binding.btnDaTraTien.setVisibility(View.VISIBLE);
-        }else {
+        } else {
             binding.btnDaTraTien.setVisibility(View.GONE);
         }
-        if(donHang.getTrangThai().toString().equals("Shipper_GiaoKhongThanhCong")){
+        if (donHang.getTrangThai().toString().equals("Shipper_GiaoKhongThanhCong")) {
             binding.tvdonhang.setText("Trả hàng cho cửa hàng");
             binding.btnDaTraHang.setVisibility(View.VISIBLE);
-        }else {
+        } else {
             binding.btnDaTraHang.setVisibility(View.GONE);
         }
-        if(donHang.getTrangThai().toString().equals("ChoShopXacNhan_Tien")){
+        if (donHang.getTrangThai().toString().equals("ChoShopXacNhan_Tien")) {
             binding.tvdonhang.setText("Đang chờ xác nhận");
             binding.btnDaTraTien.setVisibility(View.GONE);
             binding.tvxacnhan.setVisibility(View.VISIBLE);
             binding.tvxacnhan.setText("Đang chờ xác nhận");
         }
-        if(donHang.getTrangThai().toString().equals("ChoShopXacNhan_TraHang")){
+        if (donHang.getTrangThai().toString().equals("ChoShopXacNhan_TraHang")) {
             binding.tvxacnhan.setVisibility(View.VISIBLE);
             binding.tvxacnhan.setText("Đang chờ xác nhận");
             binding.tvdonhang.setText("Đang chờ xác nhận");
             binding.btnDaTraHang.setVisibility(View.GONE);
         }
-        if(donHang.getTrangThai().toString().equals("Shipper_DaChuyenTien")){
+        if (donHang.getTrangThai().toString().equals("Shipper_DaChuyenTien")) {
             binding.tvxacnhan.setVisibility(View.VISIBLE);
             binding.tvxacnhan.setText("Đã chuyển tiền cho cửa hàng");
         }
-        if(donHang.getTrangThai().toString().equals("Shipper_DaTraHang")){
+        if (donHang.getTrangThai().toString().equals("Shipper_DaTraHang")) {
             binding.tvxacnhan.setText("Đã trả hàng cho cửa hàng");
             binding.tvxacnhan.setVisibility(View.VISIBLE);
         }
-        if(donHang.getTrangThai().toString().equals("SHOP_ChoXacNhanGiaoHangChoShipper")){
+        if (donHang.getTrangThai().toString().equals("SHOP_ChoXacNhanGiaoHangChoShipper")) {
             binding.tvdonhang.setText("Đang chờ cửa hàng xác nhận");
             binding.tvxacnhan.setVisibility(View.VISIBLE);
             binding.tvxacnhan.setText("Đang chờ xác nhận");
@@ -154,71 +156,60 @@ public class ChiTietDonHang_Activity extends AppCompatActivity {
         super.onResume();
         LoadBtn();
     }
-    public String GetStringTrangThaiDonHang(TrangThaiDonHang trangThaiDonHang){
-        String res ="";
-        if (trangThaiDonHang == TrangThaiDonHang.SHOP_DangGiaoShipper)
-        {
-            res ="Đơn hàng có thể nhận";
+
+    public String GetStringTrangThaiDonHang(TrangThaiDonHang trangThaiDonHang) {
+        String res = "";
+        if (trangThaiDonHang == TrangThaiDonHang.SHOP_DangGiaoShipper) {
+            res = "Đơn hàng có thể nhận";
         }
-        if (trangThaiDonHang == TrangThaiDonHang.SHOP_ChoShipperLayHang)
-        {
-            res ="Chờ shipper lấy hàng";
+        if (trangThaiDonHang == TrangThaiDonHang.SHOP_ChoShipperLayHang) {
+            res = "Chờ shipper lấy hàng";
         }
-        if (trangThaiDonHang == TrangThaiDonHang.SHOP_ChoXacNhanGiaoHangChoShipper)
-        {
-            res ="Chờ Shop xác nhận giao hàng";
+        if (trangThaiDonHang == TrangThaiDonHang.SHOP_ChoXacNhanGiaoHangChoShipper) {
+            res = "Chờ Shop xác nhận giao hàng";
         }
-        if (trangThaiDonHang == TrangThaiDonHang.ChoShopXacNhan_Tien)
-        {
-            res ="Chờ Shop xác nhận đã nhận tiền hàng từ Shipper";
+        if (trangThaiDonHang == TrangThaiDonHang.ChoShopXacNhan_Tien) {
+            res = "Chờ Shop xác nhận đã nhận tiền hàng từ Shipper";
         }
-        if (trangThaiDonHang == TrangThaiDonHang.ChoShopXacNhan_TraHang)
-        {
-            res ="Chờ Shop xác nhận đã nhận hàng trả về từ Shipper";
+        if (trangThaiDonHang == TrangThaiDonHang.ChoShopXacNhan_TraHang) {
+            res = "Chờ Shop xác nhận đã nhận hàng trả về từ Shipper";
         }
-        if (trangThaiDonHang == TrangThaiDonHang.Shipper_DaLayHang)
-        {
-            res ="Đã lấy hàng";
+        if (trangThaiDonHang == TrangThaiDonHang.Shipper_DaLayHang) {
+            res = "Đã lấy hàng";
         }
-        if (trangThaiDonHang == TrangThaiDonHang.Shipper_KhongNhanGiaoHang)
-        {
-            res ="Đã từ chối đơn hàng này";
+        if (trangThaiDonHang == TrangThaiDonHang.Shipper_KhongNhanGiaoHang) {
+            res = "Đã từ chối đơn hàng này";
         }
-        if (trangThaiDonHang == TrangThaiDonHang.Shipper_DaTraHang)
-        {
-            res ="Đã trả hàng cho cửa hàng";
+        if (trangThaiDonHang == TrangThaiDonHang.Shipper_DaTraHang) {
+            res = "Đã trả hàng cho cửa hàng";
         }
-        if (trangThaiDonHang == TrangThaiDonHang.Shipper_DaChuyenTien)
-        {
-            res ="Đã chuyển tiền cho cửa hàng";
+        if (trangThaiDonHang == TrangThaiDonHang.Shipper_DaChuyenTien) {
+            res = "Đã chuyển tiền cho cửa hàng";
         }
-        if (trangThaiDonHang == TrangThaiDonHang.Shipper_GiaoKhongThanhCong)
-        {
-            res ="Giao hàng không thành công";
+        if (trangThaiDonHang == TrangThaiDonHang.Shipper_GiaoKhongThanhCong) {
+            res = "Giao hàng không thành công";
         }
-        if (trangThaiDonHang == TrangThaiDonHang.Shipper_DangGiaoHang)
-        {
-            res ="Đang giao hàng";
+        if (trangThaiDonHang == TrangThaiDonHang.Shipper_DangGiaoHang) {
+            res = "Đang giao hàng";
         }
-        if (trangThaiDonHang == TrangThaiDonHang.Shipper_GiaoThanhCong)
-        {
-            res ="Giao hàng thành công";
+        if (trangThaiDonHang == TrangThaiDonHang.Shipper_GiaoThanhCong) {
+            res = "Giao hàng thành công";
         }
         return res;
     }
 
-    private void LoadDataDonHang(){
+    private void LoadDataDonHang() {
         reference.child("DonHang").child(donHang.getIDDonHang()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                DonHang temp = snapshot.getValue(DonHang .class);
-                binding.tvmaDH.setText(donHang.getIDDonHang().substring(0,7));
-                binding.tvTongDon.setText("Tổng đơn : " +temp.getTongTien()+ "VNĐ");
-                binding.tvtrangThai.setText("Trạng thái : "+ GetStringTrangThaiDonHang(temp.getTrangThai()));
-                binding.edtGhiChu.setText("Ghi chú : " +temp.getGhiChu_KhachHang());
+                DonHang temp = snapshot.getValue(DonHang.class);
+                binding.tvmaDH.setText(donHang.getIDDonHang().substring(0, 7));
+                binding.tvTongDon.setText("Tổng đơn : " + temp.getTongTien() + "VNĐ");
+                binding.tvtrangThai.setText("Trạng thái : " + GetStringTrangThaiDonHang(temp.getTrangThai()));
+                binding.edtGhiChu.setText("Ghi chú : " + temp.getGhiChu_KhachHang());
                 donHang = temp;
-                binding.sdtNguoiNhan.setText("SĐT người nhận : "+donHang.getSoDienThoai());
-                binding.tvDiaChiNguoiNhan.setText("Địa chỉ người nhận :" +donHang.getDiaChi());
+                binding.sdtNguoiNhan.setText("SĐT người nhận : " + donHang.getSoDienThoai());
+                binding.tvDiaChiNguoiNhan.setText("Địa chỉ người nhận :" + donHang.getDiaChi());
                 LoadBtn();
             }
 
@@ -230,10 +221,10 @@ public class ChiTietDonHang_Activity extends AppCompatActivity {
         reference.child("CuaHang").child(donHang.getIDCuaHang()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    CuaHang cuaHang = snapshot.getValue(CuaHang.class);
-                    binding.tvtenCuaHang.setText("Tên cửa hàng : " +cuaHang.getTenCuaHang());
-                    binding.tvDiaChiCuaHang.setText("Địa chỉ cửa hàng : "+ cuaHang.getDiaChi());
-                    binding.tvsdtCuaHang.setText("SĐT cửa hàng : " + cuaHang.getSoDienThoai());
+                CuaHang cuaHang = snapshot.getValue(CuaHang.class);
+                binding.tvtenCuaHang.setText("Tên cửa hàng : " + cuaHang.getTenCuaHang());
+                binding.tvDiaChiCuaHang.setText("Địa chỉ cửa hàng : " + cuaHang.getDiaChi());
+                binding.tvsdtCuaHang.setText("SĐT cửa hàng : " + cuaHang.getSoDienThoai());
             }
 
             @Override
@@ -245,7 +236,7 @@ public class ChiTietDonHang_Activity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 KhachHang khachHang = snapshot.getValue(KhachHang.class);
-                binding.tvtenNguoiNhan.setText("Tên người nhận : "+khachHang.getTenKhachHang());
+                binding.tvtenNguoiNhan.setText("Tên người nhận : " + khachHang.getTenKhachHang());
 
             }
 
@@ -258,7 +249,7 @@ public class ChiTietDonHang_Activity extends AppCompatActivity {
         reference.child("DonHangInfo").orderByChild("iddonHang").equalTo(donHang.getIDDonHang()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     DonHangInfo donHangInfo = dataSnapshot.getValue(DonHangInfo.class);
                     hangInfos.add(donHangInfo);
                     storageRef.child("SanPham").child(donHangInfo.getSanPham()
@@ -274,6 +265,7 @@ public class ChiTietDonHang_Activity extends AppCompatActivity {
 
                 }
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
@@ -282,11 +274,12 @@ public class ChiTietDonHang_Activity extends AppCompatActivity {
 
         adapterSoLuong = new AdapterSoLuong(ChiTietDonHang_Activity.this);
         adapterSoLuong.setData(hangInfos);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(ChiTietDonHang_Activity.this, RecyclerView.VERTICAL,false);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(ChiTietDonHang_Activity.this, RecyclerView.VERTICAL, false);
         binding.ryctenvasoluong.setLayoutManager(linearLayoutManager);
         binding.ryctenvasoluong.setAdapter(adapterSoLuong);
 
     }
+
     private void setEvent() {
         binding.imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -304,6 +297,7 @@ public class ChiTietDonHang_Activity extends AppCompatActivity {
                         .setConfirmText("OK")
                         .setConfirmClickListener(kAlertDialog -> {
                             donHang.setTrangThai(TrangThaiDonHang.SHOP_ChoShipperLayHang);
+
                             reference.child("DonHang").child(donHang.getIDDonHang()).setValue(donHang).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
@@ -323,7 +317,7 @@ public class ChiTietDonHang_Activity extends AppCompatActivity {
                 Gson gson = new Gson();
                 String data = gson.toJson(donHang);
                 Intent intent = new Intent(ChiTietDonHang_Activity.this, LyDo_Activity.class);
-                intent.putExtra("DonHang",data);
+                intent.putExtra("DonHang", data);
                 startActivity(intent);
                 LoadBtn();
 
@@ -368,7 +362,7 @@ public class ChiTietDonHang_Activity extends AppCompatActivity {
                 Gson gson = new Gson();
                 String data = gson.toJson(donHang);
                 Intent intent = new Intent(ChiTietDonHang_Activity.this, LyDo_Activity.class);
-                intent.putExtra("DonHang",data);
+                intent.putExtra("DonHang", data);
                 startActivity(intent);
                 KiemTra();
                 LoadBtn();
@@ -378,7 +372,6 @@ public class ChiTietDonHang_Activity extends AppCompatActivity {
         binding.btnGiaoThanhCong.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 donHang.setTrangThai(TrangThaiDonHang.Shipper_GiaoThanhCong);
                 reference.child("DonHang").child(donHang.getIDDonHang()).setValue(donHang).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -390,7 +383,10 @@ public class ChiTietDonHang_Activity extends AppCompatActivity {
                         }
                     }
                 });
-
+                String IDThongBao = UUID.randomUUID().toString();
+                ThongBao thongBao = new ThongBao(IDThongBao, "Đã giao hàng thành công đơn hàng " + donHang.getIDDonHang().substring(0, 15), "Thông Báo", "", donHang.getIDCuaHang(), "", TrangThaiThongBao.ChuaXem, new Date());
+                reference.child("ThongBao").child(donHang.getIDCuaHang()).child(IDThongBao).setValue(thongBao);
+                reference.child("ThongBao").child(auth.getUid()).child(IDThongBao).setValue(thongBao);
             }
         });
         binding.btnDaTraTien.setOnClickListener(new View.OnClickListener() {
@@ -401,7 +397,7 @@ public class ChiTietDonHang_Activity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                           // Toast.makeText(v.getContext(), "Giao hàng thành công", Toast.LENGTH_SHORT).show();
+                            // Toast.makeText(v.getContext(), "Giao hàng thành công", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -440,13 +436,12 @@ public class ChiTietDonHang_Activity extends AppCompatActivity {
                         Address address = addresses.get(0);
                         LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
                         Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
-                                Uri.parse("http://maps.google.com/maps?daddr="+latLng.latitude+","+latLng.longitude));
+                                Uri.parse("http://maps.google.com/maps?daddr=" + latLng.latitude + "," + latLng.longitude));
                         startActivity(intent);
-                    }
-                    else {
+                    } else {
                         Alerter.create(ChiTietDonHang_Activity.this)
                                 .setTitle("Thông báo")
-                                .setText("Không tìm thấy địa chỉ : "+ donHang.getDiaChi())
+                                .setText("Không tìm thấy địa chỉ : " + donHang.getDiaChi())
                                 .setDuration(5000)
                                 .setBackgroundColorRes(R.color.error_stroke_color)
                                 .show();
@@ -456,9 +451,11 @@ public class ChiTietDonHang_Activity extends AppCompatActivity {
         });
 
     }
+
     boolean res = true;
+
     @RequiresApi(api = Build.VERSION_CODES.N)
-    private void KiemTra(){
+    private void KiemTra() {
         reference.child("DonHang").orderByChild("idshipper").equalTo(auth.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
@@ -466,15 +463,15 @@ public class ChiTietDonHang_Activity extends AppCompatActivity {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
 
                     DonHang donHang = dataSnapshot.getValue(DonHang.class);
-                    if (donHang.getTrangThai().toString().equals("Shipper_DangGiaoHang")){
-                       //reference.child("Shipper").child(auth.getUid()).child("trangThaiHoatDong").setValue("Đang giao hàng");
+                    if (donHang.getTrangThai().toString().equals("Shipper_DangGiaoHang")) {
+                        //reference.child("Shipper").child(auth.getUid()).child("trangThaiHoatDong").setValue("Đang giao hàng");
                         res = false;
                         break;
                     }
                 }
-                if (res == false){
+                if (res == false) {
                     reference.child("Shipper").child(auth.getUid()).child("trangThaiShipper").setValue(TrangThaiShipper.DangGiaoHang);
-                }else {
+                } else {
                     reference.child("Shipper").child(auth.getUid()).child("trangThaiShipper").setValue(TrangThaiShipper.DangHoatDong);
                 }
             }

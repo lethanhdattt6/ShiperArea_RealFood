@@ -14,4 +14,13 @@
         <item name="android:gravity" >left</item>
         <item name="android:padding" >5dp</item>
     </style>
+    <style name="Edittext_v1">
+        <item name="android:layout_width" >match_parent</item>
+        <item name="android:layout_height" >60dp</item>
+        <item name="android:layout_marginLeft" >20dp</item>
+        <item name="android:layout_marginTop" >20dp</item>
+        <item name="android:layout_marginRight" >20dp</item>
+        <item name="android:paddingLeft" >20dp</item>
+        <item name="android:background" >@drawable/edittext_background_v1</item>
+    </style>
 </resources>
