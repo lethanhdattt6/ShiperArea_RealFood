@@ -6,8 +6,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.net.Uri;
@@ -59,7 +61,10 @@ public class ChiTietDonHang_Activity extends AppCompatActivity {
     FirebaseStorage storage;
     ArrayList<DonHangInfo> hangInfos = new ArrayList<>();
     AdapterSoLuong adapterSoLuong;
+    private int REQUEST_CODE = 1;
+    String sdtCuaHang = "";
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,8 +74,12 @@ public class ChiTietDonHang_Activity extends AppCompatActivity {
         storage = FirebaseStorage.getInstance();
         storageRef = storage.getReference();
         auth = FirebaseAuth.getInstance();
-
-
+        //Check and request permission if neeeded
+        if (!checkPermission(Manifest.permission.CALL_PHONE)) {
+            requestPermissions(new String[]{Manifest.permission.CALL_PHONE}, REQUEST_CODE);
+        } else {
+            callPerson();
+        }
         if (getIntent() != null) {
             Intent intent = getIntent();
             String DataDonHang = intent.getStringExtra("DataDonHang");
@@ -225,6 +234,7 @@ public class ChiTietDonHang_Activity extends AppCompatActivity {
                 binding.tvtenCuaHang.setText("Tên cửa hàng : " + cuaHang.getTenCuaHang());
                 binding.tvDiaChiCuaHang.setText("Địa chỉ cửa hàng : " + cuaHang.getDiaChi());
                 binding.tvsdtCuaHang.setText("SĐT cửa hàng : " + cuaHang.getSoDienThoai());
+                sdtCuaHang = cuaHang.getSoDienThoai();
             }
 
             @Override
@@ -482,6 +492,46 @@ public class ChiTietDonHang_Activity extends AppCompatActivity {
             }
         });
 
+    }
+
+    //Check Permission
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    private boolean checkPermission(String permission) {
+        boolean ok = false;
+        int check = checkSelfPermission(permission);
+        if (check == PackageManager.PERMISSION_GRANTED) {
+            ok = true;
+        }
+        return ok;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull @NotNull String[] permissions, @NonNull @NotNull int[] grantResults) {
+        if (requestCode == REQUEST_CODE) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                callPerson();
+            }
+        }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
+    private void callPerson() {
+        binding.tvCallCuaHang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String text = "tel:" + sdtCuaHang;
+                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse(text));
+                startActivity(intent);
+            }
+        });
+        binding.tvCallNguoiNhan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String text = "tel:" + donHang.getSoDienThoai();
+                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse(text));
+                startActivity(intent);
+            }
+        });
     }
 //    public String GetStringTrangThaiShipper(TrangThaiShipper trangThaiShipper){
 //        String res ="";
