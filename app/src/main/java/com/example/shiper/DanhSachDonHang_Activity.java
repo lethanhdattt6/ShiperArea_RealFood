@@ -2,6 +2,7 @@ package com.example.shiper;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -13,7 +14,6 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.shiper.Model.DonHang;
 import com.example.shiper.adapter.AdapterDonHang;
@@ -28,13 +28,14 @@ import java.util.ArrayList;
 
 public class DanhSachDonHang_Activity extends AppCompatActivity {
     RecyclerView recyclerDanhSach;
-    ArrayList<DonHang>hangs = new ArrayList<>();
+    ArrayList<DonHang> hangs = new ArrayList<>();
     AdapterDonHang adapterDonHang;
     private FirebaseAuth auth;
     DatabaseReference reference;
     ImageView imgBack;
     Spinner spdanhsach;
     TextView tvDanhSach;
+    androidx.appcompat.widget.SearchView searchView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,16 +77,6 @@ public class DanhSachDonHang_Activity extends AppCompatActivity {
                             && spdanhsach.getSelectedItem().toString().equals("Danh sách đơn hàng chờ đi giao")){
                         hangs.add(donHang);
                     }
-//                    if(donHang.getIDShipper().equals(auth.getUid())
-//                            && donHang.getTrangThai().toString().equals("SHOP_ChoShipperLayHang")
-//                            && spdanhsach.getSelectedItem().toString().equals("Danh sách đơn hàng chưa lấy")){
-//                        hangs.add(donHang);
-//                    }
-//                    if(donHang.getIDShipper().equals(auth.getUid())
-//                            && donHang.getTrangThai().toString().equals("Shipper_KhongNhanGiaoHang")
-//                            && spdanhsach.getSelectedItem().toString().equals("Danh sách đơn hàng đã từ chối")){
-//                        hangs.add(donHang);
-//                    }
                     if(donHang.getIDShipper().equals(auth.getUid())
                             && donHang.getTrangThai().toString().equals("Shipper_GiaoKhongThanhCong")
                             && spdanhsach.getSelectedItem().toString().equals("Đơn hàng giao không thành công")){
@@ -102,9 +93,10 @@ public class DanhSachDonHang_Activity extends AppCompatActivity {
                         hangs.add(donHang);
                     }
                 }
-                adapterDonHang = new AdapterDonHang(DanhSachDonHang_Activity.this);
+                adapterDonHang = new AdapterDonHang(DanhSachDonHang_Activity.this,R.layout.itemdonhang,hangs);
                 adapterDonHang.setData(hangs);
-                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(DanhSachDonHang_Activity.this, RecyclerView.VERTICAL,false);
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(
+                        DanhSachDonHang_Activity.this, RecyclerView.VERTICAL,false);
                 recyclerDanhSach.setLayoutManager(linearLayoutManager);
                 recyclerDanhSach.setAdapter(adapterDonHang);
 
@@ -119,8 +111,54 @@ public class DanhSachDonHang_Activity extends AppCompatActivity {
 
 
     private void setEvent() {
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                adapterDonHang.getFilter().filter(query);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapterDonHang.getFilter().filter(newText);
+                return true;
+            }
+        });
         Context context = this;
 
+        spdanhsach.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                switch (position){
+                    case 0:
+                        adapterDonHang.getFilter().filter(TrangThaiDonHang.SHOP_DangGiaoShipper.toString());
+                        break;
+                    case 1:
+                        adapterDonHang.getFilter().filter(TrangThaiDonHang.SHOP_ChoShipperLayHang.toString());
+                        break;
+                    case 2:
+                        adapterDonHang.getFilter().filter(TrangThaiDonHang.SHOP_ChoXacNhanGiaoHangChoShipper.toString());
+                        break;
+                    case 3:
+                        adapterDonHang.getFilter().filter(TrangThaiDonHang.Shipper_DangGiaoHang.toString());
+                        break;
+                    case 4:
+                        adapterDonHang.getFilter().filter(TrangThaiDonHang.Shipper_DaLayHang.toString());
+                        break;
+                    case 5:
+                        adapterDonHang.getFilter().filter(TrangThaiDonHang.Shipper_GiaoKhongThanhCong.toString());
+                        break;
+                    case 6:
+                        adapterDonHang.getFilter().filter(TrangThaiDonHang.Shipper_GiaoThanhCong.toString());
+                        break;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
         spdanhsach.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -136,12 +174,6 @@ public class DanhSachDonHang_Activity extends AppCompatActivity {
                 if(spdanhsach.getSelectedItem().toString().equals("Danh sách đơn hàng chờ đi giao")){
                     tvDanhSach.setText("Danh sách đơn hàng chờ đi giao");
                 }
-//                if(spdanhsach.getSelectedItem().toString().equals("Danh sách đơn hàng chưa lấy")){
-//                    tvDanhSach.setText("Danh sách đơn hàng chưa láy");
-//                }
-//                if(spdanhsach.getSelectedItem().toString().equals("Danh sách đơn hàng đã từ chối")){
-//                    tvDanhSach.setText("Danh sách đơn hàng đã từ chối");
-//                }
                 if(spdanhsach.getSelectedItem().toString().equals("Đơn hàng giao không thành công")){
                     tvDanhSach.setText("Đơn hàng giao không thành công");
                 }
@@ -177,5 +209,6 @@ public class DanhSachDonHang_Activity extends AppCompatActivity {
         recyclerDanhSach = findViewById(R.id.recycleDanhSach);
         spdanhsach = findViewById(R.id.spdanhSach);
         tvDanhSach = findViewById(R.id.tvDanhSach);
+        searchView = findViewById(R.id.searchView);
     }
 }

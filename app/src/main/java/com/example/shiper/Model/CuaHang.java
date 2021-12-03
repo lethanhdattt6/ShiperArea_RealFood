@@ -2,6 +2,8 @@ package com.example.shiper.Model;
 
 import com.example.shiper.TrangThaiCuaHang;
 
+import java.util.Date;
+
 public class CuaHang {
     String IDCuaHang;
     String TenCuaHang;
@@ -15,16 +17,13 @@ public class CuaHang {
     String Email;
     TrangThaiCuaHang trangThaiCuaHang;
     String DiaChi;
+    Date timeStart,timeEnd;
+    Date createdDate;
 
-    public String getDiaChi() {
-        return DiaChi;
+    public CuaHang() {
     }
 
-    public void setDiaChi(String diaChi) {
-        DiaChi = diaChi;
-    }
-
-    public CuaHang(String IDCuaHang, String tenCuaHang, String chuSoHuu, String thongTinChiTiet, String soCMND, String soDienThoai, String avatar, String wallPaper, Float rating, String email, TrangThaiCuaHang trangThaiCuaHang, String diaChi) {
+    public CuaHang(String IDCuaHang, String tenCuaHang, String chuSoHuu, String thongTinChiTiet, String soCMND, String soDienThoai, String avatar, String wallPaper, Float rating, String email, TrangThaiCuaHang trangThaiCuaHang, String diaChi, Date timeStart, Date timeEnd, Date createdDate) {
         this.IDCuaHang = IDCuaHang;
         TenCuaHang = tenCuaHang;
         ChuSoHuu = chuSoHuu;
@@ -37,12 +36,10 @@ public class CuaHang {
         Email = email;
         this.trangThaiCuaHang = trangThaiCuaHang;
         DiaChi = diaChi;
+        this.timeStart = timeStart;
+        this.timeEnd = timeEnd;
+        this.createdDate = createdDate;
     }
-
-    public CuaHang() {
-    }
-
-
 
     public String getIDCuaHang() {
         return IDCuaHang;
@@ -130,5 +127,37 @@ public class CuaHang {
 
     public void setTrangThaiCuaHang(TrangThaiCuaHang trangThaiCuaHang) {
         this.trangThaiCuaHang = trangThaiCuaHang;
+    }
+
+    public String getDiaChi() {
+        return DiaChi;
+    }
+
+    public void setDiaChi(String diaChi) {
+        DiaChi = diaChi;
+    }
+
+    public Date getTimeStart() {
+        return timeStart;
+    }
+
+    public void setTimeStart(Date timeStart) {
+        this.timeStart = timeStart;
+    }
+
+    public Date getTimeEnd() {
+        return timeEnd;
+    }
+
+    public void setTimeEnd(Date timeEnd) {
+        this.timeEnd = timeEnd;
+    }
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
     }
 }

@@ -63,6 +63,7 @@ public class ChiTietDonHang_Activity extends AppCompatActivity {
     AdapterSoLuong adapterSoLuong;
     private int REQUEST_CODE = 1;
     String sdtCuaHang = "";
+    QuanLy quanLy;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
@@ -74,6 +75,8 @@ public class ChiTietDonHang_Activity extends AppCompatActivity {
         storage = FirebaseStorage.getInstance();
         storageRef = storage.getReference();
         auth = FirebaseAuth.getInstance();
+
+        quanLy = new QuanLy();
         //Check and request permission if neeeded
         if (!checkPermission(Manifest.permission.CALL_PHONE)) {
             requestPermissions(new String[]{Manifest.permission.CALL_PHONE}, REQUEST_CODE);
@@ -166,46 +169,7 @@ public class ChiTietDonHang_Activity extends AppCompatActivity {
         LoadBtn();
     }
 
-    public String GetStringTrangThaiDonHang(TrangThaiDonHang trangThaiDonHang) {
-        String res = "";
-        if (trangThaiDonHang == TrangThaiDonHang.SHOP_DangGiaoShipper) {
-            res = "Đơn hàng có thể nhận";
-        }
-        if (trangThaiDonHang == TrangThaiDonHang.SHOP_ChoShipperLayHang) {
-            res = "Chờ shipper lấy hàng";
-        }
-        if (trangThaiDonHang == TrangThaiDonHang.SHOP_ChoXacNhanGiaoHangChoShipper) {
-            res = "Chờ Shop xác nhận giao hàng";
-        }
-        if (trangThaiDonHang == TrangThaiDonHang.ChoShopXacNhan_Tien) {
-            res = "Chờ Shop xác nhận đã nhận tiền hàng từ Shipper";
-        }
-        if (trangThaiDonHang == TrangThaiDonHang.ChoShopXacNhan_TraHang) {
-            res = "Chờ Shop xác nhận đã nhận hàng trả về từ Shipper";
-        }
-        if (trangThaiDonHang == TrangThaiDonHang.Shipper_DaLayHang) {
-            res = "Đã lấy hàng";
-        }
-        if (trangThaiDonHang == TrangThaiDonHang.Shipper_KhongNhanGiaoHang) {
-            res = "Đã từ chối đơn hàng này";
-        }
-        if (trangThaiDonHang == TrangThaiDonHang.Shipper_DaTraHang) {
-            res = "Đã trả hàng cho cửa hàng";
-        }
-        if (trangThaiDonHang == TrangThaiDonHang.Shipper_DaChuyenTien) {
-            res = "Đã chuyển tiền cho cửa hàng";
-        }
-        if (trangThaiDonHang == TrangThaiDonHang.Shipper_GiaoKhongThanhCong) {
-            res = "Giao hàng không thành công";
-        }
-        if (trangThaiDonHang == TrangThaiDonHang.Shipper_DangGiaoHang) {
-            res = "Đang giao hàng";
-        }
-        if (trangThaiDonHang == TrangThaiDonHang.Shipper_GiaoThanhCong) {
-            res = "Giao hàng thành công";
-        }
-        return res;
-    }
+
 
     private void LoadDataDonHang() {
         reference.child("DonHang").child(donHang.getIDDonHang()).addValueEventListener(new ValueEventListener() {
@@ -214,7 +178,7 @@ public class ChiTietDonHang_Activity extends AppCompatActivity {
                 DonHang temp = snapshot.getValue(DonHang.class);
                 binding.tvmaDH.setText(donHang.getIDDonHang().substring(0, 7));
                 binding.tvTongDon.setText("Tổng đơn : " + temp.getTongTien() + "VNĐ");
-                binding.tvtrangThai.setText("Trạng thái : " + GetStringTrangThaiDonHang(temp.getTrangThai()));
+                binding.tvtrangThai.setText("Trạng thái : " + quanLy.GetStringTrangThaiDonHang(temp.getTrangThai()));
                 binding.edtGhiChu.setText("Ghi chú : " + temp.getGhiChu_KhachHang());
                 donHang = temp;
                 binding.sdtNguoiNhan.setText("SĐT người nhận : " + donHang.getSoDienThoai());
@@ -307,12 +271,11 @@ public class ChiTietDonHang_Activity extends AppCompatActivity {
                         .setConfirmText("OK")
                         .setConfirmClickListener(kAlertDialog -> {
                             donHang.setTrangThai(TrangThaiDonHang.SHOP_ChoShipperLayHang);
-
                             reference.child("DonHang").child(donHang.getIDDonHang()).setValue(donHang).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()) {
-                                        Toast.makeText(v.getContext(), "Đã nhận thành công đƠn Hàng", Toast.LENGTH_SHORT).show();
+                                        //Toast.makeText(v.getContext(), "Đã nhận thành công đƠn Hàng", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             });

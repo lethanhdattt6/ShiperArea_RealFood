@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -17,11 +18,9 @@ import com.example.shiper.ChiTietDonHang_Activity;
 import com.example.shiper.Model.CuaHang;
 import com.example.shiper.Model.DonHang;
 import com.example.shiper.Model.DonHangInfo;
-import com.example.shiper.Model.TrangThaiShipper;
 import com.example.shiper.R;
 import com.example.shiper.TrangThaiDonHang;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -38,6 +37,9 @@ import java.util.ArrayList;
 
 public class AdapterDonHang extends RecyclerView.Adapter<AdapterDonHang.DonHangViewHolder> {
     Context context;
+    private int resource;
+    private ArrayList<DonHang> display;
+    //chính này
     ArrayList<DonHang> donHangs;
     DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
     private FirebaseStorage storage;
@@ -52,14 +54,55 @@ public class AdapterDonHang extends RecyclerView.Adapter<AdapterDonHang.DonHangV
         return new DonHangViewHolder(view);
 
     }
+    public String GetStringTrangThaiDonHang(TrangThaiDonHang trangThaiDonHang) {
+        String res = "";
+        if (trangThaiDonHang == TrangThaiDonHang.SHOP_DangGiaoShipper) {
+            res = "Đơn hàng có thể nhận";
+        }
+        if (trangThaiDonHang == TrangThaiDonHang.SHOP_ChoShipperLayHang) {
+            res = "Chờ shipper lấy hàng";
+        }
+        if (trangThaiDonHang == TrangThaiDonHang.SHOP_ChoXacNhanGiaoHangChoShipper) {
+            res = "Chờ Shop xác nhận giao hàng";
+        }
+        if (trangThaiDonHang == TrangThaiDonHang.ChoShopXacNhan_Tien) {
+            res = "Chờ Shop xác nhận đã nhận tiền hàng từ Shipper";
+        }
+        if (trangThaiDonHang == TrangThaiDonHang.ChoShopXacNhan_TraHang) {
+            res = "Chờ Shop xác nhận đã nhận hàng trả về từ Shipper";
+        }
+        if (trangThaiDonHang == TrangThaiDonHang.Shipper_DaLayHang) {
+            res = "Đã lấy hàng";
+        }
+        if (trangThaiDonHang == TrangThaiDonHang.Shipper_KhongNhanGiaoHang) {
+            res = "Đã từ chối đơn hàng này";
+        }
+        if (trangThaiDonHang == TrangThaiDonHang.Shipper_DaTraHang) {
+            res = "Đã trả hàng cho cửa hàng";
+        }
+        if (trangThaiDonHang == TrangThaiDonHang.Shipper_DaChuyenTien) {
+            res = "Đã chuyển tiền cho cửa hàng";
+        }
+        if (trangThaiDonHang == TrangThaiDonHang.Shipper_GiaoKhongThanhCong) {
+            res = "Giao hàng không thành công";
+        }
+        if (trangThaiDonHang == TrangThaiDonHang.Shipper_DangGiaoHang) {
+            res = "Đang giao hàng";
+        }
+        if (trangThaiDonHang == TrangThaiDonHang.Shipper_GiaoThanhCong) {
+            res = "Giao hàng thành công";
+        }
+        return res;
+    }
 
     @Override
     public void onBindViewHolder(@NonNull AdapterDonHang.DonHangViewHolder holder, int position) {
-        DonHang donHang = donHangs.get(position);
+        DonHang donHang = display.get(position);
         if (donHang == null) {
             return;
         }
         //
+        holder.trangThai.setText(GetStringTrangThaiDonHang(donHang.getTrangThai()));
         holder.maDH.setText("Mã ĐH : " + donHang.getIDDonHang().substring(0,10));
         holder.tvDiaChiNN.setText("Địa chỉ người nhận : "+ donHang.getDiaChi());
         holder.tvTongDon.setText("Tổng đơn : "+ donHang.getTongTien() + "VNĐ");
@@ -102,7 +145,6 @@ public class AdapterDonHang extends RecyclerView.Adapter<AdapterDonHang.DonHangV
                                 }
                             }
                         });
-
                 }
             }
 
@@ -115,29 +157,37 @@ public class AdapterDonHang extends RecyclerView.Adapter<AdapterDonHang.DonHangV
             @Override
             public void onClick(View v) {
                 Gson gson = new Gson();
-                String data = gson.toJson(donHangs.get(position));
+                String data = gson.toJson(donHang);
                 Intent intent = new Intent(context, ChiTietDonHang_Activity.class);
                 intent.putExtra("DataDonHang",data);
                 context.startActivity(intent);
             }
         });
     }
-    public  AdapterDonHang(Context context)
+    public  AdapterDonHang(Context context ,int resource , ArrayList<DonHang>donHangs)
     {
         this.context = context;
+        this.resource = resource;
+        this.donHangs = donHangs;
+        this.display = donHangs;
     }
     @Override
     public int getItemCount() {
-        return donHangs.size();
+        return display.size();
+    }
+    @Override
+    public int getItemViewType(int position) {
+        return resource;
     }
     public void setData(ArrayList<DonHang> data){
         this.donHangs = data;
+        this.display = data;
         notifyDataSetChanged();
     }
 
     public class DonHangViewHolder extends RecyclerView.ViewHolder {
         ImageView imganhDH;
-        TextView tvsdtCH, tvDiaChiCuaHang, tvDiaChiNN, tvTongDon, maDH, tvTenSanPham;
+        TextView tvsdtCH, tvDiaChiCuaHang, tvDiaChiNN, tvTongDon, maDH, tvTenSanPham,trangThai;
         LinearLayout lineardonhang;
         public DonHangViewHolder(View view){
             super(view);
@@ -149,7 +199,40 @@ public class AdapterDonHang extends RecyclerView.Adapter<AdapterDonHang.DonHangV
             tvTongDon = view.findViewById(R.id.tvTongDon);
             lineardonhang = view.findViewById(R.id.lndonhang);
             tvTenSanPham = view.findViewById(R.id.tvtensanpham);
+            trangThai = view.findViewById(R.id.trangthai);
 
         }
+    }
+
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                String strSearch = constraint.toString();
+                if (strSearch.isEmpty()) {
+                    display = donHangs;
+                } else {
+                    ArrayList<DonHang> list = new ArrayList<>();
+                    for (DonHang donHang: donHangs) {
+                        if (donHang.getTrangThai().toString().equals(strSearch)
+                                ||donHang.getIDDonHang().contains(strSearch)
+                                ||donHang.getSoDienThoai().contains(strSearch)
+                                ||donHang.getDiaChi().contains(strSearch)) {
+                            list.add(donHang);
+                        }
+                    }
+                    display = list;
+                }
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = display;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                display = (ArrayList<DonHang>) results.values;
+                notifyDataSetChanged();
+            }
+        };
     }
 }
