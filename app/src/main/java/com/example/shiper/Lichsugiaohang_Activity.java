@@ -1,6 +1,7 @@
 package com.example.shiper;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -72,7 +73,7 @@ public class Lichsugiaohang_Activity extends AppCompatActivity {
                         hangs.add(donHang);
                     }
                 }
-                adapterLichSuGiaoHang = new AdapterLichSuGiaoHang(Lichsugiaohang_Activity.this);
+                adapterLichSuGiaoHang = new AdapterLichSuGiaoHang(Lichsugiaohang_Activity.this , R.layout.itemlichsu,hangs);
                 adapterLichSuGiaoHang.setData(hangs);
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(Lichsugiaohang_Activity.this, RecyclerView.VERTICAL,false);
                 recyclerDanhSach.setLayoutManager(linearLayoutManager);
@@ -87,6 +88,19 @@ public class Lichsugiaohang_Activity extends AppCompatActivity {
         });
      }
     private void setEvent() {
+        binding.searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                adapterLichSuGiaoHang.getFilter().filter(query);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapterLichSuGiaoHang.getFilter().filter(newText);
+                return true;
+            }
+        });
         spdanhsach.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {

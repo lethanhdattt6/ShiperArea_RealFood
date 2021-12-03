@@ -10,6 +10,7 @@
     android:layout_margin="10dp"
     >
     <LinearLayout
+        android:id="@+id/lntrangthai"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#BE41D3"
@@ -19,6 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Trạng Thái"
+            android:textColor="@color/black"
             android:textStyle="bold"
             android:textSize="15dp"/>
     </LinearLayout>

@@ -18,6 +18,7 @@ import com.example.shiper.ChiTietDonHang_Activity;
 import com.example.shiper.Model.CuaHang;
 import com.example.shiper.Model.DonHang;
 import com.example.shiper.Model.DonHangInfo;
+import com.example.shiper.QuanLy;
 import com.example.shiper.R;
 import com.example.shiper.TrangThaiDonHang;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -44,55 +45,17 @@ public class AdapterDonHang extends RecyclerView.Adapter<AdapterDonHang.DonHangV
     DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
     private FirebaseStorage storage;
     private StorageReference storageRef;
+    QuanLy quanLy;
 
     @NonNull
     @Override
     public DonHangViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         storage = FirebaseStorage.getInstance();
         storageRef = storage.getReference();
+        quanLy = new QuanLy();
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.itemdonhang,parent, false);
         return new DonHangViewHolder(view);
 
-    }
-    public String GetStringTrangThaiDonHang(TrangThaiDonHang trangThaiDonHang) {
-        String res = "";
-        if (trangThaiDonHang == TrangThaiDonHang.SHOP_DangGiaoShipper) {
-            res = "Đơn hàng có thể nhận";
-        }
-        if (trangThaiDonHang == TrangThaiDonHang.SHOP_ChoShipperLayHang) {
-            res = "Chờ shipper lấy hàng";
-        }
-        if (trangThaiDonHang == TrangThaiDonHang.SHOP_ChoXacNhanGiaoHangChoShipper) {
-            res = "Chờ Shop xác nhận giao hàng";
-        }
-        if (trangThaiDonHang == TrangThaiDonHang.ChoShopXacNhan_Tien) {
-            res = "Chờ Shop xác nhận đã nhận tiền hàng từ Shipper";
-        }
-        if (trangThaiDonHang == TrangThaiDonHang.ChoShopXacNhan_TraHang) {
-            res = "Chờ Shop xác nhận đã nhận hàng trả về từ Shipper";
-        }
-        if (trangThaiDonHang == TrangThaiDonHang.Shipper_DaLayHang) {
-            res = "Đã lấy hàng";
-        }
-        if (trangThaiDonHang == TrangThaiDonHang.Shipper_KhongNhanGiaoHang) {
-            res = "Đã từ chối đơn hàng này";
-        }
-        if (trangThaiDonHang == TrangThaiDonHang.Shipper_DaTraHang) {
-            res = "Đã trả hàng cho cửa hàng";
-        }
-        if (trangThaiDonHang == TrangThaiDonHang.Shipper_DaChuyenTien) {
-            res = "Đã chuyển tiền cho cửa hàng";
-        }
-        if (trangThaiDonHang == TrangThaiDonHang.Shipper_GiaoKhongThanhCong) {
-            res = "Giao hàng không thành công";
-        }
-        if (trangThaiDonHang == TrangThaiDonHang.Shipper_DangGiaoHang) {
-            res = "Đang giao hàng";
-        }
-        if (trangThaiDonHang == TrangThaiDonHang.Shipper_GiaoThanhCong) {
-            res = "Giao hàng thành công";
-        }
-        return res;
     }
 
     @Override
@@ -102,7 +65,8 @@ public class AdapterDonHang extends RecyclerView.Adapter<AdapterDonHang.DonHangV
             return;
         }
         //
-        holder.trangThai.setText(GetStringTrangThaiDonHang(donHang.getTrangThai()));
+        quanLy.SetColorOfStatus(donHang.getTrangThai(),holder.lnTrangThai);
+        holder.trangThai.setText(quanLy.GetStringTrangThaiDonHang(donHang.getTrangThai()));
         holder.maDH.setText("Mã ĐH : " + donHang.getIDDonHang().substring(0,10));
         holder.tvDiaChiNN.setText("Địa chỉ người nhận : "+ donHang.getDiaChi());
         holder.tvTongDon.setText("Tổng đơn : "+ donHang.getTongTien() + "VNĐ");
@@ -187,8 +151,8 @@ public class AdapterDonHang extends RecyclerView.Adapter<AdapterDonHang.DonHangV
 
     public class DonHangViewHolder extends RecyclerView.ViewHolder {
         ImageView imganhDH;
-        TextView tvsdtCH, tvDiaChiCuaHang, tvDiaChiNN, tvTongDon, maDH, tvTenSanPham,trangThai;
-        LinearLayout lineardonhang;
+        TextView tvsdtCH, tvDiaChiCuaHang, tvDiaChiNN, tvTongDon, maDH, tvTenSanPham ,trangThai;
+        LinearLayout lineardonhang, lnTrangThai;
         public DonHangViewHolder(View view){
             super(view);
             maDH = view.findViewById(R.id.maDonHang);
@@ -200,6 +164,7 @@ public class AdapterDonHang extends RecyclerView.Adapter<AdapterDonHang.DonHangV
             lineardonhang = view.findViewById(R.id.lndonhang);
             tvTenSanPham = view.findViewById(R.id.tvtensanpham);
             trangThai = view.findViewById(R.id.trangthai);
+            lnTrangThai = view.findViewById(R.id.lntrangthai);
 
         }
     }
