@@ -82,15 +82,42 @@ public class Home_Activity extends AppCompatActivity implements NavigationView.O
         NavigationView navigationView = findViewById(R.id.navigationView);
         navigationView.setNavigationItemSelectedListener(this);
 
-        reference.child("Shipper").child(auth.getUid()).addValueEventListener(new ValueEventListener() {
+        reference.child("DonHang").child(auth.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                int duocGiao=0,canGiao=0,daNhan,dangGiao,thanhCong,thatBai;
+                int duocGiao=0,canGiao=0,daNhan=0,dangGiao=0,thanhCong=0,thatBai=0;
 
                 for (DataSnapshot dataSnapshot:snapshot.getChildren()) {
                     DonHang donHang = dataSnapshot.getValue(DonHang.class);
-
+                    if (donHang.getTrangThai() == TrangThaiDonHang.SHOP_ChoShipperLayHang)
+                    {
+                        duocGiao ++;
+                    }
+                    if (donHang.getTrangThai() == TrangThaiDonHang.SHOP_ChoXacNhanGiaoHangChoShipper)
+                    {
+                        daNhan ++;
+                    }
+                    if (donHang.getTrangThai() == TrangThaiDonHang.Shipper_DaLayHang)
+                    {
+                        canGiao ++;
+                    }
+                    if (donHang.getTrangThai() == TrangThaiDonHang.Shipper_ChoDiGiao||donHang.getTrangThai() == TrangThaiDonHang.Shipper_DangGiaoHang)
+                    {
+                        dangGiao ++;
+                    }
+                    if (donHang.getTrangThai() == TrangThaiDonHang.Shipper_GiaoThanhCong||donHang.getTrangThai() == TrangThaiDonHang.Shipper_DaChuyenTien)
+                    {
+                        thanhCong ++;
+                    }
+                    if (donHang.getTrangThai() == TrangThaiDonHang.Shipper_GiaoKhongThanhCong||donHang.getTrangThai() == TrangThaiDonHang.Shipper_DaTraHang)
+                    {
+                        thatBai ++;
+                    }
                 }
+                binding.tvCanGiao.setText(canGiao+"");
+                binding.tvDangGiao.setText(dangGiao+"");
+                binding.tvGiaoThatBai.setText(thatBai+"");
+                binding.tvThanhCong.setText(thatBai+"");
             }
 
             @Override
@@ -99,7 +126,7 @@ public class Home_Activity extends AppCompatActivity implements NavigationView.O
             }
         });
 
-        reference.child("DonHang").orderByChild("idShipper").equalTo(auth.getUid()).addValueEventListener(new ValueEventListener() {
+        reference.child("Shipper").child(auth.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                 nguoidunghientai = snapshot.getValue(Shipper.class);
