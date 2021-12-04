@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.developer.kalert.KAlertDialog;
+import com.example.shiper.Model.DonHang;
 import com.example.shiper.Model.Shipper;
 import com.example.shiper.Model.ThongBao;
 import com.example.shiper.Model.TrangThaiShipper;
@@ -48,7 +49,6 @@ public class Home_Activity extends AppCompatActivity implements NavigationView.O
     Shipper shipper = new Shipper();
     Shipper nguoidunghientai;
     ActivityHomeBinding binding;
-
 //    private static final int FRAMENT_DANHSACHDONHANG = 0;
 //    private static final int FRAMENT_DOIMATKHAU= 1;
 
@@ -85,8 +85,25 @@ public class Home_Activity extends AppCompatActivity implements NavigationView.O
         reference.child("Shipper").child(auth.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                int duocGiao=0,canGiao=0,daNhan,dangGiao,thanhCong,thatBai;
 
+                for (DataSnapshot dataSnapshot:snapshot.getChildren()) {
+                    DonHang donHang = dataSnapshot.getValue(DonHang.class);
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+        });
+
+        reference.child("DonHang").orderByChild("idShipper").equalTo(auth.getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                 nguoidunghientai = snapshot.getValue(Shipper.class);
+                binding.tvTenShipper.setText("Hi, "+nguoidunghientai.getHoVaTen());
                 if (nguoidunghientai.getTrangThaiShipper() == (TrangThaiShipper.DangHoatDong)) {
                     binding.btnssdigiao.setVisibility(View.GONE);
                 }
@@ -106,8 +123,6 @@ public class Home_Activity extends AppCompatActivity implements NavigationView.O
 
             }
         });
-
-
     }
 
 
@@ -210,6 +225,9 @@ public class Home_Activity extends AppCompatActivity implements NavigationView.O
                 Glide.with(getApplicationContext())
                         .load(uri.toString())
                         .into(imvavatar);
+                Glide.with(getApplicationContext())
+                        .load(uri.toString())
+                        .into(binding.imageAvatar);
             }
         });
 
