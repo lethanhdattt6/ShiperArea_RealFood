@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.shiper.Model.TrangThai;
 import com.example.shiper.Model.TrangThaiShipper;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -68,7 +69,7 @@ public class QuanLy {
         //textView.setTextColor(Color.WHITE);
         if (trangThaiDonHang == TrangThaiDonHang.Shipper_GiaoKhongThanhCong)
         {
-            view.setBackgroundColor(Color.parseColor("#F0290E"));
+            view.setBackgroundColor(Color.parseColor("#54D6BA"));
         }
         if (trangThaiDonHang == TrangThaiDonHang.Shipper_DangGiaoHang)
         {
@@ -80,11 +81,11 @@ public class QuanLy {
         }
         if (trangThaiDonHang == TrangThaiDonHang.Shipper_GiaoThanhCong)
         {
-            view.setBackgroundColor(Color.parseColor("#05E6C6"));
+            view.setBackgroundColor(Color.parseColor("#D65F5E"));
         }
         if (trangThaiDonHang == TrangThaiDonHang.SHOP_ChoShipperLayHang)
         {
-            view.setBackgroundColor(Color.parseColor("#05E6C6"));
+            view.setBackgroundColor(Color.parseColor("#2CFA6B"));
         }
         if (trangThaiDonHang == TrangThaiDonHang.Shipper_ChoDiGiao)
         {
@@ -105,5 +106,20 @@ public class QuanLy {
         {
             textView.setTextColor(Color.parseColor("#E8DF3C"));
         }
+    }
+    public void SetLichSuColor(TrangThaiDonHang trangThai, TextView textView){
+        textView.setTextColor(Color.WHITE);
+        if (trangThai == TrangThaiDonHang.Shipper_DaTraHang)
+        {
+            textView.setTextColor(Color.parseColor("#F0290E"));
+        }
+//        if (trangThai== TrangThaiShipper.DangHoatDong)
+//        {
+//            textView.setTextColor(Color.parseColor("#4CAF50"));
+//        }
+//        if (trangThai== TrangThaiShipper.DangGiaoHang)
+//        {
+//            textView.setTextColor(Color.parseColor("#E8DF3C"));
+//        }
     }
 }
