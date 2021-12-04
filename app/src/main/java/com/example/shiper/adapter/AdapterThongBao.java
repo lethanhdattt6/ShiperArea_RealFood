@@ -1,17 +1,23 @@
 package com.example.shiper.adapter;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.example.shiper.Model.ThongBao;
 import com.example.shiper.R;
+import com.example.shiper.TrangThaiThongBao;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -22,7 +28,8 @@ public class AdapterThongBao extends RecyclerView.Adapter<AdapterThongBao.MyView
     Activity context;
     int resources;
     ArrayList<ThongBao> thongBaos;
-
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference reference = database.getReference();
     public AdapterThongBao(Activity context, int resources, ArrayList<ThongBao> thongBaos) {
         this.context = context;
         this.resources = resources;
@@ -40,13 +47,36 @@ public class AdapterThongBao extends RecyclerView.Adapter<AdapterThongBao.MyView
     @Override
     public void onBindViewHolder(@NonNull @NotNull MyViewHolder holder, int position) {
         ThongBao thongBao = thongBaos.get(position);
+        if (thongBao.getTrangThaiThongBao()==TrangThaiThongBao.DaXem)
+        {
+            holder.linearLayout.setBackgroundColor(Color.WHITE);
+        }
+        else {
+            holder.linearLayout.setBackgroundColor(Color.parseColor("#CAC9C9"));
+
+        }
         if (thongBao == null) {
             return;
+        }
+        if (thongBao.getTrangThaiThongBao()== TrangThaiThongBao.ChuaXem)
+        {
+            holder.lottieAnimationView.setVisibility(View.VISIBLE);
+            holder.ivNotification.setVisibility(View.GONE);
+        }
+        else {
+            holder.lottieAnimationView.setVisibility(View.GONE);
+            holder.ivNotification.setVisibility(View.VISIBLE);
         }
         holder.tvTieuDe.setText(thongBao.getTieuDe());
         holder.tvNoiDung.setText(thongBao.getNoiDung());
         String date = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.MEDIUM).format(thongBao.getDate());
         holder.tvNgayThongBao.setText(date);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                reference.child("ThongBao").child(thongBao.getIDUSer()).child(thongBao.getIDThongBao()).child("trangThaiThongBao").setValue(TrangThaiThongBao.DaXem);
+            }
+        });
     }
 
     @Override
@@ -62,12 +92,16 @@ public class AdapterThongBao extends RecyclerView.Adapter<AdapterThongBao.MyView
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         TextView tvTieuDe, tvNoiDung, tvNgayThongBao;
         ImageView ivNotification;
+        LottieAnimationView lottieAnimationView;
+        LinearLayout linearLayout ;
         public MyViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
             tvTieuDe = itemView.findViewById(R.id.tv_TieuDe_ThongBao);
             tvNoiDung = itemView.findViewById(R.id.tv_NoiDung_ThongBao);
             tvNgayThongBao = itemView.findViewById(R.id.tv_ThoiGian_ThongBao);
             ivNotification = itemView.findViewById(R.id.image_notification);
+            lottieAnimationView = itemView.findViewById(R.id.image_notification_new);
+            linearLayout = itemView.findViewById(R.id.lnLayout);
         }
     }
 }

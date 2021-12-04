@@ -20,6 +20,7 @@ import com.google.firebase.database.ValueEventListener;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class ThongBao_Activity extends AppCompatActivity {
     RecyclerView rcvThongBao;
@@ -53,11 +54,13 @@ public class ThongBao_Activity extends AppCompatActivity {
         mDataBase.child("ThongBao").child(auth.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                thongBaos.clear();
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     ThongBao thongBao = dataSnapshot.getValue(ThongBao.class);
                     thongBaos.add(thongBao);
                     adapterThongBao.notifyDataSetChanged();
                 }
+                Collections.sort(thongBaos,(o1, o2) -> o2.getDate().compareTo(o1.getDate()));
             }
 
             @Override

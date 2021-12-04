@@ -82,7 +82,7 @@ public class Home_Activity extends AppCompatActivity implements NavigationView.O
         NavigationView navigationView = findViewById(R.id.navigationView);
         navigationView.setNavigationItemSelectedListener(this);
 
-        reference.child("DonHang").child(auth.getUid()).addValueEventListener(new ValueEventListener() {
+        reference.child("DonHang").orderByChild("idshipper").equalTo(auth.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                 int duocGiao=0,canGiao=0,daNhan=0,dangGiao=0,thanhCong=0,thatBai=0;
@@ -117,7 +117,9 @@ public class Home_Activity extends AppCompatActivity implements NavigationView.O
                 binding.tvCanGiao.setText(canGiao+"");
                 binding.tvDangGiao.setText(dangGiao+"");
                 binding.tvGiaoThatBai.setText(thatBai+"");
-                binding.tvThanhCong.setText(thatBai+"");
+                binding.tvThanhCong.setText(thanhCong+"");
+                binding.tvDangGiao.setText(dangGiao+"");
+                binding.tvDonHangDuocGiao.setText(duocGiao+"");
             }
 
             @Override
@@ -244,6 +246,35 @@ public class Home_Activity extends AppCompatActivity implements NavigationView.O
 
         reference.child("Shipper").child(auth.getUid()).addValueEventListener(postListener);
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigationView);
+        reference.child("ThongBao").child(auth.getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                int i =0;
+                for (DataSnapshot dataSnapshot:snapshot.getChildren()
+                     ) {
+                    ThongBao thongBao = dataSnapshot.getValue(ThongBao.class);
+                    if (thongBao.getTrangThaiThongBao()==TrangThaiThongBao.ChuaXem)
+                    {
+                        i++;
+                    }
+                }
+                TextView view = (TextView) navigationView.getMenu().findItem(R.id.thongbao).getActionView();
+                if (i==0)
+                {
+                    view.setVisibility(View.GONE);
+                }
+                else {
+                    view.setText(i+"");
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+        });
+
         View headerView = navigationView.getHeaderView(0);
         CircleImageView imvavatar = (CircleImageView) headerView.findViewById(R.id.imvavatar);
         storageRef.child("Shipper").child(auth.getUid()).child("avatar").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
