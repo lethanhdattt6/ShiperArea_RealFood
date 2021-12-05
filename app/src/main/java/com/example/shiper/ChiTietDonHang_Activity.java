@@ -24,6 +24,7 @@ import com.example.shiper.Model.CuaHang;
 import com.example.shiper.Model.DonHang;
 import com.example.shiper.Model.DonHangInfo;
 import com.example.shiper.Model.KhachHang;
+import com.example.shiper.Model.LoaiThongBao;
 import com.example.shiper.Model.ThongBao;
 import com.example.shiper.Model.TrangThaiShipper;
 import com.example.shiper.adapter.AdapterDonHang;
@@ -358,7 +359,11 @@ public class ChiTietDonHang_Activity extends AppCompatActivity {
                 });
                 String IDThongBao = UUID.randomUUID().toString();
                 ThongBao thongBao = new ThongBao(IDThongBao, "Đã giao hàng thành công đơn hàng " + donHang.getIDDonHang().substring(0, 15), "Thông Báo", "", donHang.getIDCuaHang(), "", TrangThaiThongBao.ChuaXem, new Date());
+                thongBao.setDonHang(donHang);
+                thongBao.setLoaiThongBao(LoaiThongBao.DONHANG_MOI);
                 reference.child("ThongBao").child(donHang.getIDCuaHang()).child(IDThongBao).setValue(thongBao);
+                thongBao.setLoaiThongBao(LoaiThongBao.DonHangShipper);
+                thongBao.setIDUSer(auth.getUid());
                 reference.child("ThongBao").child(auth.getUid()).child(IDThongBao).setValue(thongBao);
             }
         });

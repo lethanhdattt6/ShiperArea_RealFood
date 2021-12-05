@@ -1,6 +1,9 @@
 package com.example.shiper.adapter;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,15 +16,20 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.example.shiper.ChiTietDonHang_Activity;
 import com.example.shiper.Model.ThongBao;
 import com.example.shiper.R;
 import com.example.shiper.TrangThaiThongBao;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.gson.Gson;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class AdapterThongBao extends RecyclerView.Adapter<AdapterThongBao.MyViewHolder> {
@@ -30,6 +38,7 @@ public class AdapterThongBao extends RecyclerView.Adapter<AdapterThongBao.MyView
     ArrayList<ThongBao> thongBaos;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference reference = database.getReference();
+    FirebaseAuth auth = FirebaseAuth.getInstance();
     public AdapterThongBao(Activity context, int resources, ArrayList<ThongBao> thongBaos) {
         this.context = context;
         this.resources = resources;
@@ -69,12 +78,49 @@ public class AdapterThongBao extends RecyclerView.Adapter<AdapterThongBao.MyView
         }
         holder.tvTieuDe.setText(thongBao.getTieuDe());
         holder.tvNoiDung.setText(thongBao.getNoiDung());
-        String date = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.MEDIUM).format(thongBao.getDate());
-        holder.tvNgayThongBao.setText(date);
+        SimpleDateFormat formatter = new SimpleDateFormat("hh:mm dd/MM/yyyy");
+        String strDate= formatter.format(thongBao.getDate());
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                reference.child("ThongBao").child(thongBao.getIDUSer()).child(thongBao.getIDThongBao()).child("trangThaiThongBao").setValue(TrangThaiThongBao.DaXem);
+                switch (thongBao.getLoaiThongBao())
+                {
+                    case DonHangShipper:
+                        if (thongBao.getDonHang()!=null)
+                        {
+                            thongBao.setTrangThaiThongBao(TrangThaiThongBao.DaXem);
+                            reference.child("ThongBao").child(auth.getUid()).child(thongBao.getIDThongBao()).setValue(thongBao).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+                                    Gson gson = new Gson();
+                                    String data = gson.toJson(thongBao.getDonHang());
+                                    Intent intent = new Intent(context, ChiTietDonHang_Activity.class);
+                                    intent.putExtra("DataDonHang",data);
+                                    context.startActivity(intent);
+                                }
+                            });
+                        }
+                        break;
+                    case NORMAL:
+                        AlertDialog.Builder b = new AlertDialog.Builder(context);
+
+                        b.setTitle("Thông báo");
+                        b.setMessage(thongBao.getNoiDung());
+
+                        b.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+
+                        AlertDialog al = b.create();
+                        reference.child("ThongBao").child(thongBao.getIDUSer()).child(thongBao.getIDThongBao()).child("trangThaiThongBao").setValue(TrangThaiThongBao.DaXem);
+                        al.show();
+                        break;
+
+                }
+
             }
         });
     }

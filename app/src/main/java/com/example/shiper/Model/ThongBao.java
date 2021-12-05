@@ -5,9 +5,42 @@ import com.example.shiper.TrangThaiThongBao;
 import java.util.Date;
 
 public class ThongBao {
-    String IDThongBao, noiDung, tieuDe, theme, IDUSer, Image;
+    String IDThongBao;
+    String noiDung;
+    String tieuDe;
+    String theme;
+    String IDUSer;
+    String Image;
     TrangThaiThongBao trangThaiThongBao;
+    LoaiThongBao loaiThongBao;
+    DonHang donHang;
+    SanPham sanPham;
     Date date;
+
+
+    public LoaiThongBao getLoaiThongBao() {
+        return loaiThongBao;
+    }
+
+    public void setLoaiThongBao(LoaiThongBao loaiThongBao) {
+        this.loaiThongBao = loaiThongBao;
+    }
+
+    public DonHang getDonHang() {
+        return donHang;
+    }
+
+    public void setDonHang(DonHang donHang) {
+        this.donHang = donHang;
+    }
+
+    public SanPham getSanPham() {
+        return sanPham;
+    }
+
+    public void setSanPham(SanPham sanPham) {
+        this.sanPham = sanPham;
+    }
 
     public ThongBao(String IDThongBao, String noiDung, String tieuDe, String theme, String IDUSer, String image, TrangThaiThongBao trangThaiThongBao, Date date) {
         this.IDThongBao = IDThongBao;
@@ -20,8 +53,23 @@ public class ThongBao {
         this.date = date;
     }
 
-    public ThongBao() {
+
+    public Date getDate() {
+        return date;
     }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public String getImage() {
+        return Image;
+    }
+
+    public void setImage(String image) {
+        Image = image;
+    }
+
 
     public String getIDThongBao() {
         return IDThongBao;
@@ -63,14 +111,6 @@ public class ThongBao {
         this.IDUSer = IDUSer;
     }
 
-    public String getImage() {
-        return Image;
-    }
-
-    public void setImage(String image) {
-        Image = image;
-    }
-
     public TrangThaiThongBao getTrangThaiThongBao() {
         return trangThaiThongBao;
     }
@@ -78,12 +118,6 @@ public class ThongBao {
     public void setTrangThaiThongBao(TrangThaiThongBao trangThaiThongBao) {
         this.trangThaiThongBao = trangThaiThongBao;
     }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
+    public ThongBao() {
     }
 }
