@@ -12,6 +12,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -34,7 +35,7 @@ import java.util.stream.Collectors;
 public class ThongKe_activity extends AppCompatActivity {
     FirebaseAuth auth;
     DatabaseReference reference;
-
+    ImageView imgBack;
     int  dangGiaoHang = 0, giaoHangThanhCong = 0, giaoHangThatBai = 0;
     String[] info = {"Đã nhận đơn", "Đang xử lý", "Đang giao hàng", "Giao hàng thành công", "Giao hàng thất bạt"};
     TextView txtTongSoDonHang, txtTongDoanhThu, txtDaGiaoThanhCong, txtChoChuyenCoc, txtDangXuLy, txtDangGiaoHang, txtGiaoHangKhongThanhCong;
@@ -62,6 +63,7 @@ public class ThongKe_activity extends AppCompatActivity {
         progressBar = findViewById(R.id.progessbar);
         btnNgayBatDau = findViewById(R.id.btnNgayBatDau);
         btnNgayKetThuc = findViewById(R.id.btnNgayKetThuc);
+        imgBack = findViewById(R.id.imgBack);
         setEvent();
         LoadData();
         lnLayout.setVisibility(View.GONE);
@@ -99,6 +101,12 @@ public class ThongKe_activity extends AppCompatActivity {
     }
 
     private void setEvent() {
+        imgBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         btnNgayKetThuc.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override

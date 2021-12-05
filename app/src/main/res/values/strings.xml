@@ -5,7 +5,7 @@
     <string name="email">Email</string>
     <string name="ngaysinh">Ngày sinh</string>
     <string name="cmnd">CMND</string>
-    <string name="diachi">ĐỊa chỉ</string>
+    <string name="diachi">Địa chỉ</string>
     <string name="bienso">Biển số</string>
     <string name="title_activity_home">Home</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>

@@ -232,9 +232,15 @@ public class ChiTietDonHang_Activity extends AppCompatActivity {
                             .child(donHangInfo.getSanPham().getImages().get(0)).getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
                         @Override
                         public void onComplete(@NonNull Task<Uri> task) {
-                            Glide.with(ChiTietDonHang_Activity.this)
-                                    .load(task.getResult().toString())
-                                    .into(binding.anhsanpham);
+                            try {
+                                Glide.with(ChiTietDonHang_Activity.this)
+                                        .load(task.getResult().toString())
+                                        .into(binding.anhsanpham);
+                            }catch (Exception e)
+                            {
+
+                            }
+
                         }
                     });
 
@@ -276,7 +282,12 @@ public class ChiTietDonHang_Activity extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()) {
-                                        //Toast.makeText(v.getContext(), "Đã nhận thành công đƠn Hàng", Toast.LENGTH_SHORT).show();
+                                        Alerter.create(ChiTietDonHang_Activity.this)
+                                                .setTitle("Thông báo")
+                                                .setText("Bạn đã nhận giao đon hàng này")
+                                                .setDuration(5000)
+                                                .setBackgroundColorRes(R.color.success_stroke_color)
+                                                .show();
                                     }
                                 }
                             });
@@ -305,7 +316,12 @@ public class ChiTietDonHang_Activity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(v.getContext(), "Lấy hàng thành công! Chờ xác nhận từ cửa hàng!", Toast.LENGTH_SHORT).show();
+                            Alerter.create(ChiTietDonHang_Activity.this)
+                                    .setTitle("Thông báo")
+                                    .setText("Đã lấy hàng thành công - Chờ shop xác nhận")
+                                    .setDuration(5000)
+                                    .setBackgroundColorRes(R.color.success_stroke_color)
+                                    .show();
                         }
                     }
                 });
@@ -321,7 +337,12 @@ public class ChiTietDonHang_Activity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(v.getContext(), "Xác nhận đi giao thành công", Toast.LENGTH_SHORT).show();
+                            Alerter.create(ChiTietDonHang_Activity.this)
+                                    .setTitle("Thông báo")
+                                    .setText("Xác nhận đi giao")
+                                    .setDuration(5000)
+                                    .setBackgroundColorRes(R.color.success_stroke_color)
+                                    .show();
                         }
                     }
                 });
@@ -352,7 +373,12 @@ public class ChiTietDonHang_Activity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            //Toast.makeText(v.getContext(), "Giao hàng thành công", Toast.LENGTH_SHORT).show();
+                            Alerter.create(ChiTietDonHang_Activity.this)
+                                    .setTitle("Thông báo")
+                                    .setText("Giao hàng thành công")
+                                    .setDuration(5000)
+                                    .setBackgroundColorRes(R.color.success_stroke_color)
+                                    .show();
                             KiemTra();
                         }
                     }
@@ -375,6 +401,12 @@ public class ChiTietDonHang_Activity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
+                            Alerter.create(ChiTietDonHang_Activity.this)
+                                    .setTitle("Thông báo")
+                                    .setText("Đã trả tiền - chờ shop xác nhận")
+                                    .setDuration(5000)
+                                    .setBackgroundColorRes(R.color.success_stroke_color)
+                                    .show();
                             // Toast.makeText(v.getContext(), "Giao hàng thành công", Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -390,7 +422,12 @@ public class ChiTietDonHang_Activity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(v.getContext(), "Giao hàng thành công", Toast.LENGTH_SHORT).show();
+                            Alerter.create(ChiTietDonHang_Activity.this)
+                                    .setTitle("Thông báo")
+                                    .setText("Đã trả hàng - Chờ shop xác nhận")
+                                    .setDuration(5000)
+                                    .setBackgroundColorRes(R.color.success_stroke_color)
+                                    .show();
                         }
                     }
                 });
