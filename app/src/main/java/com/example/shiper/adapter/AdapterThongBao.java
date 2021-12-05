@@ -80,7 +80,7 @@ public class AdapterThongBao extends RecyclerView.Adapter<AdapterThongBao.MyView
         holder.tvNoiDung.setText(thongBao.getNoiDung());
         SimpleDateFormat formatter = new SimpleDateFormat("hh:mm dd/MM/yyyy");
         String strDate= formatter.format(thongBao.getDate());
-
+        holder.tvNgayThongBao.setText(strDate);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
