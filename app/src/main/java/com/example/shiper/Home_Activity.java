@@ -132,7 +132,7 @@ public class Home_Activity extends AppCompatActivity implements NavigationView.O
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                 nguoidunghientai = snapshot.getValue(Shipper.class);
-                binding.tvTenShipper.setText("Hi, "+nguoidunghientai.getHoVaTen());
+                binding.tvTenShipper.setText("Hi, "+ nguoidunghientai.getHoVaTen());
                 if (nguoidunghientai.getTrangThaiShipper() == (TrangThaiShipper.DangHoatDong)) {
                     binding.btnssdigiao.setVisibility(View.GONE);
                 }

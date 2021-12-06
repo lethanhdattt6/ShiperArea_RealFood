@@ -293,7 +293,14 @@ public class ChiTietDonHang_Activity extends AppCompatActivity {
                             });
                             kAlertDialog.dismiss();
                         }).show();
-
+                String IDThongBao = UUID.randomUUID().toString();
+                ThongBao thongBao = new ThongBao(IDThongBao, "Đã nhận đơn hàng thành công! Hãy đến cửa hàng để lấy hàng!! " + donHang.getIDDonHang().substring(0, 15), "Thông Báo", "", donHang.getIDCuaHang(), "", TrangThaiThongBao.ChuaXem, new Date());
+                thongBao.setDonHang(donHang);
+                thongBao.setLoaiThongBao(LoaiThongBao.DONHANG_MOI);
+                reference.child("ThongBao").child(donHang.getIDCuaHang()).child(IDThongBao).setValue(thongBao);
+                thongBao.setLoaiThongBao(LoaiThongBao.DonHangShipper);
+                thongBao.setIDUSer(auth.getUid());
+                reference.child("ThongBao").child(auth.getUid()).child(IDThongBao).setValue(thongBao);
             }
         });
         binding.btnTuChoiDon.setOnClickListener(new View.OnClickListener() {
@@ -325,6 +332,14 @@ public class ChiTietDonHang_Activity extends AppCompatActivity {
                         }
                     }
                 });
+                String IDThongBao = UUID.randomUUID().toString();
+                ThongBao thongBao = new ThongBao(IDThongBao, "Đã xác nhận lấy hàng! Chờ cửa hàng xác nhận " + donHang.getIDDonHang().substring(0, 15), "Thông Báo", "", donHang.getIDCuaHang(), "", TrangThaiThongBao.ChuaXem, new Date());
+                thongBao.setDonHang(donHang);
+                thongBao.setLoaiThongBao(LoaiThongBao.DONHANG_MOI);
+                reference.child("ThongBao").child(donHang.getIDCuaHang()).child(IDThongBao).setValue(thongBao);
+                thongBao.setLoaiThongBao(LoaiThongBao.DonHangShipper);
+                thongBao.setIDUSer(auth.getUid());
+                reference.child("ThongBao").child(auth.getUid()).child(IDThongBao).setValue(thongBao);
 
             }
         });
@@ -411,7 +426,14 @@ public class ChiTietDonHang_Activity extends AppCompatActivity {
                         }
                     }
                 });
-
+                String IDThongBao = UUID.randomUUID().toString();
+                ThongBao thongBao = new ThongBao(IDThongBao, "Đã xác nhận trả tiền cho cửa hàng! Chờ cửa hàng xác nhận " + donHang.getIDDonHang().substring(0, 15), "Thông Báo", "", donHang.getIDCuaHang(), "", TrangThaiThongBao.ChuaXem, new Date());
+                thongBao.setDonHang(donHang);
+                thongBao.setLoaiThongBao(LoaiThongBao.DONHANG_MOI);
+                reference.child("ThongBao").child(donHang.getIDCuaHang()).child(IDThongBao).setValue(thongBao);
+                thongBao.setLoaiThongBao(LoaiThongBao.DonHangShipper);
+                thongBao.setIDUSer(auth.getUid());
+                reference.child("ThongBao").child(auth.getUid()).child(IDThongBao).setValue(thongBao);
             }
         });
         binding.btnDaTraHang.setOnClickListener(new View.OnClickListener() {
@@ -431,6 +453,14 @@ public class ChiTietDonHang_Activity extends AppCompatActivity {
                         }
                     }
                 });
+                String IDThongBao = UUID.randomUUID().toString();
+                ThongBao thongBao = new ThongBao(IDThongBao, "Đã xác nhận trả hàng cho cửa hàng! Chờ cửa hàng xác nhận " + donHang.getIDDonHang().substring(0, 15), "Thông Báo", "", donHang.getIDCuaHang(), "", TrangThaiThongBao.ChuaXem, new Date());
+                thongBao.setDonHang(donHang);
+                thongBao.setLoaiThongBao(LoaiThongBao.DONHANG_MOI);
+                reference.child("ThongBao").child(donHang.getIDCuaHang()).child(IDThongBao).setValue(thongBao);
+                thongBao.setLoaiThongBao(LoaiThongBao.DonHangShipper);
+                thongBao.setIDUSer(auth.getUid());
+                reference.child("ThongBao").child(auth.getUid()).child(IDThongBao).setValue(thongBao);
 
             }
         });
