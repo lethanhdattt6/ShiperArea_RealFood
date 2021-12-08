@@ -114,13 +114,24 @@ public class DanhSachDonHang_Activity extends AppCompatActivity {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                adapterDonHang.getFilter().filter(query);
+                try {
+                    adapterDonHang.getFilter().filter(query);
+                }catch (Exception e)
+                {
+
+                }
                 return true;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                adapterDonHang.getFilter().filter(newText);
+                try {
+                    adapterDonHang.getFilter().filter(newText);
+                }catch (Exception e)
+                {
+
+                }
+
                 return true;
             }
         });

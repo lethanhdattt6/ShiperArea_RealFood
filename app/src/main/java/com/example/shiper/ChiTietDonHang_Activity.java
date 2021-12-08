@@ -177,7 +177,7 @@ public class ChiTietDonHang_Activity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 DonHang temp = snapshot.getValue(DonHang.class);
-                binding.tvmaDH.setText(donHang.getIDDonHang().substring(0, 7));
+                binding.tvmaDH.setText(donHang.getIDDonHang().substring(0, 20));
                 binding.tvTongDon.setText("Tổng đơn : " + temp.getTongTien() + "VNĐ");
                 binding.tvtrangThai.setText("Trạng thái : " + quanLy.GetStringTrangThaiDonHang(temp.getTrangThai()));
                 binding.edtGhiChu.setText("Ghi chú : " + temp.getGhiChu_KhachHang());
