@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.example.shiper.Model.ThongBao;
@@ -29,6 +31,7 @@ public class ThongBao_Activity extends AppCompatActivity {
     FirebaseAuth auth;
     DatabaseReference mDataBase;
     AdapterThongBao adapterThongBao;
+    ImageView imgBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +51,13 @@ public class ThongBao_Activity extends AppCompatActivity {
         rcvThongBao.setLayoutManager(linearLayoutManager);
         rcvThongBao.setAdapter(adapterThongBao);
         LoadItemThongBao();
+
+        imgBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     private void LoadItemThongBao() {
@@ -71,6 +81,7 @@ public class ThongBao_Activity extends AppCompatActivity {
     }
 
     private void setControl() {
+        imgBack = findViewById(R.id.imgBack);
         rcvThongBao = findViewById(R.id.rcvThongBao);
     }
 }
