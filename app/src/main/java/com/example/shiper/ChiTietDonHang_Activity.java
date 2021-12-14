@@ -473,24 +473,24 @@ public class ChiTietDonHang_Activity extends AppCompatActivity {
                     Geocoder geocoder = new Geocoder(ChiTietDonHang_Activity.this);
                     try {
                         addresses = geocoder.getFromLocationName(donHang.getDiaChi(), 1);
+                        if (addresses.size() != 0) {
+
+                            Address address = addresses.get(0);
+                            LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
+                            Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
+                                    Uri.parse("http://maps.google.com/maps?daddr=" + latLng.latitude + "," + latLng.longitude));
+                            startActivity(intent);
+                        } else {
+                            Alerter.create(ChiTietDonHang_Activity.this)
+                                    .setTitle("Thông báo")
+                                    .setText("Không tìm thấy địa chỉ : " + donHang.getDiaChi())
+                                    .setDuration(5000)
+                                    .setBackgroundColorRes(R.color.error_stroke_color)
+                                    .show();
+                        }
 
                     } catch (Exception e) {
 
-                    }
-                    if (addresses.size() != 0) {
-
-                        Address address = addresses.get(0);
-                        LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
-                        Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
-                                Uri.parse("http://maps.google.com/maps?daddr=" + latLng.latitude + "," + latLng.longitude));
-                        startActivity(intent);
-                    } else {
-                        Alerter.create(ChiTietDonHang_Activity.this)
-                                .setTitle("Thông báo")
-                                .setText("Không tìm thấy địa chỉ : " + donHang.getDiaChi())
-                                .setDuration(5000)
-                                .setBackgroundColorRes(R.color.error_stroke_color)
-                                .show();
                     }
                 }
             }
